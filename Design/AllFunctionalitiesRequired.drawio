@@ -1,0 +1,60 @@
+<mxfile host="65bd71144e">
+    <diagram id="8vNfjiD8i_rGudIjSIzm" name="Page-1">
+        <mxGraphModel dx="950" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="Project Submission" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="80" width="130" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="*Note: Create a software replacing the above excel worksheet" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="15" y="135" width="350" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="All the functionailities:" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="190" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="2. Display information:&amp;nbsp;of all class (group by group) - or just the members of a group specified by user" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="340" width="560" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="3. Save group information to a file named group.txt so that it can be loaded next time" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="390" width="470" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="1.&amp;nbsp;Input information of group: Ask user for the number of groups in the class, then input the &lt;br/&gt;information about group members. Each group has at least one member. A student can not belong to &lt;br/&gt;more than 1 group. " style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="70" y="250" width="560" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="4.&amp;nbsp; Load group information: Load data from the file group.txt" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="435" width="340" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="5.&amp;nbsp;Input a number of projects for all course &lt;br&gt;(. Each project has &lt;br&gt;a number (for exp Project 1, 2, 3..), a short description, a submission deadline. Student can see again &lt;br&gt;the information about the project declaration if necessary.)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="500" width="560" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="6. Submit project:&amp;nbsp;The class monitor is responsible for inputting: Group number, Project number, &lt;br/&gt;submission date." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="45" y="620" width="530" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="7.&amp;nbsp; Instructor inputs a project number; the program displays a table show the state of submission of this &lt;br/&gt;project for groups (late/on time)." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="710" width="570" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="edgeStyle=none;html=1;exitX=0.542;exitY=1.018;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="26" target="19" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="314.0000000000002" y="900" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="Export result to a text file named: statistic.txt" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="950" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="10. Find groups do not complete or submit on time" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="1030" width="290" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="11. Quit" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="1070" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="8.&amp;nbsp; Instructor inputs a group number; the program displays a table show the state of submission of all projects of this group. &lt;br&gt;For the projects which have time for submission (do not reach the deadline) - display the text: Not yet submitted" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="790" width="680" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="9. Ask user want to watch statistic for the period between the beginning of the course &lt;br&gt;to a specific date (inputted by user) or to current time. Then displays a table show the state of &lt;br&gt;submission of all projects having deadline before that date or up to current time" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="860" width="520" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
