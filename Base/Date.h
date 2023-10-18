@@ -128,7 +128,6 @@ public:
 
     */
     bool later(const Date &otherDate)
-
     {
         if (this->year > otherDate.year)
         {
