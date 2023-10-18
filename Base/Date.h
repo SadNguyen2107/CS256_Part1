@@ -114,7 +114,19 @@ public:
     {
         return this->day != otherDate.day || this->month == otherDate.month || this->year == otherDate.year;
     }
-    // Later
+    /*
+    d1.later(d2): bool, check whether d1 is later than d2.
+    ex:
+        Date d1 = Date("17/10/2003");
+        Date d2 = Date("18/10/2003");
+        if (d1.later(d2)){
+            cout <<"d1 is later than d2"<<endl;
+        } else{
+            cout<<"d1 is not later than d2"<<endl;
+        }
+    result: "d1 is not later than d2"
+
+    */
     bool later(const Date &otherDate)
 
     {
@@ -142,6 +154,19 @@ public:
     }
 
     // Sooner
+    /*
+        d1.sooner(d2): bool, check whether d1 is sooner than d2.
+    ex:
+        Date d1 = Date("17/10/2003");
+        Date d2 = Date("18/10/2003");
+        if (d1.sooner(d2)){
+            cout <<"d1 is sooner than d2"<<endl;
+        } else{
+            cout<<"d1 is not sooner than d2"<<endl;
+        }
+    result: "d1 is sooner than d2"
+
+    */
     bool sooner(const Date &otherDate)
     {
         if (this->year < otherDate.year)
