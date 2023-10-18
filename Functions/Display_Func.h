@@ -1,3 +1,6 @@
+#ifndef DISPLAYFUNC_H
+#define DISPLAYFUNC_H
+
 #include "../Base/Project.h"
 #include "../Base/Group.h"
 #include <queue>
@@ -16,3 +19,5 @@ void displayTableTest(std::vector<Group *> *groups, std::vector<Project *> *proj
         std::cout << projects->at(index) << std::endl;
     }
 }
+
+#endif
