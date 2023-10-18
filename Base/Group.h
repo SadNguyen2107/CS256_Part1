@@ -7,7 +7,12 @@ struct Student
     std::string student_name;
     unsigned short student_id;
 };
-
+Student* newStudent(std::string name, unsigned short id){
+    Student* s = new Student();
+    s->student_name = name;
+    s->student_id = id;
+    return s;
+}
 class Group
 {
 private:
