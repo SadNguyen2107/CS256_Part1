@@ -114,6 +114,58 @@ public:
     {
         return this->day != otherDate.day || this->month == otherDate.month || this->year == otherDate.year;
     }
+    // Later
+    bool later(const Date &otherDate)
+
+    {
+        if (this->year > otherDate.year)
+        {
+            return true;
+        }
+        else if (this->year == otherDate.year)
+        {
+            if (this->month > otherDate.month)
+            {
+                return true;
+            }
+            else if (this->month == otherDate.month)
+            {
+                if (this->day > otherDate.day)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    // Sooner
+    bool sooner(const Date &otherDate)
+    {
+        if (this->year < otherDate.year)
+        {
+            return true;
+        }
+        else if (this->year == otherDate.year)
+        {
+            if (this->month < otherDate.month)
+            {
+                return true;
+            }
+            else if (this->month == otherDate.month)
+            {
+                if (this->day < otherDate.day)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
 };
 
 bool validateThroughLib(const string date)
@@ -151,6 +203,16 @@ bool validate(const unsigned short a, const unsigned short b, const unsigned sho
         return false;
     }
     return true;
+}
+
+// check as null day :))
+bool validate_null(const unsigned short a, const unsigned short b)
+{
+    if (a == 0 || b == 0 || b > 13)
+    {
+        return true;
+    }
+    return false;
 }
 
 #endif
