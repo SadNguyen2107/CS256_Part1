@@ -1,7 +1,7 @@
 #ifndef VALIDATEFUNC_H
 #define VALIDATEFUNC_H
 
-#include "./Base/Date.h"
+#include "../Base/Date.h"
 #include <ctime>
 #include <string>
 #include <iostream>

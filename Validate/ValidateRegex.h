@@ -22,6 +22,7 @@ bool validateID(std::string ID)
 }
 
 //* FOR VALIDATE studentName. groupName
+//? IF user input name is Tuan Anh Ga then is must be Tuan_Anh_Ga
 bool validateName(std::string name)
 {
     return (std::regex_match(name, std::regex("(([A-Z]{1}[a-z]+)_?){1,}")));
