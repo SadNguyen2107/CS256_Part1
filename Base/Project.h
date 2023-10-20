@@ -2,9 +2,7 @@
 #define PROJECT_H
 
 #include "Date.h"
-#include <iostream>
 #include <vector>
-#include <string>
 
 // Use Vector to hold the number of Groups
 class Project

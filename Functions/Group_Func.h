@@ -6,6 +6,7 @@
 #include "../Base/Project.h"
 #include "../Validate/ValidateRegex.h"
 #include "../Validate/ValidateFunc.h"
+#include <fstream>
 
 void inputGroupInfo(std::vector<Group*>* groups);
 void displayGroupInfo(std::vector<Group*>* groups);

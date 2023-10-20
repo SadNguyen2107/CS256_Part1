@@ -1,10 +1,10 @@
 #ifndef EXTRACTDATAFUNC_H
 #define EXTRACTDATAFUNC_H
 
-#include <bits/stdc++.h>
 #include "../Base/Group.h"
 #include "../Base/Date.h"
 #include "../Base/Project.h"
+#include <fstream>
 //? ALL THE EXTRACT FUNCTIONS
 void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string filePath);
 void extractProjectInfoFile(std::vector<Project *> *projects_to_store, std::string filePath);
@@ -33,7 +33,6 @@ void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string fil
         ss >> name;
         (*groups_to_store)[id - 1] = new Group(name);
         string student_name;
-        int x = 0;
 
         while (ss >> student_name)
         {

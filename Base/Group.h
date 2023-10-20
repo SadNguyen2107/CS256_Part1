@@ -1,6 +1,8 @@
 #ifndef GROUP_H
 #define GROUP_H
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
 
 struct Student
 {
@@ -29,7 +31,7 @@ public:
     {
         std::vector<Student> list(this->group_students.size());
 
-        for (int index = 0; index < this->group_students.size(); index++)
+        for (std::vector<Student*>::size_type index = 0; index < this->group_students.size(); index++)
         {
             list[index] = *group_students[index];
         }
@@ -85,7 +87,7 @@ Group::Group(std::string group_name)
 
 Group::~Group()
 {
-    for (int index = 0; index < group_students.size(); index++)
+    for (std::vector<Student*>::size_type index = 0; index < group_students.size(); index++)
     {
         delete group_students[index];
     }
