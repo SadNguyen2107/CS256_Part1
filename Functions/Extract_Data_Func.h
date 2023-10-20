@@ -6,7 +6,7 @@
 #include "../Base/Date.h"
 
 //! EXTRACT DATA FROM GroupInfo.txt FILES
-// groups_to_store parameter is a place to store the result after extract finish
+// groups_to_store parameter is a place to store the RESULT after extract finish
 void extractGroupInfoFile(std::vector<Group* >* groups_to_store, std::string filename)
 { 
     fstream fs;
