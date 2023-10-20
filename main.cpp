@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
 
     if (std::strcmp(OS_NAME, "Windows") == 0)
     {
-        std::string filePath = getFilePathWindow();
+        std::string filePath = getFileTxtPathWindow();
         std::cout << filePath << std::endl;
     }
     

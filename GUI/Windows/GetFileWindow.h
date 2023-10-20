@@ -6,22 +6,21 @@
 
 #include <windows.h>
 #include <shobjidl.h>
-#include <objbase.h>     
+#include <objbase.h>
 #include <string>
 
 //? To Open File Dialog Box
 //? Use a COM object called the Common Item Dialog object
 //? The Common Item Dialog implements an interface IFileOpenDialog (declared in header file Shobbbjidl.h)
 
-
-// This Function will return the FilePath 
+// This Function will return the FilePath
 // After open a FileDialog GUI on WINDOWS
-std::string getFilePathWindow()
+std::string getFileTxtPathWindow()
 {
     // File Path to find
     std::string filePath = "";
 
-    HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);   // Init the COM library
+    HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE); // Init the COM library
     if (SUCCEEDED(hr))
     {
         IFileOpenDialog *pFileOpen;
@@ -32,6 +31,17 @@ std::string getFilePathWindow()
 
         if (SUCCEEDED(hr))
         {
+            // Set the file dialog options
+            DWORD dwFlags;
+            pFileOpen->GetOptions(&dwFlags);
+            pFileOpen->SetOptions(dwFlags | FOS_FORCEFILESYSTEM);
+
+            // Set the file type filter to restrict file selection to .txt files
+            COMDLG_FILTERSPEC fileTypes[] = {
+                {L"Text Files", L"*.txt"}
+            };
+            pFileOpen->SetFileTypes(1, fileTypes);
+
             // Show the Open dialog box.
             hr = pFileOpen->Show(NULL);
 
@@ -39,14 +49,14 @@ std::string getFilePathWindow()
             if (SUCCEEDED(hr))
             {
                 IShellItem *pItem;
-                hr = pFileOpen->GetResult(&pItem);  
+                hr = pFileOpen->GetResult(&pItem);
                 //? If Succeed return a Shell item object
                 //? Shell item which implements IShellItem interface, represent the file that the user selected
 
                 if (SUCCEEDED(hr))
                 {
                     PWSTR pszFilePath;
-                    hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);    //get the file path in the form of a string
+                    hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath); // get the file path in the form of a string
 
                     // Display the file name to the user.
                     if (SUCCEEDED(hr))
