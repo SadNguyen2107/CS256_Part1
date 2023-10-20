@@ -5,12 +5,17 @@
 #include "../Base/Group.h"
 #include "../Base/Date.h"
 
+//? ALL THE EXTRACT FUNCTIONS
+void extractGroupInfoFile(std::vector<Group* >* groups_to_store, std::string filePath);
+void extractProjectInfoFile(std::vector<Group* >* groups_to_store, std::string filePath);
+void extractSubmissionInfoFile(std::vector<Group* >* groups_to_store, std::string filePath);
+
 //! EXTRACT DATA FROM GroupInfo.txt FILES
 // groups_to_store parameter is a place to store the RESULT after extract finish
-void extractGroupInfoFile(std::vector<Group* >* groups_to_store, std::string filename)
+void extractGroupInfoFile(std::vector<Group* >* groups_to_store, std::string filePath)
 { 
     fstream fs;
-    fs.open(filename);
+    fs.open(filePath);
     string str;
     getline(fs, str);
     srand((unsigned)time(0));
