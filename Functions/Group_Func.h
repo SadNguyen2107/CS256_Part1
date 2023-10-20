@@ -9,8 +9,7 @@
 
 void inputGroupInfo(std::vector<Group*>* groups);
 void displayGroupInfo(std::vector<Group*>* groups);
-void saveGroupInfo(std::vector<Group*> *groups, std::string filePath = "groups.txt");
-std::vector<Group*>* loadGroupInfo(std::string filePath);
+void saveGroupInfo(std::vector<Group*> *groups, std::string filePath);
 
 void inputGroupInfo(std::vector<Group*>* groups){
     int numGroups = 0;
@@ -61,28 +60,27 @@ void inputGroupInfo(std::vector<Group*>* groups){
             string_ID = getValueAfterValidate(string_ID, validateID);
             student_id = std::stoi(string_ID);
 
-            std::cout << "================================================\n";
-
             newGroup->addStudent(newStudent(student_name, student_id));
         }
+        std::cout << "================================================\n";
 
         groups->push_back(newGroup);
     }
 }
 
 void displayGroupInfo(std::vector<Group*>* groups){
-    std::cout << "|" << std::left << std::setw(20) << "GROUP NAME"
-              << "|" << std::left << std::setw(20) << "STUDENT NAME"
-              << "|" << std::left << std::setw(10) << "STUDENT ID" << std::endl
+    std::cout << "\n" << "|" << std::left << std::setw(20) << "GROUP NAME"
+              << "|" << std::left << std::setw(25) << "STUDENT NAME"
+              << "|" << std::left << std::setw(15) << "STUDENT ID" << std::endl
               << "+==============================================================+\n";
 
-    for (int i = 0; i < groups->size(); i++)
+    for (int rows = 0; rows < groups->size(); rows++)
     {
-        for (int j = 0; j < groups->at(i)->getGroupStudentCopy().size(); j++)
+        for (int columns = 0; columns < groups->at(rows)->getGroupStudentCopy().size(); columns++)
         {
-            std::cout << "|" << std::left << std::setw(20) << groups->at(i)->getGroupName()
-                      << "|" << std::left << std::setw(20) << groups->at(i)->getGroupStudentCopy().at(j).student_name
-                      << "|" << std::left << std::setw(10) << groups->at(i)->getGroupStudentCopy().at(j).student_id << std::endl
+            std::cout << "|" << std::left << std::setw(20) << groups->at(rows)->getGroupName()
+                      << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
+                      << "|" << std::left << std::setw(15) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id << std::endl
                       << "+==============================================================+\n";
         }
 
@@ -90,8 +88,36 @@ void displayGroupInfo(std::vector<Group*>* groups){
     }
 }
 
-//
-void saveGroupInfo(std::vector<Group*> *groups){
-    
+void saveGroupInfo(std::vector<Group*> *groups, std::string filePath)
+{
+    std::ofstream file;
+    file.open(filePath, std::ios::out | std::ios::trunc);
+
+    if (file.is_open())
+    {
+        file << "GroupNumber GroupName   GroupMembers\n";
+        for (int i = 0; i < groups->size(); i++)
+        {
+            // WRITE GROUPS NAME
+            file << groups->at(i)->getGroupName() << "\t";
+
+            // WRITE STUDENT INFORMATION
+            for (int j = 0; j < groups->at(i)->getGroupStudentCopy().size(); j++)
+            {
+                // WRITE STUDENT NAMES
+                file << groups->at(i)->getGroupStudentCopy().at(j).student_name << "/" << groups->at(i)->getGroupStudentCopy().at(j).student_id << "\t";
+            }
+
+            file << "\n";
+        }
+
+        file.close();
+    }
+    else
+    {
+        std::cout << "Error opening file: " << filePath << std::endl;
+    }
 }
+
+
 #endif
