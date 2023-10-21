@@ -13,9 +13,6 @@ using namespace std;
 Project* inputProjectInfo(int project_index);
 void submitProject(std::vector<Project*>* projects);
 
-Project* inputProjectInfo();
-
-<<<<<<< HEAD
 Project* inputProjectInfo(int project_index)
 {
     cout << "Project " << project_index + 1 << " Information:" << endl;
@@ -45,8 +42,4 @@ Project* inputProjectInfo(int project_index)
     cout << "Project " << project_index + 1 << " added successfully." << endl;
     return project;
 }
-=======
-Project* inputProjectInfo();
-
->>>>>>> 6eccf9999e459d22bbe9ce80c2e5b8aad0ff9acc
 #endif
