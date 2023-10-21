@@ -6,4 +6,6 @@
 void inputProjectsInfo(std::vector<Project *>* projects);
 void submitProject(std::vector<Project*>* projects);
 
+Project* inputProjectInfo();
+
 #endif

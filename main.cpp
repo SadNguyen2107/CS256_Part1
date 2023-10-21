@@ -4,6 +4,8 @@
 #include "./Validate/ValidateRegex.h"
 #include "./Validate/ValidateFunc.h"
 #include "./Functions/Extract_Data_Func.h"
+#include "./Functions/Other_Func.h"
+#include "./Functions/Group_Func.h"
 #include "./src/include/json.hpp"
 #include <sqlite3.h>
 #include <cstring>
@@ -15,6 +17,14 @@ int main(int argc, char const *argv[])
     //? To Store numbers of Groups AND PROJECTS
     std::vector<Group *> groups;
     std::vector<Project *> projects;
+
+    int groups_size = askUserNumberOfGroups();
+    groups = std::vector<Group*>(groups_size);
+    for (int group_index = 0; group_index < groups_size; group_index++)
+    {
+        groups[group_index] = inputGroupInfo(group_index);
+    }
+    
 
     // extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
 
@@ -55,22 +65,22 @@ int main(int argc, char const *argv[])
     //     std::cout << "Opened Database Successfully!" << std::endl;
     // sqlite3_close(DB);
 
-    if (std::strcmp(OS_NAME, "Windows") == 0)
-    {
-        while (true)
-        {
-            std::string filePath = getFileTxtPathWindow();
-            if (isRightFile(filePath, 1))
-            {
-                std::cout << "Right File" << std::endl;
-                break;
-            }
-            else
-            {
-                std::cerr << "Wrong File!!!" << std::endl;
-            }
-        }
-    }
+    // if (std::strcmp(OS_NAME, "Windows") == 0)
+    // {
+    //     while (true)
+    //     {
+    //         std::string filePath = getFileTxtPathWindow();
+    //         if (isRightFile(filePath, 1))
+    //         {
+    //             std::cout << "Right File" << std::endl;
+    //             break;
+    //         }
+    //         else
+    //         {
+    //             std::cerr << "Wrong File!!!" << std::endl;
+    //         }
+    //     }
+    // }
 
     return 0;
 }

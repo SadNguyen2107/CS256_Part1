@@ -23,7 +23,7 @@ void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string fil
 
         istringstream ss(str);
 
-        int id;
+        std::vector<Group*>::size_type id;
         string name;
         ss >> id;
         if (id > groups_to_store->size())

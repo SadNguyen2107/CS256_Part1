@@ -35,7 +35,7 @@ public:
     void setDueDate(Date *new_due_date) { this->due_date = new_due_date; };
 
     //* UPDATE SUBMISSION DATE
-    void addSubmissionDate(int groupID, Date *group_subbmit_date)
+    void addSubmissionDate(std::vector<Date *>::size_type groupID, Date *group_subbmit_date)
     {
         if (groupID > this->submission_dates.size())
         {
