@@ -12,6 +12,7 @@ using namespace std;
 // PROTOTYPE
 Project* inputProjectInfo(int project_index);
 void submitProject(std::vector<Project*>* projects);
+void saveProjectsInfo(std::vector<Project*>* projects, std::string filePath);
 
 Project* inputProjectInfo(int project_index)
 {
