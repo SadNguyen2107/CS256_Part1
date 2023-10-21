@@ -13,6 +13,8 @@ using namespace std;
 Project* inputProjectInfo(int project_index);
 void submitProject(std::vector<Project*>* projects);
 
+Project* inputProjectInfo();
+
 <<<<<<< HEAD
 Project* inputProjectInfo(int project_index)
 {

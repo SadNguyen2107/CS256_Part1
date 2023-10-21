@@ -1,26 +1,6 @@
-<<<<<<< HEAD
-//#include "./GUI/Windows/GetFileWindow.h"
-=======
-#include "./GUI/Windows/GetFileWindow.h"
->>>>>>> 6eccf9999e459d22bbe9ce80c2e5b8aad0ff9acc
-#include "./GUI/ValidateOS.h"
+#include "./Base/Project.h"
+#include "./Base/Group.h"
 #include "./Functions/Display_Func.h"
-#include "./Validate/ValidateRegex.h"
-#include "./Validate/ValidateFunc.h"
-#include "./Functions/Extract_Data_Func.h"
-#include "./Functions/Other_Func.h"
-#include "./Functions/Group_Func.h"
-<<<<<<< HEAD
-#include "./Functions/Project_Func.h"
-#include "./src/include/json.hpp"
-//#include <sqlite3.h>
-=======
-#include "./src/include/json.hpp"
-#include <sqlite3.h>
->>>>>>> 6eccf9999e459d22bbe9ce80c2e5b8aad0ff9acc
-#include <cstring>
-
-using json = nlohmann::json;
 
 int main(int argc, char const *argv[])
 {
@@ -28,47 +8,9 @@ int main(int argc, char const *argv[])
     std::vector<Group *> groups;
     std::vector<Project *> projects;
 
-<<<<<<< HEAD
-    // int groups_size = askUserNumberOfGroups();
-    // groups = std::vector<Group*>(groups_size);
-    // for (int group_index = 0; group_index < groups_size; group_index++)
-    // {
-    //     groups[group_index] = inputGroupInfo(group_index);
-    // }
-
-    int projects_size = askUserNumberOfProjects();
-    projects = std::vector<Project*>(projects_size);
-    for (int project_index = 0; project_index < projects_size; project_index++)
-    {
-        projects[project_index] = inputProjectInfo(project_index);
-    }
-    
-
-    // extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
-
-=======
-    int groups_size = askUserNumberOfGroups();
-    groups = std::vector<Group*>(groups_size);
-    for (int group_index = 0; group_index < groups_size; group_index++)
-    {
-        groups[group_index] = inputGroupInfo(group_index);
-    }
-    
-
-    // extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
-
->>>>>>> 6eccf9999e459d22bbe9ce80c2e5b8aad0ff9acc
-    // for (size_t index = 0; index < groups.size(); index++)
-    // {
-    //     if (groups[index] != nullptr)
-    //     {
-    //         std::cout << groups[index] << std::endl;
-    //     }
-    // }
-
-    // Date *date = new Date(10, 12, 2003);
-    // Project *project = new Project("Hello World", date);
-    // project->addSubmissionDate(4, date);
+    Date *date = new Date(10, 12, 2003);
+    Project *project = new Project("Hello World", date);
+    project->addSubmissionDate(4, date);
 
     // Date *new_date = new Date(30, 12, 2004);
     // project->addSubmissionDate(10, new_date);
