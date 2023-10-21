@@ -2,9 +2,10 @@
 #include "./GUI/ValidateOS.h"
 #include "./Functions/Display_Func.h"
 #include "./Validate/ValidateRegex.h"
+#include "./Validate/ValidateFunc.h"
 #include "./Functions/Extract_Data_Func.h"
 #include "./src/include/json.hpp"
-#include <sqlite3.h> 
+#include <sqlite3.h>
 #include <cstring>
 
 using json = nlohmann::json;
@@ -56,10 +57,20 @@ int main(int argc, char const *argv[])
 
     if (std::strcmp(OS_NAME, "Windows") == 0)
     {
-        std::string filePath = getFileTxtPathWindow();
-        std::cout << filePath << std::endl;
+        while (true)
+        {
+            std::string filePath = getFileTxtPathWindow();
+            if (isRightFile(filePath, 1))
+            {
+                std::cout << "Right File" << std::endl;
+                break;
+            }
+            else
+            {
+                std::cerr << "Wrong File!!!" << std::endl;
+            }
+        }
     }
-    
+
     return 0;
 }
-
