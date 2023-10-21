@@ -13,7 +13,7 @@ endif
 
 # Common compiler flags and source files
 CFLAGS += -Wall
-SOURCES = test.cpp
+SOURCES = main.cpp
 
 # Output executable name
 OUTPUT = main
