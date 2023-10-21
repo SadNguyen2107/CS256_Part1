@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 //#include "./GUI/Windows/GetFileWindow.h"
+=======
+#include "./GUI/Windows/GetFileWindow.h"
+>>>>>>> 6eccf9999e459d22bbe9ce80c2e5b8aad0ff9acc
 #include "./GUI/ValidateOS.h"
 #include "./Functions/Display_Func.h"
 #include "./Validate/ValidateRegex.h"
@@ -6,9 +10,14 @@
 #include "./Functions/Extract_Data_Func.h"
 #include "./Functions/Other_Func.h"
 #include "./Functions/Group_Func.h"
+<<<<<<< HEAD
 #include "./Functions/Project_Func.h"
 #include "./src/include/json.hpp"
 //#include <sqlite3.h>
+=======
+#include "./src/include/json.hpp"
+#include <sqlite3.h>
+>>>>>>> 6eccf9999e459d22bbe9ce80c2e5b8aad0ff9acc
 #include <cstring>
 
 using json = nlohmann::json;
@@ -19,6 +28,7 @@ int main(int argc, char const *argv[])
     std::vector<Group *> groups;
     std::vector<Project *> projects;
 
+<<<<<<< HEAD
     // int groups_size = askUserNumberOfGroups();
     // groups = std::vector<Group*>(groups_size);
     // for (int group_index = 0; group_index < groups_size; group_index++)
@@ -36,6 +46,18 @@ int main(int argc, char const *argv[])
 
     // extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
 
+=======
+    int groups_size = askUserNumberOfGroups();
+    groups = std::vector<Group*>(groups_size);
+    for (int group_index = 0; group_index < groups_size; group_index++)
+    {
+        groups[group_index] = inputGroupInfo(group_index);
+    }
+    
+
+    // extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
+
+>>>>>>> 6eccf9999e459d22bbe9ce80c2e5b8aad0ff9acc
     // for (size_t index = 0; index < groups.size(); index++)
     // {
     //     if (groups[index] != nullptr)

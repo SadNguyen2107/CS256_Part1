@@ -27,6 +27,7 @@ int askUserNumberOfGroups(){
 
     return numGroups;
 }
+<<<<<<< HEAD
 
 int askUserNumberOfProjects(){
     int numProjects = 0;
@@ -43,5 +44,7 @@ int askUserNumberOfProjects(){
 
     return numProjects;
 }
+=======
+>>>>>>> 6eccf9999e459d22bbe9ce80c2e5b8aad0ff9acc
 
 #endif
