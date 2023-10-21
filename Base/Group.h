@@ -1,13 +1,15 @@
 #ifndef GROUP_H
 #define GROUP_H
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
 
 struct Student
 {
     std::string student_name;
-    unsigned short student_id;
+    unsigned int student_id;
 };
-Student* newStudent(std::string name, unsigned short id){
+Student* newStudent(std::string name, unsigned int id){
     Student* s = new Student();
     s->student_name = name;
     s->student_id = id;
@@ -29,7 +31,7 @@ public:
     {
         std::vector<Student> list(this->group_students.size());
 
-        for (int index = 0; index < this->group_students.size(); index++)
+        for (std::vector<Student*>::size_type index = 0; index < this->group_students.size(); index++)
         {
             list[index] = *group_students[index];
         }
@@ -39,12 +41,12 @@ public:
     //* SETTER
     void addStudent(Student *s) { this->group_students.push_back(s); }
     void changeGroupName(std::string group_name) { this->group_name = group_name; }
-    void deleteStudent(unsigned short id)
+    void deleteStudent(unsigned int id)
     {
         delete this->group_students[id - 1];
         this->group_students.erase(this->group_students.begin() + id - 1);
     }
-    void changeStudentInfo(unsigned short id, std::string new_name, unsigned short new_id)
+    void changeStudentInfo(unsigned int id, std::string new_name, unsigned int new_id)
     {
         Student *s = this->group_students[id - 1];
 
@@ -85,7 +87,7 @@ Group::Group(std::string group_name)
 
 Group::~Group()
 {
-    for (int index = 0; index < group_students.size(); index++)
+    for (std::vector<Student*>::size_type index = 0; index < group_students.size(); index++)
     {
         delete group_students[index];
     }
