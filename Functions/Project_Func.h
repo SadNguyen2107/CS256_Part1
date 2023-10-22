@@ -7,6 +7,7 @@
 #include "../Base/Date.h"
 #include "../Validate/ValidateFunc.h"
 #include "../Validate/ValidateRegex.h"
+#include <fstream>
 using namespace std;
 
 // PROTOTYPE
@@ -20,7 +21,6 @@ Project* inputProjectInfo(int project_index)
 
     string description;
     cout << "Description: ";
-    cin.ignore();
     getline(cin, description);
 
     string dueDateString = "";
@@ -43,4 +43,44 @@ Project* inputProjectInfo(int project_index)
     cout << "Project " << project_index + 1 << " added successfully." << endl;
     return project;
 }
+
+void saveProjectsInfo(std::vector<Project*>* projects, std::string filePath)
+{
+    std::ofstream file;
+    file.open(filePath, std::ios::out | std::ios::trunc);
+
+    if (file.is_open())
+    {
+        file << "ProjectNumber   Due_date    Description\n";
+        for (std::vector<Project*>::size_type i = 0; i < projects->size(); i++)
+        {
+            // WRITE PROJECT NUMBER
+            file << i + 1 << "\t";
+
+            // WRITE DUE DATE
+            const Date* dueDate = projects->at(i)->getDueDate();
+            if (dueDate != nullptr)
+            {
+                file << dueDate->getDay() << "/" << dueDate->getMonth() << "/" << dueDate->getYear() << "\t";
+            }
+            else
+            {
+                file << "N/A\t"; // No due date specified
+            }
+
+            // WRITE PROJECT DESCRIPTION
+
+            file << projects->at(i)->getDescription() << "\n";
+
+        }
+
+        file.close();
+    }
+    else
+    {
+        std::cout << "Error opening file: " << filePath << std::endl;
+    }
+}
+
+
 #endif

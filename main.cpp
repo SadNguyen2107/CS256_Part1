@@ -26,12 +26,13 @@ int main(int argc, char const *argv[])
     //     groups[group_index] = inputGroupInfo(group_index);
     // }
 
-    int projects_size = askUserNumberOfProjects();
-    projects = std::vector<Project*>(projects_size);
-    for (int project_index = 0; project_index < projects_size; project_index++)
-    {
-        projects[project_index] = inputProjectInfo(project_index);
-    }
+    // int projects_size = askUserNumberOfProjects();
+    // projects = std::vector<Project*>(projects_size);
+    // for (int project_index = 0; project_index < projects_size; project_index++)
+    // {
+    //     projects[project_index] = inputProjectInfo(project_index);
+    // }
+    // saveProjectsInfo(&projects, "OutputFiles/ProjectInfo.txt" );
     
 
     // extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
