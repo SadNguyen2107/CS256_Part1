@@ -89,34 +89,5 @@ Project::~Project()
 }
 
 
-//d2: submission date
-//d1: deadline
-std::string checkState(const Date *d1, const Date* d2)
-{
-    auto time = std::time(nullptr);
-    stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%F");
-    unsigned short day, month, year;
-    char delim;
-    ss >> year >> delim >> month >> delim >> day;
-    // Date *today = new Date(ss.str());
-    // if today> 
-    Date today = Date(day,month,year);
 
-    if (d2==nullptr){
-        if (!today.later(*d1)){
-            return "Undefined";
-        } else{
-            return "Late!";
-        }
-    } else{
-        Date submission = *d2;
-        if (!submission.later(*d1)){
-            return "On time";
-        } else{
-            return "Late!";
-        }
-    }
-
-}
 #endif
