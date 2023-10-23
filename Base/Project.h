@@ -19,12 +19,12 @@ public:
     //* GETTER
     std::string getDescription() { return this->description; };
     const Date *getDueDate() { return this->due_date; };
-    const std::vector<Date> getSubmissionDateCopy()
+    std::vector<Date*> getSubmissionDateCopy()
     {
-        std::vector<Date> date_list(this->submission_dates.size());
+        std::vector<Date*> date_list(this->submission_dates.size());
         for (size_t index = 0; index < this->submission_dates.size(); index++)
         {
-            date_list[index] = *this->submission_dates[index];
+            date_list[index] = new Date(this->submission_dates[index]->getDay(), this->submission_dates[index]->getMonth(), this->submission_dates[index]->getYear());
         }
 
         return date_list;
