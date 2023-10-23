@@ -1,6 +1,6 @@
 #include "./GUI/Windows/GetFileWindow.h"
 #include "./GUI/ValidateOS.h"
-#include "./Validate\ValidateFile.h"
+#include "./Validate/ValidateFile.h"
 #include "./Functions/Display_Func.h"
 #include "./Validate/ValidateRegex.h"
 #include "./Validate/ValidateFunc.h"
@@ -9,24 +9,65 @@
 #include "./Functions/Group_Func.h"
 #include "./Functions/Project_Func.h"
 #include "./src/include/json.hpp"
-#include <sqlite3.h>
+#include "./Database/ConnectFunc.h"
+#include "./Database/InsertFunc.h"
 #include <cstring>
 
 using json = nlohmann::json;
 
+// Function to measure the execution time of another function
+double measureExecutionTime()
+{
+    // Get the current time before running the function
+    auto start = std::chrono::high_resolution_clock::now();
+
+    //? PUT THE FUNCTION WANT TO TEST HERE
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    std::vector<Group *> groups;
+    std::vector<Project *> projects;
+    
+    extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
+    displayGroupsInfo(&groups);
+
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Get the current time after running the function
+    auto end = std::chrono::high_resolution_clock::now();
+
+    // Calculate the elapsed time in seconds
+    std::chrono::duration<double> duration = end - start;
+
+    return duration.count();
+}
+
 int main(int argc, char const *argv[])
 {
     //? To Store numbers of Groups AND PROJECTS
-    std::vector<Group *> groups;
-    std::vector<Project *> projects;
+    // std::vector<Group *> groups;
+    // std::vector<Project *> projects;
+
+    // sqlite3* DB = nullptr;
+    // int success = connectSQLite("projects.db", &DB);
+    // if (success == CONNECT_SUCCESS)
+    // {
+    //     std::cout << "Connect Success" << std::endl;
+    // }
 
     // int groups_size = askUserNumberOfGroups();
     // groups = std::vector<Group*>(groups_size);
     // for (int group_index = 0; group_index < groups_size; group_index++)
     // {
     //     groups[group_index] = inputGroupInfo(group_index);
+    //     success = insertGroupInfo(DB, groups[group_index]);
+
+    //     if (success == INSERT_SUCCESS)
+    //     {
+    //         std::cout << "INSERT SUCCESS" << std::endl;
+    //     }
     // }
 
+    // closeSQLite(DB);
     // int projects_size = askUserNumberOfProjects();
     // projects = std::vector<Project*>(projects_size);
     // for (int project_index = 0; project_index < projects_size; project_index++)
@@ -34,9 +75,13 @@ int main(int argc, char const *argv[])
     //     projects[project_index] = inputProjectInfo(project_index);
     // }
     // saveProjectsInfo(&projects, "OutputFiles/ProjectInfo.txt" );
-    
 
     // extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
+    // displayGroupsInfo(&groups);
+
+    double executionTime = measureExecutionTime();
+
+    std::cout << "Execution time: " << executionTime << " seconds" << std::endl;
 
     // for (size_t index = 0; index < groups.size(); index++)
     // {
@@ -63,34 +108,34 @@ int main(int argc, char const *argv[])
 
     // std::cout << data["happy"] << std::endl;
 
-    std::string filePath = "";
-    if (std::strcmp(OS_NAME, "Windows") == 0)
-    {
-        while (true)
-        {
-            int success = getFileTxtPathWindow(filePath);
-            if (success == SUCCESS)
-            {
-                std::cout << filePath << std::endl;
-                if (isRightFile(filePath, GROUP_INFO_FILE))
-                {
-                    std::cout << "Right File" << std::endl;
-                    break;
-                }
-                else
-                {
-                    std::cerr << "Wrong File!!!" << std::endl;
-                }
-            }
-            else if (success == FAIL)
-            {
-                std::cerr << "Could not get the file!!!" << std::endl;
-                break;
-            }
-        }
-    }
+    // std::string filePath = "";
+    // if (std::strcmp(OS_NAME, "Windows") == 0)
+    // {
+    //     while (true)
+    //     {
+    //         int success = getFileTxtPathWindow(filePath);
+    //         if (success == SUCCESS)
+    //         {
+    //             std::cout << filePath << std::endl;
+    //             if (isRightFile(filePath, GROUP_INFO_FILE))
+    //             {
+    //                 std::cout << "Right File" << std::endl;
+    //                 break;
+    //             }
+    //             else
+    //             {
+    //                 std::cerr << "Wrong File!!!" << std::endl;
+    //             }
+    //         }
+    //         else if (success == FAIL)
+    //         {
+    //             std::cerr << "Could not get the file!!!" << std::endl;
+    //             break;
+    //         }
+    //     }
+    // }
 
-    // The Database connection object
+    // // The Database connection object
     // sqlite3 *DB = nullptr;
     // int exit = 0;
 
