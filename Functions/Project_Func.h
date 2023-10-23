@@ -86,6 +86,8 @@ void submitProject(std::vector<Project*>* projects)
 {
     int groupNumber = 0;
     string groupNumber_string = "";
+
+    // ENTER NUMBER OF GROUP
     cout << "Enter the group number that is submitting the project: ";
     cin >> groupNumber_string;
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -94,6 +96,8 @@ void submitProject(std::vector<Project*>* projects)
 
 
     string submissionDateStr = "";
+
+    //ENTER SUBMISSION DATE OF THAT GROUP
     cout << "Enter the submission date (DD/MM/YYYY): ";
     getline(cin, submissionDateStr);
     submissionDateStr = getValueAfterValidate(submissionDateStr, validateDate);
