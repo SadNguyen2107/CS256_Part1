@@ -8,6 +8,7 @@
 #include "./Functions/Other_Func.h"
 #include "./Functions/Group_Func.h"
 #include "./Functions/Project_Func.h"
+#include "./Functions/Display_Func.h"
 #include "./src/include/json.hpp"
 #include "./Database/ConnectFunc.h"
 #include "./Database/InsertFunc.h"
@@ -23,13 +24,16 @@ double measureExecutionTime()
 
     //? PUT THE FUNCTION WANT TO TEST HERE
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    
+
     std::vector<Group *> groups;
     std::vector<Project *> projects;
-    
-    extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
-    displayGroupsInfo(&groups);
 
+    extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
+    extractProjectInfoFile(&projects, "InputFiles/ProjectInfo.txt");
+
+    submitProject(&projects);
+    // displayGroupsInfo(&groups);
+    displayByGroup(&groups, &projects);
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Get the current time after running the function

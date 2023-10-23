@@ -106,6 +106,6 @@ void submitProject(std::vector<Project*>* projects)
 
     cout << "Project for group " << groupNumber << " submitted successfully on " << submissionDateStr << "." << endl;
 
-    (*projects)[groupNumber - 1]->addSubmissionDate(groupNumber, submissionDate);  
+    projects->at(groupNumber - 1)->addSubmissionDate(groupNumber, submissionDate); 
 }
 #endif
