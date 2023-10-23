@@ -56,7 +56,8 @@ Group* inputGroupInfo(int group_index)
 }
 
 void displayGroupsInfo(std::vector<Group*>* groups){
-    std::cout << "\n" << "|" << std::left << std::setw(20) << "GROUP NAME"
+    std::cout << "\n" << "|" << std::left << std::setw(3) << "ID"
+              << "|" << std::left << std::setw(20) << "GROUP NAME"
               << "|" << std::left << std::setw(25) << "STUDENT NAME"
               << "|" << std::left << std::setw(15) << "STUDENT ID" << std::endl
               << "+==============================================================+\n";
@@ -65,7 +66,8 @@ void displayGroupsInfo(std::vector<Group*>* groups){
     {
         for (std::vector<Student>::size_type columns = 0; columns < groups->at(rows)->getGroupStudentCopy().size(); columns++)
         {
-            std::cout << "|" << std::left << std::setw(20) << groups->at(rows)->getGroupName()
+            std::cout << "|" << std::left << std::setw(3) << rows + 1
+                      << "|" << std::left << std::setw(20) << groups->at(rows)->getGroupName()
                       << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
                       << "|" << std::left << std::setw(15) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id << std::endl
                       << "+==============================================================+\n";
