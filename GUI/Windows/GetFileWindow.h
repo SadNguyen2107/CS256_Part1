@@ -4,10 +4,14 @@
 #ifndef GETFILEWINDOW_H
 #define GETFILEWINDOW_H
 
+#define FAIL    0
+#define SUCCESS 1
+
 #include <windows.h>
 #include <shobjidl.h>
 #include <objbase.h>
 #include <string>
+#include <iostream>
 
 //? To Open File Dialog Box
 //? Use a COM object called the Common Item Dialog object
@@ -15,10 +19,10 @@
 
 // This Function will return the FilePath
 // After open a FileDialog GUI on WINDOWS
-std::string getFileTxtPathWindow()
+int getFileTxtPathWindow(std::string& filePath)
 {
-    // File Path to find
-    std::string filePath = "";
+    // FLAG
+    int success = SUCCESS;
 
     HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE); // Init the COM library
     if (SUCCEEDED(hr))
@@ -46,7 +50,11 @@ std::string getFileTxtPathWindow()
             hr = pFileOpen->Show(NULL);
 
             // Get the file name from the dialog box.
-            if (SUCCEEDED(hr))
+            if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED))   // If the user Pressed Cancel -> Exit
+            {
+                success = FAIL;
+            }
+            else if (SUCCEEDED(hr))
             {
                 IShellItem *pItem;
                 hr = pFileOpen->GetResult(&pItem);
@@ -62,22 +70,28 @@ std::string getFileTxtPathWindow()
                     if (SUCCEEDED(hr))
                     {
                         MessageBoxW(NULL, pszFilePath, L"File Path", MB_OK);
-                        CoTaskMemFree(pszFilePath); // For Clean Up Purpose
 
                         std::wstring path(pszFilePath);
                         std::string sFilePath(path.begin(), path.end());
 
                         // Assign the FilePath
                         filePath = sFilePath;
+
+                        CoTaskMemFree(pszFilePath); // For Clean Up Purpose
+                        std::cout << filePath << std::endl;
                     }
                     pItem->Release();
                 }
+            }
+            else    // IF THE USER PRESSED [X] Button or an error occured
+            {
+                success = FAIL;
             }
             pFileOpen->Release();
         }
         CoUninitialize();
     }
-    return filePath;
+    return success;
 }
 
 #endif

@@ -96,41 +96,6 @@ bool isSmallerOrEqualThanToday(std::string string_date_to_evaluate)
     return isSmaller;
 }
 
-// In option Parameter:
-// 1 is For GroupInfo File Template
-// 2 is For ProjectInfo File Template
-bool isRightFile(std::string filePath, int option = 1)
-{
-    std::ifstream file(filePath);
-
-    if (file.is_open())
-    {
-        std::string firstLine;
-        if (std::getline(file, firstLine))
-        {
-            if (option == 1)
-            {
-                return firstLine == "GroupNumber GroupName   GroupMembers";
-            }
-            else
-            {
-                return firstLine == "ProjectNumber   Due_date    Description";
-            }
-        }
-        else
-        {
-            std::cerr << "Error: Failed to read the first line!!!" << std::endl;
-            return false;
-        }
-        file.close();
-    }
-    else
-    {
-        std::cerr << "Error: Unable to open the file!!!" << std::endl;
-    }
-    return false;
-}
-
 // DO THE VALUE VALIDATION FUNCTION
 std::string getValueAfterValidate(std::string value, std::function<bool(std::string)> validateFunc)
 {

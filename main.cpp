@@ -1,5 +1,6 @@
-//#include "./GUI/Windows/GetFileWindow.h"
+#include "./GUI/Windows/GetFileWindow.h"
 #include "./GUI/ValidateOS.h"
+#include "./Validate\ValidateFile.h"
 #include "./Functions/Display_Func.h"
 #include "./Validate/ValidateRegex.h"
 #include "./Validate/ValidateFunc.h"
@@ -8,7 +9,7 @@
 #include "./Functions/Group_Func.h"
 #include "./Functions/Project_Func.h"
 #include "./src/include/json.hpp"
-//#include <sqlite3.h>
+#include <sqlite3.h>
 #include <cstring>
 
 using json = nlohmann::json;
@@ -61,35 +62,93 @@ int main(int argc, char const *argv[])
     // json data = json::parse(fileObj);
 
     // std::cout << data["happy"] << std::endl;
-    // sqlite3 *DB;
-    // int exit = 0;
-    // exit = sqlite3_open("C:\\Users\\User\\OneDrive - Hanoi University of Science and Technology\\Desktop\\shows.db", &DB);
 
-    // if (exit)
+    std::string filePath = "";
+    if (std::strcmp(OS_NAME, "Windows") == 0)
+    {
+        while (true)
+        {
+            int success = getFileTxtPathWindow(filePath);
+            if (success == SUCCESS)
+            {
+                std::cout << filePath << std::endl;
+                if (isRightFile(filePath, GROUP_INFO_FILE))
+                {
+                    std::cout << "Right File" << std::endl;
+                    break;
+                }
+                else
+                {
+                    std::cerr << "Wrong File!!!" << std::endl;
+                }
+            }
+            else if (success == FAIL)
+            {
+                std::cerr << "Could not get the file!!!" << std::endl;
+                break;
+            }
+        }
+    }
+
+    // The Database connection object
+    // sqlite3 *DB = nullptr;
+    // int exit = 0;
+
+    // // Open the SQLite database file
+    // exit = sqlite3_open_v2("projects.db", &DB, SQLITE_OPEN_READWRITE, NULL);
+    // std::cout << exit << std::endl;
+    // if (exit == SQLITE_ERROR)
     // {
     //     std::cerr << "Error open DB " << sqlite3_errmsg(DB) << std::endl;
     //     return (-1);
     // }
     // else
     //     std::cout << "Opened Database Successfully!" << std::endl;
-    // sqlite3_close(DB);
 
-    // if (std::strcmp(OS_NAME, "Windows") == 0)
+    // // The prepared statment object
+    // sqlite3_stmt *stmt = nullptr;
+    // const char *sql_statement = "SELECT * FROM projects WHERE id = :id AND due_date = :due_date";
+
+    // // Prepare the SQL Statement
+    // // The sql_statement -> byte-code
+    // int rc = sqlite3_prepare_v2(DB, sql_statement, -1, &stmt, 0);
+    // if (rc != SQLITE_OK)
     // {
-    //     while (true)
-    //     {
-    //         std::string filePath = getFileTxtPathWindow();
-    //         if (isRightFile(filePath, 1))
-    //         {
-    //             std::cout << "Right File" << std::endl;
-    //             break;
-    //         }
-    //         else
-    //         {
-    //             std::cerr << "Wrong File!!!" << std::endl;
-    //         }
-    //     }
+    //     std::cerr << "SQL error: " << sqlite3_errmsg(DB) << std::endl;
     // }
+
+    // int id = 1;
+    // const char* due_date = "21/07/2003";
+
+    // //? Find the index of the PLACEHOLDER in the Statement
+    // int index = sqlite3_bind_parameter_index(stmt, ":due_date");
+    // std::cout << index << std::endl;
+
+    // // Bind the paramenter
+    // sqlite3_bind_int(stmt, 1, id);
+    // sqlite3_bind_text(stmt, 2, due_date, -1, SQLITE_STATIC);
+
+    // // Execute the prepared statement
+    // while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
+    // {
+    //     // Process the result set
+    //     const unsigned char* resultColumn1 = sqlite3_column_text(stmt, 2);
+    //     // You can access other columns here as well.
+    //     std::cout << "Result: " << resultColumn1 << std::endl;
+    // }
+
+    // // For Insert
+    // rc = sqlite3_step(stmt);
+    // while (rc != SQLITE_DONE)
+    // {
+    //     //? HANDLE THE ERROR
+    // }
+
+    // // Finalize the statement and close the database
+    // sqlite3_finalize(stmt);
+
+    // // CLOSE THE CONNECTION
+    // sqlite3_close(DB);
 
     return 0;
 }
