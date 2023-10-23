@@ -20,6 +20,8 @@ int main(int argc, char const *argv[])
     std::vector<Group *> groups;
     std::vector<Project *> projects;
 
+    
+    submitProject(&projects);
     // int groups_size = askUserNumberOfGroups();
     // groups = std::vector<Group*>(groups_size);
     // for (int group_index = 0; group_index < groups_size; group_index++)
@@ -32,6 +34,7 @@ int main(int argc, char const *argv[])
     // for (int project_index = 0; project_index < projects_size; project_index++)
     // {
     //     projects[project_index] = inputProjectInfo(project_index);
+        
     // }
     // saveProjectsInfo(&projects, "OutputFiles/ProjectInfo.txt" );
     

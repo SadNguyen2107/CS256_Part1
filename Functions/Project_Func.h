@@ -5,6 +5,7 @@
 #include <vector>
 #include "../Base/Project.h"
 #include "../Base/Date.h"
+#include "../Base/Date.h"
 #include "../Validate/ValidateFunc.h"
 #include "../Validate/ValidateRegex.h"
 #include <fstream>
@@ -81,6 +82,26 @@ void saveProjectsInfo(std::vector<Project*>* projects, std::string filePath)
         std::cout << "Error opening file: " << filePath << std::endl;
     }
 }
+void submitProject(std::vector<Project*>* projects)
+{
+    int groupNumber = 0;
+    string groupNumber_string = "";
+    cout << "Enter the group number that is submitting the project: ";
+    cin >> groupNumber_string;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    groupNumber_string = getValueAfterValidate(groupNumber_string, validateID);
+    groupNumber = std::stoi(groupNumber_string);
 
 
+    string submissionDateStr = "";
+    cout << "Enter the submission date (DD/MM/YYYY): ";
+    getline(cin, submissionDateStr);
+    submissionDateStr = getValueAfterValidate(submissionDateStr, validateDate);
+
+    Date* submissionDate = new Date(submissionDateStr);
+
+    cout << "Project for group " << groupNumber << " submitted successfully on " << submissionDateStr << "." << endl;
+
+    (*projects)[groupNumber - 1]->addSubmissionDate(groupNumber, submissionDate);  
+}
 #endif
