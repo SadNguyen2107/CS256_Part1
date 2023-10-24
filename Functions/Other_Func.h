@@ -10,7 +10,8 @@
 
 int askUserNumberOfGroups();
 int askUserNumberOfProjects();
-int askUserGroupIDToSubmit();
+int askGroupIDToSubmit();
+int askProjectIDToSubmit();
 std::string askUserFileDirectory();
 void quitProgram();
 
@@ -47,7 +48,7 @@ int askUserNumberOfProjects(){
 }
 
 
-int askUserGroupIDToSubmit()
+int askGroupIDToSubmit()
 {
     int groupID = 0;
     std::string groupID_string= "";
@@ -63,4 +64,22 @@ int askUserGroupIDToSubmit()
 
     return groupID;
 }
+
+int askProjectIDToSubmit()
+{
+    int projectID = 0;
+    std::string projectID_string= "";
+
+    //ENTER NUMBER PROJECTS
+    std::cout << "Enter the Project ID to submit: ";
+    std::cin >> projectID_string;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    projectID_string = getValueAfterValidate(projectID_string, validateID);
+    projectID = std::stoi(projectID_string);
+
+    std::cout << "================================================\n";
+
+    return projectID;
+}
+
 #endif

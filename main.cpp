@@ -28,8 +28,8 @@ double measureExecutionTime()
     std::vector<Group *> groups;
     std::vector<Project *> projects;
 
-    extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
-    extractProjectInfoFile(&projects, "InputFiles/ProjectInfo.txt");
+    int numberOfGroups = extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
+    extractProjectInfoFile(&projects, numberOfGroups, "InputFiles/ProjectInfo.txt");
 
     // displayGroupsInfo(&groups);
     displayByGroup(&groups, &projects);
@@ -211,12 +211,13 @@ int main(int argc, char const *argv[])
     //     projects[project_index] = inputProjectInfo(project_index);
     // }
 
-    extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
-    extractProjectInfoFile(&projects, "InputFiles/ProjectInfo.txt");
+    int numberOfGroups = extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
+    extractProjectInfoFile(&projects, numberOfGroups, "InputFiles/ProjectInfo.txt");
 
-    int groupID = askUserGroupIDToSubmit();
+    int groupID = askGroupIDToSubmit();
+    int projectID = askProjectIDToSubmit();
 
-    submitProject(projects[groupID - 1], groupID);
+    submitProject(projects[projectID - 1], groupID);
     displayAllTable(&groups, &projects);
 
     return 0;

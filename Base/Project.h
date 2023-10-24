@@ -24,7 +24,14 @@ public:
         std::vector<Date *> date_list(this->submission_dates.size());
         for (size_t index = 0; index < this->submission_dates.size(); index++)
         {
-            date_list[index] = new Date(this->submission_dates[index]->getDay(), this->submission_dates[index]->getMonth(), this->submission_dates[index]->getYear());
+            if (this->submission_dates[index] != nullptr)
+            {
+                date_list[index] = new Date(this->submission_dates[index]->getDay(), this->submission_dates[index]->getMonth(), this->submission_dates[index]->getYear());
+            }
+            else
+            {
+                date_list[index] = nullptr;
+            }
         }
 
         return date_list;
@@ -71,7 +78,9 @@ public:
         }
         return os;
     }
-    
+
+    // FUNCTION TO RESIZE THE submission_dates VECTOR
+    friend void resizeSubmissionDates(Project *project, int newSize);
 };
 
 Project::Project(std::string group_description, Date *due_date)
@@ -87,6 +96,11 @@ Project::~Project()
     {
         delete *iter;
     }
+}
+
+void resizeSubmissionDates(Project *project, int newSize)
+{
+    project->submission_dates.resize(newSize);
 }
 
 #endif

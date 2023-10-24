@@ -5,14 +5,20 @@
 #include "../Base/Date.h"
 #include "../Base/Project.h"
 #include <fstream>
-//? ALL THE EXTRACT FUNCTIONS
-void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string filePath);
-void extractProjectInfoFile(std::vector<Project *> *projects_to_store, std::string filePath);
 
 //! EXTRACT DATA FROM GroupInfo.txt FILES
 // groups_to_store parameter is a place to store the RESULT after extract finish
-void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string filePath)
+// Return the number of groups in the file
+int extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string filePath);
+
+// Extract info file 
+void extractProjectInfoFile(std::vector<Project *> *projects_to_store, int number_of_groups, std::string filePath);
+
+//! EXTRACT DATA FROM GroupInfo.txt FILES
+int extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string filePath)
 {
+    int number_of_groups = 0;
+
     fstream fs;
     fs.open(filePath);
     string str;
@@ -32,6 +38,8 @@ void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string fil
         }
         ss >> name;
         (*groups_to_store)[id - 1] = new Group(name);
+        number_of_groups++;
+
         string student_name;
 
         while (ss >> student_name)
@@ -48,15 +56,16 @@ void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string fil
                 name = result[1];
             }
 
-            (*groups_to_store)[id - 1]->addStudent(newStudent(name, student_id));
+            groups_to_store->at(id - 1)->addStudent(newStudent(name, student_id));
         }
     }
+    return number_of_groups;
 }
 /*
 Extract info file :))))
 
 */
-void extractProjectInfoFile(std::vector<Project *> *projects_to_store, std::string filePath)
+void extractProjectInfoFile(std::vector<Project *> *projects_to_store, int number_of_groups, std::string filePath)
 {
     fstream fs;
     fs.open(filePath);
@@ -82,7 +91,10 @@ void extractProjectInfoFile(std::vector<Project *> *projects_to_store, std::stri
         getline(ss, desc, '\n');
         ss >> id >> date;
 
-        projects_to_store->push_back(new Project(desc, new Date(date)));
+        Project* project = new Project(desc, new Date(date));
+        resizeSubmissionDates(project, number_of_groups);
+
+        projects_to_store->push_back(project);
     }
 }
 
