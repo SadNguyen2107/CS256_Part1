@@ -6,9 +6,11 @@
 #include <limits>
 #include "../Validate/ValidateFunc.h"
 #include "../Validate/ValidateRegex.h"
+#include "../Base/Project.h"
 
 int askUserNumberOfGroups();
 int askUserNumberOfProjects();
+int askUserGroupIDToSubmit();
 std::string askUserFileDirectory();
 void quitProgram();
 
@@ -44,4 +46,21 @@ int askUserNumberOfProjects(){
     return numProjects;
 }
 
+
+int askUserGroupIDToSubmit()
+{
+    int groupID = 0;
+    std::string groupID_string= "";
+
+    //ENTER NUMBER PROJECTS
+    std::cout << "Enter the Group ID to submit: ";
+    std::cin >> groupID_string;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    groupID_string = getValueAfterValidate(groupID_string, validateID);
+    groupID = std::stoi(groupID_string);
+
+    std::cout << "================================================\n";
+
+    return groupID;
+}
 #endif

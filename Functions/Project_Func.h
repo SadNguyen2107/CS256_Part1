@@ -13,7 +13,7 @@ using namespace std;
 
 // PROTOTYPE
 Project* inputProjectInfo(int project_index);
-void submitProject(std::vector<Project*>* projects);
+void submitProject(Project* project, int groupID);
 void saveProjectsInfo(std::vector<Project*>* projects, std::string filePath);
 
 Project* inputProjectInfo(int project_index)
@@ -82,19 +82,8 @@ void saveProjectsInfo(std::vector<Project*>* projects, std::string filePath)
         std::cout << "Error opening file: " << filePath << std::endl;
     }
 }
-void submitProject(std::vector<Project*>* projects)
+void submitProject(Project* project, int groupID)
 {
-    int groupNumber = 0;
-    string groupNumber_string = "";
-
-    // ENTER NUMBER OF GROUP
-    cout << "Enter the group number that is submitting the project: ";
-    cin >> groupNumber_string;
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    groupNumber_string = getValueAfterValidate(groupNumber_string, validateID);
-    groupNumber = std::stoi(groupNumber_string);
-
-
     string submissionDateStr = "";
 
     //ENTER SUBMISSION DATE OF THAT GROUP
@@ -104,8 +93,8 @@ void submitProject(std::vector<Project*>* projects)
 
     Date* submissionDate = new Date(submissionDateStr);
 
-    cout << "Project for group " << groupNumber << " submitted successfully on " << submissionDateStr << "." << endl;
+    project->addSubmissionDate(groupID, submissionDate); 
 
-    projects->at(groupNumber - 1)->addSubmissionDate(groupNumber, submissionDate); 
+    cout << "Project submitted successfully on " << submissionDateStr << "." << endl;
 }
 #endif

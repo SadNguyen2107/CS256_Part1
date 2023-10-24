@@ -1,4 +1,4 @@
-#include "./GUI/Windows/GetFileWindow.h"
+// #include "./GUI/Windows/GetFileWindow.h"
 #include "./GUI/ValidateOS.h"
 #include "./Validate/ValidateFile.h"
 #include "./Functions/Display_Func.h"
@@ -10,8 +10,8 @@
 #include "./Functions/Project_Func.h"
 #include "./Functions/Display_Func.h"
 #include "./src/include/json.hpp"
-#include "./Database/ConnectFunc.h"
-#include "./Database/InsertFunc.h"
+// #include "./Database/ConnectFunc.h"
+// #include "./Database/InsertFunc.h"
 #include <cstring>
 
 using json = nlohmann::json;
@@ -31,7 +31,6 @@ double measureExecutionTime()
     extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
     extractProjectInfoFile(&projects, "InputFiles/ProjectInfo.txt");
 
-    submitProject(&projects);
     // displayGroupsInfo(&groups);
     displayByGroup(&groups, &projects);
 
@@ -48,8 +47,8 @@ double measureExecutionTime()
 int main(int argc, char const *argv[])
 {
     //? To Store numbers of Groups AND PROJECTS
-    // std::vector<Group *> groups;
-    // std::vector<Project *> projects;
+    std::vector<Group *> groups;
+    std::vector<Project *> projects;
 
     // sqlite3* DB = nullptr;
     // int success = connectSQLite("projects.db", &DB);
@@ -83,9 +82,9 @@ int main(int argc, char const *argv[])
     // extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
     // displayGroupsInfo(&groups);
 
-    double executionTime = measureExecutionTime();
+    // double executionTime = measureExecutionTime();
 
-    std::cout << "Execution time: " << executionTime << " seconds" << std::endl;
+    // std::cout << "Execution time: " << executionTime << " seconds" << std::endl;
 
     // for (size_t index = 0; index < groups.size(); index++)
     // {
@@ -198,6 +197,27 @@ int main(int argc, char const *argv[])
 
     // // CLOSE THE CONNECTION
     // sqlite3_close(DB);
+
+    // int groups_size = askUserNumberOfGroups();
+    // groups = std::vector<Group*>(groups_size);
+    // for (int group_index = 0; group_index < groups_size; group_index++)
+    // {
+    //     groups[group_index] = inputGroupInfo(group_index);
+    // }
+    // int projects_size = askUserNumberOfProjects();
+    // projects = std::vector<Project*>(projects_size);
+    // for (int project_index = 0; project_index < projects_size; project_index++)
+    // {
+    //     projects[project_index] = inputProjectInfo(project_index);
+    // }
+    
+    extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
+    extractProjectInfoFile(&projects, "InputFiles/ProjectInfo.txt");
+
+    int groupID = askUserGroupIDToSubmit();
+
+    submitProject(projects[groupID-1], groupID);
+    displayAllTable(&groups, &projects);
 
     return 0;
 }

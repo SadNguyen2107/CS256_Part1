@@ -18,10 +18,10 @@ public:
 
     //* GETTER
     std::string getDescription() { return this->description; };
-    const Date *getDueDate() { return this->due_date; };
-    std::vector<Date*> getSubmissionDateCopy()
+    Date *getDueDate() { return this->due_date; };
+    std::vector<Date *> getSubmissionDateCopy()
     {
-        std::vector<Date*> date_list(this->submission_dates.size());
+        std::vector<Date *> date_list(this->submission_dates.size());
         for (size_t index = 0; index < this->submission_dates.size(); index++)
         {
             date_list[index] = new Date(this->submission_dates[index]->getDay(), this->submission_dates[index]->getMonth(), this->submission_dates[index]->getYear());
@@ -71,6 +71,9 @@ public:
         }
         return os;
     }
+
+    // FUNCTION TO CHANGE THE SIZE OF submission_dates size
+    friend void resizeSubmissionDatesVector(Project* project, int newSize); 
 };
 
 Project::Project(std::string group_description, Date *due_date)
@@ -88,6 +91,9 @@ Project::~Project()
     }
 }
 
-
+void resizeSubmissionDatesVector(Project* project, int newSize)
+{ 
+    project->submission_dates.resize(newSize);
+};
 
 #endif
