@@ -83,15 +83,12 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
 
         for (std::vector<Date *>::size_type project_index = 0; project_index < projects->size(); project_index++)
         {
-          // if (checkState(specificDate, submission_dates[project_index]) )
-          // {
-          //   std::cout << "|" << std::left << std::setw(8) << "Null";
-          // }
-          // else
-          // {
-            Date* date = submission_dates[project_index];
+          if (project_index < submission_dates.size())
+          {
             std::cout << "|" << std::left << std::setw(8) << checkState(project->getDueDate(), submission_dates[project_index]);
-          // }
+          }
+          else
+            std::cout << "|" << std::left << std::setw(8) << checkState(project->getDueDate(), nullptr);
         }
         std::cout << std::endl;
         std::cout << "+=============================================================+\n";

@@ -210,13 +210,13 @@ int main(int argc, char const *argv[])
     // {
     //     projects[project_index] = inputProjectInfo(project_index);
     // }
-    
+
     extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
     extractProjectInfoFile(&projects, "InputFiles/ProjectInfo.txt");
 
     int groupID = askUserGroupIDToSubmit();
 
-    submitProject(projects[groupID-1], groupID);
+    submitProject(projects[groupID - 1], groupID);
     displayAllTable(&groups, &projects);
 
     return 0;

@@ -71,9 +71,7 @@ public:
         }
         return os;
     }
-
-    // FUNCTION TO CHANGE THE SIZE OF submission_dates size
-    friend void resizeSubmissionDatesVector(Project* project, int newSize); 
+    
 };
 
 Project::Project(std::string group_description, Date *due_date)
@@ -90,10 +88,5 @@ Project::~Project()
         delete *iter;
     }
 }
-
-void resizeSubmissionDatesVector(Project* project, int newSize)
-{ 
-    project->submission_dates.resize(newSize);
-};
 
 #endif
