@@ -190,6 +190,31 @@ public:
         }
         return false;
     }
+
+    bool soonerOrEqual(const Date* otherDate)
+    {
+        if (this->year <= otherDate->year)
+        {
+            return true;
+        }
+        else if (this->year == otherDate->year)
+        {
+            if (this->month <= otherDate->month)
+            {
+                return true;
+            }
+            else if (this->month == otherDate->month)
+            {
+                if (this->day <= otherDate->day)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
 };
 
 bool validateThroughLib(const string date)
@@ -264,7 +289,7 @@ std::string checkState(const Date *d1, const Date *d2)
         }
         else
         {
-            return "Late!";
+            return "Late";
         }
     }
     else
@@ -276,7 +301,7 @@ std::string checkState(const Date *d1, const Date *d2)
         }
         else
         {
-            return "Late!";
+            return "Late";
         }
     }
 }
