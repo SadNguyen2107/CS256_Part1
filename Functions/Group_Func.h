@@ -85,16 +85,17 @@ void saveGroupsInfo(std::vector<Group*> *groups, std::string filePath)
     if (file.is_open())
     {
         file << "GroupNumber GroupName   GroupMembers\n";
-        for (std::vector<Group*>::size_type i = 0; i < groups->size(); i++)
+        for (std::vector<Group*>::size_type group_index = 0; group_index < groups->size(); group_index++)
         {
+            file << group_index + 1 << "\t";
             // WRITE GROUPS NAME
-            file << groups->at(i)->getGroupName() << "\t";
+            file << groups->at(group_index)->getGroupName() << "\t";
 
             // WRITE STUDENT INFORMATION
-            for (std::vector<Student>::size_type j = 0; j < groups->at(i)->getGroupStudentCopy().size(); j++)
+            for (std::vector<Student>::size_type student_num = 0; student_num < groups->at(group_index)->getGroupStudentCopy().size(); student_num++)
             {
                 // WRITE STUDENT NAMES
-                file << groups->at(i)->getGroupStudentCopy().at(j).student_name << "/" << groups->at(i)->getGroupStudentCopy().at(j).student_id << "\t";
+                file << groups->at(group_index)->getGroupStudentCopy().at(student_num).student_name << "/" << groups->at(group_index)->getGroupStudentCopy().at(student_num).student_id << "\t";
             }
 
             file << "\n";

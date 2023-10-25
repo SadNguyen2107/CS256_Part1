@@ -32,7 +32,7 @@ double measureExecutionTime()
     extractProjectInfoFile(&projects, numberOfGroups, "InputFiles/ProjectInfo.txt");
 
     // displayGroupsInfo(&groups);
-    displayByGroup(&groups, &projects);
+    // displayByGroup(&groups, &projects);
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Get the current time after running the function

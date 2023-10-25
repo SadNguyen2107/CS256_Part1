@@ -1,4 +1,4 @@
 GroupNumber GroupName   GroupMembers
-The_Death	Nguyen_Hoang_Tuan_Anh/20211889	Nguyen_Trung_Son/20232123	
-The_Bon	Nguyen_Anh_Thu/20298165	Tran_Duy/20213325	
-Damn_Son	Tran_Tri/25321235	
+1	The_Death	Nguyen_Hoang_Tuan_Anh/20211889	Nguyen_Trung_Son/20232123	
+2	The_Bon	Nguyen_Anh_Thu/20298165	Tran_Duy/20213325	
+3	Damn_Son	Tran_Tri/25321235	
