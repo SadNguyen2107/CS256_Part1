@@ -127,21 +127,21 @@ public:
     result: "d1 is not later than d2"
 
     */
-    bool later(const Date &otherDate)
+    bool later(const Date* otherDate)
     {
-        if (this->year > otherDate.year)
+        if (this->year > otherDate->year)
         {
             return true;
         }
-        else if (this->year == otherDate.year)
+        else if (this->year == otherDate->year)
         {
-            if (this->month > otherDate.month)
+            if (this->month > otherDate->month)
             {
                 return true;
             }
-            else if (this->month == otherDate.month)
+            else if (this->month == otherDate->month)
             {
-                if (this->day > otherDate.day)
+                if (this->day > otherDate->day)
                 {
                     return true;
                 }
@@ -166,21 +166,21 @@ public:
     result: "d1 is sooner than d2"
 
     */
-    bool sooner(const Date &otherDate)
+    bool sooner(const Date* otherDate)
     {
-        if (this->year < otherDate.year)
+        if (this->year < otherDate->year)
         {
             return true;
         }
-        else if (this->year == otherDate.year)
+        else if (this->year == otherDate->year)
         {
-            if (this->month < otherDate.month)
+            if (this->month < otherDate->month)
             {
                 return true;
             }
-            else if (this->month == otherDate.month)
+            else if (this->month == otherDate->month)
             {
-                if (this->day < otherDate.day)
+                if (this->day < otherDate->day)
                 {
                     return true;
                 }
@@ -239,25 +239,28 @@ bool validate_null(const unsigned short a, const unsigned short b)
     return false;
 }
 
-// d2: submission date
 // d1: deadline
+// d2: submission date
 std::string checkState(const Date *d1, const Date *d2)
 {
-    auto time = std::time(nullptr);
-    stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%F");
-    unsigned short day, month, year;
-    char delim;
-    ss >> year >> delim >> month >> delim >> day;
-    // Date *today = new Date(ss.str());
-    // if today>
-    Date today = Date(day, month, year);
+    // Get the current time
+    std::time_t currentTime = std::time(nullptr);
+
+    // Convert the current time to a tm struct
+    std::tm *now = std::localtime(&currentTime);
+
+    // Get today year, month, day
+    int today_day = now->tm_mday;
+    int today_month = (now->tm_mon + 1); // Month is 0-based
+    int today_year = (now->tm_year + 1900);
+
+    Date today = Date(today_day, today_month, today_year);
 
     if (d2 == nullptr)
     {
-        if (!today.later(*d1))
+        if (!today.later(d1))
         {
-            return "Undefined";
+            return "NULL";
         }
         else
         {
@@ -267,7 +270,7 @@ std::string checkState(const Date *d1, const Date *d2)
     else
     {
         Date submission = *d2;
-        if (!submission.later(*d1))
+        if (!submission.later(d1))
         {
             return "On time";
         }
