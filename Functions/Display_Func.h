@@ -60,7 +60,6 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
         std::cout << "+======================================================================================+\n";
       }
       std::cout << std::endl;
-
       if (project_index + 1 < projects_length)
       {
         project_index++;
@@ -78,7 +77,7 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
       for (std::vector<Student>::size_type columns = 0; columns < groups->at(group_index)->getGroupStudentCopy().size(); columns++)
       {
 
-        std::cout << "|" << std::left << std::setw(3) << group_index + columns + rows + 1
+        std::cout << "|" << std::left << std::setw(3) << group_index +  1
                   << "|" << std::left << std::setw(12) << groups->at(group_index)->getGroupName()
                   << "|" << std::left << std::setw(25) << groups->at(group_index)->getGroupStudentCopy().at(columns).student_name
                   << "|" << std::left << std::setw(10) << groups->at(group_index)->getGroupStudentCopy().at(columns).student_id;
