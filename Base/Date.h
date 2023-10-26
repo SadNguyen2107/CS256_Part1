@@ -287,7 +287,7 @@ std::string checkState(const Date *d1, const Date *d2)
     }
     else
     {
-        Date submission = *d2;
+        Date submission(d2->getDay(),d2->getMonth(),d2->getYear());
         if (!submission.later(d1))
         {
             return "On time";

@@ -60,6 +60,7 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
         std::cout << "+======================================================================================+\n";
       }
       std::cout << std::endl;
+
       if (project_index + 1 < projects_length)
       {
         project_index++;
