@@ -14,7 +14,8 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
 std::queue<Group *> *findGroupsNotCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects);
 std::queue<Group *> *findGroupsCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects);
 
-void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *projects){
+void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *projects)
+{
   std::cout << "\n"
             << "|" << std::left << std::setw(3) << "No."
             << "|" << std::left << std::setw(12) << "Group Name"
@@ -44,7 +45,7 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
       std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
 
       for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
-      {
+      {        
         std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[project_index]);
       }
       std::cout << std::endl;
@@ -64,12 +65,14 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
 
   // Iterate over all of the projects.
   std::vector<Project *> projects_before_specific_date;
-  for (Project *project : *projects) {
+  for (Project *project : *projects)
+  {
     // Get the project's due date.
     Date *dueDate = project->getDueDate();
 
     // If the submission date is earlier than the specific date, push the specific date into the project.
-    if (dueDate->soonerOrEqual(specificDate)) {
+    if (dueDate->soonerOrEqual(specificDate))
+    {
       projects_before_specific_date.push_back(project);
     }
   }
@@ -112,6 +115,72 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
     }
     std::cout << std::endl;
   }
+}
+// std::queue<Group *> *findGroupsCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects) {
+//   // Create a queue to store the groups that have completed their projects on time.
+//   std::queue<Group *> *completedGroups = new std::queue<Group *>();
+
+//   // Iterate over the list of groups.
+//   for (Group *group : *groups) {
+//     // Get the group's project.
+//     Project *project = projects->at(stoi(group->getGroupName()));
+
+//     // Get the group's submission date.
+//     Date *submissionDate = project->getSubmissionDateCopy()[group->getGroupName().size() - 1];
+
+//     // Check if the group submitted their project on time.
+//     if (checkState(submissionDate, project->getDueDate()) == "On time") {
+//       // If the group submitted their project on time, add them to the queue.
+//       completedGroups->push(group);
+//     }
+//   }
+
+//   // Return the queue of groups that have completed their projects on time.
+//   return completedGroups;
+// }
+void printCompletedGroups(std::queue<Group *> *completeOnTimeGroups)
+{
+  // Iterate over the queue of groups that have completed their projects on time.
+  while (!completeOnTimeGroups->empty())
+  {
+    // Get the next group from the queue.
+    Group *group = completeOnTimeGroups->front();
+
+    // Print the group's name.
+    std::cout << "Group " << group->getGroupName() << " submitted their assignment on time." << std::endl;
+
+    // Pop the group from the queue.
+    completeOnTimeGroups->pop();
+  }
+}
+
+std::queue<Group *> *findGroupsCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects)
+{
+  // Create a queue to store complete on time groups
+  std::queue<Group *> *completeOnTimeGroups = new std::queue<Group *>;
+  int largerValue = ((groups->size()) > (projects->size())) ? (groups->size()) : (projects->size());
+  // Check all group and project
+  for (size_t i = 0; i < largerValue; i++)
+  {
+      Group *group = (*groups)[i];
+      Project *project = (*projects)[i];
+
+      // Check if project have due date and submission date
+      if (project->getDueDate() && project->getSubmissionDateCopy().size() > i)
+      {
+        Date *dueDate = project->getDueDate();
+        Date *submissionDate = project->getSubmissionDateCopy()[i];
+
+        if (checkState(dueDate, submissionDate) == "On time")
+        {
+          completeOnTimeGroups->push(group);
+        }
+        else{
+          cout << i;
+        }
+      }
+    }
+  return completeOnTimeGroups;
 }
 
 #endif
