@@ -16,10 +16,10 @@ std::queue<Group *> *findGroupsCompleteOnTime(std::vector<Group *> *groups, std:
 
 void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *projects){
   std::cout << "\n"
-            << "|" << std::left << std::setw(3) << "ID"
-            << "|" << std::left << std::setw(12) << "GroupName"
-            << "|" << std::left << std::setw(25) << "StudentName"
-            << "|" << std::left << std::setw(9) << "StudentID";
+            << "|" << std::left << std::setw(3) << "No."
+            << "|" << std::left << std::setw(12) << "Group Name"
+            << "|" << std::left << std::setw(25) << "Student Name"
+            << "|" << std::left << std::setw(10) << "Student ID";
 
   for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
   {
@@ -37,7 +37,7 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
       std::cout << "|" << std::left << std::setw(3) << rows + 1
                 << "|" << std::left << std::setw(12) << groups->at(rows)->getGroupName()
                 << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
-                << "|" << std::left << std::setw(9) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id;
+                << "|" << std::left << std::setw(10) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id;
 
       // CURRENT PROJECT
       Project *project = projects->at(rows);
@@ -76,10 +76,10 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
 
   //! HEADLINE
   std::cout << "\n"
-            << "|" << std::left << std::setw(3) << "ID"
-            << "|" << std::left << std::setw(12) << "GroupName"
-            << "|" << std::left << std::setw(25) << "StudentName"
-            << "|" << std::left << std::setw(9) << "StudentID";
+            << "|" << std::left << std::setw(3) << "No."
+            << "|" << std::left << std::setw(12) << "Group Name"
+            << "|" << std::left << std::setw(25) << "Student Name"
+            << "|" << std::left << std::setw(10) << "Student ID";
 
   for (std::vector<Project *>::size_type project_index = 0; project_index < projects_before_specific_date.size(); project_index++)
   {
@@ -97,7 +97,7 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
       std::cout << "|" << std::left << std::setw(3) << rows + 1
                 << "|" << std::left << std::setw(12) << groups->at(rows)->getGroupName()
                 << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
-                << "|" << std::left << std::setw(9) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id;
+                << "|" << std::left << std::setw(10) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id;
 
       // CURRENT PROJECT
       Project *project = projects->at(rows);

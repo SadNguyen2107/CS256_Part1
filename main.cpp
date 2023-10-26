@@ -13,6 +13,7 @@
 // #include "./Database/ConnectFunc.h"
 // #include "./Database/InsertFunc.h"
 #include <cstring>
+#include <cstdlib>
 
 using json = nlohmann::json;
 
@@ -219,6 +220,8 @@ int main(int argc, char const *argv[])
 
     // submitProject(projects[projectID - 1], groupID);
     showSubmissionToASpecificDate(&groups, &projects);
+
+    displayAllTable(&groups, &projects);
 
     return 0;
 }
