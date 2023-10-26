@@ -87,13 +87,6 @@ public:
 
         return os;
     }
-    // COPY CONSTRUCTOR
-    Date(const Date &date)
-    {
-        this->day = date.day;
-        this->month = date.month;
-        this->year = date.year;
-    }
 
     // OPERATOR
     // Date &operator=(const Date &otherDate)
