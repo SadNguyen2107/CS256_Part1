@@ -14,6 +14,8 @@ void saveGroupsInfo(std::vector<Group*> *groups, std::string filePath);
 
 Group* inputGroupInfo(int group_index)
 {
+    cout << "Group " << group_index + 1 << " Information:" << endl;
+    std::cout << "================================================\n";
     // ENTER GROUPS NAME
     std::string groupName;
     std::cout << "Enter the name of group " << group_index + 1 << ": ";
@@ -51,6 +53,7 @@ Group* inputGroupInfo(int group_index)
         newGroup->addStudent(newStudent(student_name, student_id));
     }
     std::cout << "================================================\n";
+    cout << "Group " << group_index + 1 << " added successfully." << endl;
 
     return newGroup;
 }

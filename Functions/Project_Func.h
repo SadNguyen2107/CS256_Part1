@@ -19,6 +19,7 @@ void saveProjectsInfo(std::vector<Project*>* projects, std::string filePath);
 Project* inputProjectInfo(int project_index)
 {
     cout << "Project " << project_index + 1 << " Information:" << endl;
+    std::cout << "================================================\n";
 
     string description;
     cout << "Description: ";
@@ -27,7 +28,7 @@ Project* inputProjectInfo(int project_index)
     string dueDateString = "";
     do
     {
-        cout << "Input VALID Due date (DD/MM/YYYY): ";
+        cout << "Due date (DD/MM/YYYY): ";
         getline(cin, dueDateString);
 
         //! VALIDATE dueDate FORMAT
@@ -41,7 +42,9 @@ Project* inputProjectInfo(int project_index)
     // Create a new Project object and add it to the vector
     Project* project = new Project(description, dueDate);
 
+    std::cout << "================================================\n";
     cout << "Project " << project_index + 1 << " added successfully." << endl;
+    
     return project;
 }
 
@@ -85,7 +88,6 @@ void saveProjectsInfo(std::vector<Project*>* projects, std::string filePath)
 void submitProject(Project* project, int groupID)
 {
     string submissionDateStr = "";
-
     //ENTER SUBMISSION DATE OF THAT GROUP
     cout << "Enter the submission date (DD/MM/YYYY): ";
     getline(cin, submissionDateStr);
