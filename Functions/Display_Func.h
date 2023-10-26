@@ -16,7 +16,7 @@ std::queue<Group *> *findGroupsCompleteOnTime(std::vector<Group *> *groups, std:
 
 void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *projects){
   std::cout << "\n"
-            << "|" << std::left << std::setw(3) << "ID"
+            << "|" << std::left << std::setw(3) << "No."
             << "|" << std::left << std::setw(12) << "Group Name"
             << "|" << std::left << std::setw(25) << "Student Name"
             << "|" << std::left << std::setw(10) << "Student ID";
@@ -76,7 +76,7 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
 
   //! HEADLINE
   std::cout << "\n"
-            << "|" << std::left << std::setw(3) << "ID"
+            << "|" << std::left << std::setw(3) << "No."
             << "|" << std::left << std::setw(12) << "Group Name"
             << "|" << std::left << std::setw(25) << "Student Name"
             << "|" << std::left << std::setw(10) << "Student ID";
