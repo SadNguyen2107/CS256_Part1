@@ -218,11 +218,11 @@ int main(int argc, char const *argv[])
     int groupID = askGroupIDToSubmit();
     int projectID = askProjectIDToSubmit();
 
-    // submitProject(projects[projectID - 1], groupID);
+    submitProject(projects[projectID - 1], groupID);
 
     // std::queue<Group *> *completeOnTimeGroups = findGroupsCompleteOnTime(&groups, &projects);
     // printCompletedGroups(completeOnTimeGroups);
-    // showSubmissionToASpecificDate(&groups, &projects);
+    showSubmissionToASpecificDate(&groups, &projects);
 
     displayAllTable(&groups, &projects);
 
