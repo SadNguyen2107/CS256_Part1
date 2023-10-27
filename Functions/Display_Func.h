@@ -14,6 +14,50 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
 std::queue<Group *> *findGroupsNotCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects);
 std::queue<Group *> *findGroupsCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects);
 
+void displayByProject(std::vector<Group *> *groups, std::vector<Project *> *projects) {
+    // Get the project number from the instructor
+    std::cout << "Enter the project number you want to display: ";
+    int projectNumber;
+    std::cin >> projectNumber;
+
+    // Check if the project number is valid
+    if (projectNumber < 1 || projectNumber > projects->size()) {
+        std::cout << "Invalid project number. Please enter a valid project number." << std::endl;
+        return;
+    }
+
+    // Get the selected project
+    Project *selectedProject = projects->at(projectNumber - 1);
+    std::vector<Date *> submissionDates = selectedProject->getSubmissionDateCopy();
+
+    // Display the table
+    std::cout << "\nTable for Project " << projectNumber << " Submission Status:\n";
+    std::cout << "\n|" << std::left << std::setw(3) << "ID"
+              << "|" << std::left << std::setw(12) << "GroupName"
+              << "|" << std::left << std::setw(25) << "StudentName"
+              << "|" << std::left << std::setw(9) << "StudentID"
+              << "|" << std::left << std::setw(15) << "Submission Status";
+
+    std::cout << "\n+=============================================================+\n";
+
+
+    for (std::vector<Group *>::size_type groupIndex = 0; groupIndex < groups->size(); groupIndex++) {
+        for (std::vector<Student>::size_type studentIndex = 0; studentIndex < groups->at(groupIndex)->getGroupStudentCopy().size(); studentIndex++) {
+            std::cout << "|" << std::left << std::setw(3) << groupIndex + 1
+                      << "|" << std::left << std::setw(12) << groups->at(groupIndex)->getGroupName()
+                      << "|" << std::left << std::setw(25) << groups->at(groupIndex)->getGroupStudentCopy().at(studentIndex).student_name
+                      << "|" << std::left << std::setw(9) << groups->at(groupIndex)->getGroupStudentCopy().at(studentIndex).student_id;
+
+            // Check the submission status for the selected project
+            std::string submissionStatus = checkState(selectedProject->getDueDate(), submissionDates[groupIndex]);
+            std::cout << "|" << std::left << std::setw(15) << submissionStatus;
+            std::cout << "\n+=============================================================+\n";
+        }
+    }
+}
+
+
+
 void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *projects)
 {
   std::cout << "\n"
