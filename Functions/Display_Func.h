@@ -48,13 +48,11 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
                   << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
                   << "|" << std::left << std::setw(10) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id;
 
-        // CURRENT PROJECT
-        Project *project = projects->at(project_index);
-        std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
-
         for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
         {
-          std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[project_index]);
+          Project *project = projects->at(project_index);
+          std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
+          std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[rows]);
         }
         std::cout << std::endl;
         std::cout << "+======================================================================================+\n";
