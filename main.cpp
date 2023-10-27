@@ -215,16 +215,25 @@ int main(int argc, char const *argv[])
     int numberOfGroups = extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
     extractProjectInfoFile(&projects, numberOfGroups, "InputFiles/ProjectInfo.txt");
 
-    int groupID = askGroupIDToSubmit();
-    int projectID = askProjectIDToSubmit();
+    int numberOfGroup = 0;
+    cout << "Enter the number of group submitted project: ";
+    cin >> numberOfGroup;
+    for (int i = 0; i < numberOfGroup; i++){
+        int groupID = askGroupIDToSubmit();
+        int projectID = askProjectIDToSubmit();
+        submitProject(projects[projectID - 1], groupID);
+    }
 
-    submitProject(projects[projectID - 1], groupID);
+    std::queue<Group *> *groupsCompleteOnTime = findGroupsCompleteOnTime(&groups, &projects);
+    
+    // printCompleteOnTimeGroups(groupsCompleteOnTime, &groups, &projects);
+
 
     // std::queue<Group *> *completeOnTimeGroups = findGroupsCompleteOnTime(&groups, &projects);
     // printCompletedGroups(completeOnTimeGroups);
-    showSubmissionToASpecificDate(&groups, &projects);
+    // showSubmissionToASpecificDate(&groups, &projects);
 
-    displayAllTable(&groups, &projects);
+    // displayAllTable(&groups, &projects);
 
     return 0;
 }
