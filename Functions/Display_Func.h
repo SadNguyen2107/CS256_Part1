@@ -329,7 +329,6 @@ std::queue<std::tuple<int, Group *>> findGroupsNotCompleteOnTime(std::vector<Gro
   }
   return groupsNotCompleteOnTime;
 }
-
 void printGroups(std::queue<std::tuple<int, Group *>> groupsInfo, int flag)
 {
   
