@@ -5,15 +5,19 @@
 #include "../Base/Group.h"
 #include "../Validate/ValidateFunc.h"
 #include "../Validate/ValidateRegex.h"
+#include <tuple>
 #include <queue>
+
+#define GROUP_LATE 0
+#define GROUP_ON_TIME 1
 
 void displayByProject(std::vector<Group *> *groups, std::vector<Project *> *projects);
 void displayByGroup(std::vector<Group *> *groups, std::vector<Project *> *projects);
 void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *projects);
 void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Project *> *projects);
-std::queue<Group *> *findGroupsCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects);
-std::queue<Group *> *findGroupsNotCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects);
-
+std::queue<std::tuple<int, Group *>> findGroupsCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects);
+std::queue<std::tuple<int, Group *>> findGroupsNotCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects);
+void printGroups(std::queue<std::tuple<int, Group *>> groupsInfo, int flag);
 
 void displayByProject(std::vector<Group *> *groups, std::vector<Project *> *projects)
 {
@@ -259,9 +263,9 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
     //------------------------------------------------------------------------------------------------------------
   }
 }
-std::queue<Group *> *findGroupsCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects)
+std::queue<std::tuple<int, Group *>> findGroupsCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects)
 {
-  std::queue<Group *> *groupsCompleteOnTime = new std::queue<Group *>();
+  std::queue<std::tuple<int, Group *>> groupsCompleteOnTime = std::queue<std::tuple<int, Group *>>();
 
   // Iterate through all projects
   for (size_t project_index = 0; project_index < projects->size(); project_index++)
@@ -286,15 +290,15 @@ std::queue<Group *> *findGroupsCompleteOnTime(std::vector<Group *> *groups, std:
       // If Group complete on time, add to the queue
       if (groupCompleteOnTime)
       {
-        groupsCompleteOnTime->push(group);
+        groupsCompleteOnTime.push({project_index + 1, group});
       }
     }
   }
   return groupsCompleteOnTime;
 }
-std::queue<Group *> *findGroupsNotCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects)
+std::queue<std::tuple<int, Group *>> findGroupsNotCompleteOnTime(std::vector<Group *> *groups, std::vector<Project *> *projects)
 {
-  std::queue<Group *> *groupsNotCompleteOnTime = new std::queue<Group *>();
+  std::queue<std::tuple<int, Group *>> groupsNotCompleteOnTime = std::queue<std::tuple<int, Group *>>();
 
   // Iterate through all projects
   for (size_t project_index = 0; project_index < projects->size(); project_index++)
@@ -319,54 +323,52 @@ std::queue<Group *> *findGroupsNotCompleteOnTime(std::vector<Group *> *groups, s
       // If Group not complete on time, add to the queue
       if (groupNotCompleteOnTime)
       {
-        groupsNotCompleteOnTime->push(group);
+        groupsNotCompleteOnTime.push({project_index + 1, group});
       }
     }
   }
   return groupsNotCompleteOnTime;
 }
 
-// void printCompleteOnTimeGroups(std::queue<Group *> *groupsCompleteOnTime, std::vector<Group *> *groups, std::vector<Project *> *projects)
-// {
-//   std::cout << "Enter the number of project you want to check: ";
-//   std::vector<Project *>::size_type projectNum = 0;
-//   string projectNum_string = "";
-//   std::cin >> projectNum_string;
-//   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-//   projectNum_string = getValueAfterValidate(projectNum_string, validateID);
-//   projectNum = (std::stoi(projectNum_string));
+void printGroups(std::queue<std::tuple<int, Group *>> groupsInfo, int flag)
+{
+  
+  if (groupsInfo.empty())
+  {
+    std::cout << "No Group submitted on time!" << std::endl;
+  }
+  else if (!groupsInfo.empty())
+  {
+    if (flag == GROUP_ON_TIME)
+    {
+      std::cout << "Groups that submitted Project on time:" << std::endl;
+    }
+    else if (flag == GROUP_LATE)
+    {
+      std::cout << "Groups that submitted Project late:" << std::endl;
+    }
+    
+    std::cout << "==========================================================" << std::endl;
+    while (!groupsInfo.empty())
+    {
+      int prev_index = 0;
+      if (!groupsInfo.empty())
+      {
+        std::tuple<int, Group *> project_info = groupsInfo.front();
+        int project_index = std::get<int>(project_info);
+        Group *group = std::get<Group *>(project_info);
+        std::cout << "Group " << group->getGroupName() << " submitted Project " << project_index << " on time!" << std::endl;
+        groupsInfo.pop();
 
-//   while (projectNum < 1 || projectNum > projects->size())
-//   {
-//     std::cout << "Invalid project number. Please enter a valid project number: ";
-//     std::cin >> projectNum_string;
-//     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-//     projectNum_string = getValueAfterValidate(projectNum_string, validateID);
-//     projectNum = (std::stoi(projectNum_string));
-//   }
-
-//   if (groupsCompleteOnTime->empty())
-//   {
-//     std::cout << "No Group submitted on time!" << std::endl;
-//   }
-//   else if (!groupsCompleteOnTime->empty())
-//   {
-//     std::cout << "Groups that submitted Project " << projectNum <<  " on time:" << std::endl;
-//     for (size_t project_index = 0; project_index < projects->size(); project_index++)
-//     {
-//       if (!groupsCompleteOnTime->empty()){
-
-//       for (size_t group_index = 0; group_index < groups->size(); group_index++)
-//       {
-//         if (!groupsCompleteOnTime->empty()){
-//           Project *project = (*projects)[project_index];
-//           Group *group = groupsCompleteOnTime->front();
-//           std::cout << "Group " << group->getGroupName() << " submitted Project!" << std::endl;
-//           groupsCompleteOnTime->pop();
-//         }
-//       }
-//       }
-//     }
-//   }
-// }
+        // Print the separate line
+        if (prev_index != project_index)
+        {
+          std::cout << "==========================================================" << std::endl;
+          prev_index = project_index;
+        }
+        
+      }
+    }
+  }
+}
 #endif

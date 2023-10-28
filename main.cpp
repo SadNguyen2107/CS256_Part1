@@ -224,16 +224,24 @@ int main(int argc, char const *argv[])
         submitProject(projects[projectID - 1], groupID);
     }
 
-    std::queue<Group *> *groupsCompleteOnTime = findGroupsCompleteOnTime(&groups, &projects);
+    std::queue<std::tuple<int, Group*>> groupsCompleteOnTime = findGroupsCompleteOnTime(&groups, &projects);
     
-    // printCompleteOnTimeGroups(groupsCompleteOnTime, &groups, &projects);
+    printGroups(groupsCompleteOnTime, GROUP_ON_TIME);
 
-
-    // std::queue<Group *> *completeOnTimeGroups = findGroupsCompleteOnTime(&groups, &projects);
-    // printCompletedGroups(completeOnTimeGroups);
     // showSubmissionToASpecificDate(&groups, &projects);
 
     // displayAllTable(&groups, &projects);
 
+    // // Use queue tuple
+    // std::queue<std::tuple<int, Group*>> groups_complete_on_time = std::queue<std::tuple<int, Group*>>();
+    // groups_complete_on_time.push({1, new Group("Chicken Town")});
+    
+    // std::tuple<int, Group*> group = groups_complete_on_time.front();
+    // groups_complete_on_time.pop();
+
+    // int group_index = std::get<int>(group);
+    // Group* group_obj = std::get<Group*>(group);
+
+    // std::cout << group_index << ". " << group_obj << std::endl;
     return 0;
 }
