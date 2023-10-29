@@ -46,7 +46,7 @@ void displayByProject(std::vector<Group *> *groups, std::vector<Project *> *proj
 
   // Display the table
   std::cout << "\nTable for Project " << projectNumber << " Submission Status:\n";
-  std::cout << "\n|" << std::left << std::setw(3) << "ID"
+  std::cout << "\n|" << std::left << std::setw(3) << "No. "
             << "|" << std::left << std::setw(12) << "GroupName"
             << "|" << std::left << std::setw(25) << "StudentName"
             << "|" << std::left << std::setw(9) << "StudentID"
