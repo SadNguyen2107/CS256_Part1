@@ -57,7 +57,6 @@ Group* inputGroupInfo(int group_index)
 
     return newGroup;
 }
-
 void displayGroupsInfo(std::vector<Group*>* groups){
     std::cout << "\n" << "|" << std::left << std::setw(3) << "ID"
               << "|" << std::left << std::setw(20) << "GROUP NAME"
@@ -79,7 +78,6 @@ void displayGroupsInfo(std::vector<Group*>* groups){
         std::cout << std::endl;
     }
 }
-
 void saveGroupsInfo(std::vector<Group*> *groups, std::string filePath)
 {
     std::ofstream file;

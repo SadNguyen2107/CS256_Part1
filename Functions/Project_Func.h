@@ -47,7 +47,6 @@ Project* inputProjectInfo(int project_index)
     
     return project;
 }
-
 void saveProjectsInfo(std::vector<Project*>* projects, std::string filePath)
 {
     std::ofstream file;
