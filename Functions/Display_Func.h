@@ -71,6 +71,51 @@ void displayByProject(std::vector<Group *> *groups, std::vector<Project *> *proj
     std::cout << std::endl;
   }
 }
+void displayByGroup(std::vector<Group *> *groups, std::vector<Project *> *projects)
+{
+  // Get the group number from the instructor
+  std::cout << "Enter the group number you want to display: ";
+  std::vector<Group *>::size_type groupNumber = 0;
+  string groupNumber_string = "";
+  std::cin >> groupNumber_string;
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  groupNumber_string = getValueAfterValidate(groupNumber_string, validateID);
+  groupNumber = (std::stoi(groupNumber_string));
+
+  // Check if the project number is valid
+  while (groupNumber < 1 || groupNumber > groups->size())
+  {
+    std::cout << "Invalid group number. Please enter a valid project number: ";
+    std::cin >> groupNumber_string;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    groupNumber_string = getValueAfterValidate(groupNumber_string, validateID);
+    groupNumber = (std::stoi(groupNumber_string));
+  }
+  
+  //Get the selected group
+  Group *selectedGroup = groups->at(groupNumber-1);
+
+  //Display the group's project
+  std::cout<<"\nTable for Group "<<groupNumber;
+  std::cout << "\n|" << std::left << std::setw(12) << "GroupName"
+            << "|" << std::left << std::setw(25) << "StudentName"
+            << "|" << std::left << std::setw(9) << "StudentID";
+  for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
+  {
+    std::cout << "|" << std::left << std::setw(8) << "Project" << project_index + 1;
+  }
+  std::cout << std::endl;
+  std::cout << "+======================================================================================+\n";
+  for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
+    {
+      Project *project = projects->at(project_index);
+      std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
+      std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[groupNumber]);
+    }
+  std::cout << std::endl;
+  std::cout << "+======================================================================================+\n";
+  std::cout << std::endl;
+}
 void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *projects)
 {
   std::cout << "\n"
