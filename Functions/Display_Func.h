@@ -91,13 +91,11 @@ void displayByGroup(std::vector<Group *> *groups, std::vector<Project *> *projec
     groupNumber_string = getValueAfterValidate(groupNumber_string, validateID);
     groupNumber = (std::stoi(groupNumber_string));
   }
-  
-  //Get the selected group
-  Group *selectedGroup = groups->at(groupNumber-1);
 
-  //Display the group's project
-  std::cout<<"\nTable for Group "<<groupNumber;
-  std::cout << "\n|" << std::left << std::setw(12) << "GroupName"
+  // Display the group's project
+  std::cout << "\nTable for Group " << groupNumber;
+  std::cout << "\n|" << std::left << std::setw(3) << "No."
+            << "|" << std::left << std::setw(12) << "GroupName"
             << "|" << std::left << std::setw(25) << "StudentName"
             << "|" << std::left << std::setw(9) << "StudentID";
   for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
@@ -105,13 +103,20 @@ void displayByGroup(std::vector<Group *> *groups, std::vector<Project *> *projec
     std::cout << "|" << std::left << std::setw(8) << "Project" << project_index + 1;
   }
   std::cout << std::endl;
-  std::cout << "+======================================================================================+\n";
-  for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
+  std::cout << "+======================================================================================+";
+  for (std::vector<Student>::size_type studentIndex = 0; studentIndex < groups->at(groupNumber - 1)->getGroupStudentCopy().size(); studentIndex++)
+  {
+    std::cout << "\n|" << std::left << std::setw(3) << groupNumber
+              << "|" << std::left << std::setw(12) << groups->at(groupNumber - 1)->getGroupName()
+              << "|" << std::left << std::setw(25) << groups->at(groupNumber - 1)->getGroupStudentCopy().at(studentIndex).student_name
+              << "|" << std::left << std::setw(9) << groups->at(groupNumber - 1)->getGroupStudentCopy().at(studentIndex).student_id;
+    for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
     {
       Project *project = projects->at(project_index);
       std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
-      std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[groupNumber]);
+      std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[groupNumber - 1]);
     }
+  }
   std::cout << std::endl;
   std::cout << "+======================================================================================+\n";
   std::cout << std::endl;
@@ -376,7 +381,7 @@ std::queue<std::tuple<int, Group *>> findGroupsNotCompleteOnTime(std::vector<Gro
 }
 void printGroups(std::queue<std::tuple<int, Group *>> groupsInfo, int flag)
 {
-  
+
   if (groupsInfo.empty())
   {
     std::cout << "No Group submitted on time!" << std::endl;
@@ -391,7 +396,7 @@ void printGroups(std::queue<std::tuple<int, Group *>> groupsInfo, int flag)
     {
       std::cout << "Groups that submitted Project late:" << std::endl;
     }
-    
+
     std::cout << "==========================================================" << std::endl;
     while (!groupsInfo.empty())
     {
@@ -410,7 +415,6 @@ void printGroups(std::queue<std::tuple<int, Group *>> groupsInfo, int flag)
           std::cout << "==========================================================" << std::endl;
           prev_index = project_index;
         }
-        
       }
     }
   }

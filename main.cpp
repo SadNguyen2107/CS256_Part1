@@ -224,11 +224,12 @@ int main(int argc, char const *argv[])
         submitProject(projects[projectID - 1], groupID);
     }
 
-    std::queue<std::tuple<int, Group*>> groupsCompleteOnTime = findGroupsCompleteOnTime(&groups, &projects);
+    // std::queue<std::tuple<int, Group*>> groupsCompleteOnTime = findGroupsCompleteOnTime(&groups, &projects);
     
-    printGroups(groupsCompleteOnTime, GROUP_ON_TIME);
+    // printGroups(groupsCompleteOnTime, GROUP_ON_TIME);
 
     // showSubmissionToASpecificDate(&groups, &projects);
+    displayByGroup(&groups, &projects);
 
     // displayAllTable(&groups, &projects);
 
