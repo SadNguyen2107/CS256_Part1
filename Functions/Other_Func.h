@@ -91,7 +91,7 @@ std::string askUserFileDirectory()
     std::vector<Project *> projects;
 
     // ASK INPUT
-    cout << "Load corporation from file(1) or create new corporation from terminal(2)? ";
+    cout << "Load corporation from file(1) or input from terminal(2)? ";
     std::cin >> option;
     while (!(option == 1 || option == 2))
     {
