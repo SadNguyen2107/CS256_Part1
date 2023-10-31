@@ -13,6 +13,7 @@ using namespace std;
 
 // PROTOTYPE
 Project* inputProjectInfo(int project_index);
+void displayProjectsInfo(std::vector<Project*>* projects);
 void submitProject(Project* project, int groupID);
 void saveProjectsInfo(std::vector<Project*>* projects, std::string filePath);
 
@@ -46,6 +47,10 @@ Project* inputProjectInfo(int project_index)
     cout << "Project " << project_index + 1 << " added successfully." << endl;
     
     return project;
+}
+void displayProjectsInfo(std::vector<Project*>* projects)
+{
+    
 }
 void saveProjectsInfo(std::vector<Project*>* projects, std::string filePath)
 {
