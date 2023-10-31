@@ -8,11 +8,11 @@
 #include "../Validate/ValidateFunc.h"
 #include <fstream>
 
-Group* inputGroupInfo(int group_index);
-void displayGroupsInfo(std::vector<Group*>* groups);
-void saveGroupsInfo(std::vector<Group*> *groups, std::string filePath);
+Group *inputGroupInfo(int group_index);
+void displayGroupsInfo(std::vector<Group *> *groups);
+void saveGroupsInfo(std::vector<Group *> *groups, std::string filePath);
 
-Group* inputGroupInfo(int group_index)
+Group *inputGroupInfo(int group_index)
 {
     cout << "Group " << group_index + 1 << " Information:" << endl;
     std::cout << "================================================\n";
@@ -21,7 +21,7 @@ Group* inputGroupInfo(int group_index)
     std::cout << "Enter the name of group " << group_index + 1 << ": ";
     std::getline(std::cin, groupName);
 
-    Group* newGroup = new Group(groupName);
+    Group *newGroup = new Group(groupName);
 
     // ENTER NUMBER STUDENTS
     std::vector<Student>::size_type numStudents = 0;
@@ -34,7 +34,8 @@ Group* inputGroupInfo(int group_index)
 
     std::cout << "________________________________________________\n";
 
-    for (std::vector<Student>::size_type j = 0; j < numStudents; j++) {
+    for (std::vector<Student>::size_type j = 0; j < numStudents; j++)
+    {
         // ENTER STUDENTS NAME
         std::string student_name;
         std::cout << "Enter the name of student " << j + 1 << ": ";
@@ -57,28 +58,38 @@ Group* inputGroupInfo(int group_index)
 
     return newGroup;
 }
-void displayGroupsInfo(std::vector<Group*>* groups){
-    std::cout << "\n" << "|" << std::left << std::setw(3) << "ID"
-              << "|" << std::left << std::setw(20) << "GROUP NAME"
-              << "|" << std::left << std::setw(25) << "STUDENT NAME"
-              << "|" << std::left << std::setw(15) << "STUDENT ID" << std::endl
-              << "+==============================================================+\n";
-
-    for (std::vector<Group*>::size_type rows = 0; rows < groups->size(); rows++)
+void displayGroupsInfo(std::vector<Group *> *groups)
+{
+    if (groups->empty())
     {
-        for (std::vector<Student>::size_type columns = 0; columns < groups->at(rows)->getGroupStudentCopy().size(); columns++)
-        {
-            std::cout << "|" << std::left << std::setw(3) << rows + 1
-                      << "|" << std::left << std::setw(20) << groups->at(rows)->getGroupName()
-                      << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
-                      << "|" << std::left << std::setw(15) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id << std::endl
-                      << "+==============================================================+\n";
-        }
+        std::cout << "There are no groups to display." << std::endl;
+        return;
+    }
+    else
+    {
+        std::cout << "\n"
+                  << "|" << std::left << std::setw(3) << "ID"
+                  << "|" << std::left << std::setw(20) << "GROUP NAME"
+                  << "|" << std::left << std::setw(25) << "STUDENT NAME"
+                  << "|" << std::left << std::setw(15) << "STUDENT ID" << std::endl
+                  << "+==============================================================+\n";
 
-        std::cout << std::endl;
+        for (std::vector<Group *>::size_type rows = 0; rows < groups->size(); rows++)
+        {
+            for (std::vector<Student>::size_type columns = 0; columns < groups->at(rows)->getGroupStudentCopy().size(); columns++)
+            {
+                std::cout << "|" << std::left << std::setw(3) << rows + 1
+                          << "|" << std::left << std::setw(20) << groups->at(rows)->getGroupName()
+                          << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
+                          << "|" << std::left << std::setw(15) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id << std::endl
+                          << "+==============================================================+\n";
+            }
+
+            std::cout << std::endl;
+        }
     }
 }
-void saveGroupsInfo(std::vector<Group*> *groups, std::string filePath)
+void saveGroupsInfo(std::vector<Group *> *groups, std::string filePath)
 {
     std::ofstream file;
     file.open(filePath, std::ios::out | std::ios::trunc);
@@ -86,7 +97,7 @@ void saveGroupsInfo(std::vector<Group*> *groups, std::string filePath)
     if (file.is_open())
     {
         file << "GroupNumber GroupName   GroupMembers\n";
-        for (std::vector<Group*>::size_type group_index = 0; group_index < groups->size(); group_index++)
+        for (std::vector<Group *>::size_type group_index = 0; group_index < groups->size(); group_index++)
         {
             file << group_index + 1 << "\t";
             // WRITE GROUPS NAME
@@ -109,6 +120,5 @@ void saveGroupsInfo(std::vector<Group*> *groups, std::string filePath)
         std::cout << "Error opening file: " << filePath << std::endl;
     }
 }
-
 
 #endif
