@@ -2,15 +2,22 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++ build active file",
-            "command": "/usr/bin/g++",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "-static-libgcc", 
+                "-static-libstdc++",
+                "-Wall",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
-                "-lsqlite3"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-lsqlite3",
+                "-lole32",
+                "-lshell32",
+                "-lcomdlg32",
+                "-luuid"
             ],
             "options": {
                 "cwd": "${fileDirname}"

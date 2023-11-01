@@ -82,7 +82,7 @@ void extractProjectInfoFile(std::vector<Project *> *projects_to_store, int numbe
         stringstream ss(str);
         // cout << str << endl;
         string desc;
-        int id;
+        std::vector<Project*>::size_type id;
         string date;
         // char delim;
         ss >> id >> date;

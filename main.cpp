@@ -29,8 +29,8 @@ double measureExecutionTime()
     std::vector<Group *> groups;
     std::vector<Project *> projects;
 
-    int numberOfGroups = extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
-    extractProjectInfoFile(&projects, numberOfGroups, "InputFiles/ProjectInfo.txt");
+    extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
+    extractProjectInfoFile(&projects,groups.size(), "InputFiles/ProjectInfo.txt");
 
     // displayGroupsInfo(&groups);
     // displayByGroup(&groups, &projects);
@@ -212,8 +212,8 @@ int main(int argc, char const *argv[])
     //     projects[project_index] = inputProjectInfo(project_index);
     // }
 
-    int numberOfGroups = extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
-    extractProjectInfoFile(&projects, numberOfGroups, "InputFiles/ProjectInfo.txt");
+    extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
+    extractProjectInfoFile(&projects,groups.size(), "InputFiles/ProjectInfo.txt");
 
     int numberOfGroup = 0;
     cout << "Enter the number of group submitted project: ";
