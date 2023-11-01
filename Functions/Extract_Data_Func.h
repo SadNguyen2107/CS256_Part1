@@ -9,13 +9,13 @@
 //! EXTRACT DATA FROM GroupInfo.txt FILES
 // groups_to_store parameter is a place to store the RESULT after extract finish
 // Return the number of groups in the file
-void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string filePath);
+void extractGroupInfoFile(std::vector<Group *> *groups_to_store,std::string filePath);
 
-// Extract info file
+// Extract info file 
 void extractProjectInfoFile(std::vector<Project *> *projects_to_store, int number_of_groups, std::string filePath);
 
 //! EXTRACT DATA FROM GroupInfo.txt FILES
-void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string filePath)
+void extractGroupInfoFile(std::vector<Group *> *groups_to_store,std::string filePath)
 {
     fstream fs;
     fs.open(filePath);
@@ -27,7 +27,7 @@ void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string fil
 
         istringstream ss(str);
 
-        std::vector<Group *>::size_type id;
+        std::vector<Group*>::size_type id;
         string name;
         ss >> id;
         if (id > groups_to_store->size())
@@ -35,9 +35,8 @@ void extractGroupInfoFile(std::vector<Group *> *groups_to_store, std::string fil
             groups_to_store->resize(id);
         }
         ss >> name;
-        if ((*groups_to_store)[id - 1] == nullptr)
-        {
-            (*groups_to_store)[id - 1] = new Group(name);
+        if ((*groups_to_store)[id - 1] ==nullptr){
+               (*groups_to_store)[id - 1] = new Group(name);
         }
 
         string student_name;
@@ -90,14 +89,13 @@ void extractProjectInfoFile(std::vector<Project *> *projects_to_store, int numbe
         getline(ss, desc, '\n');
         ss >> id >> date;
 
-        Project *project = new Project(desc, new Date(date));
+        Project* project = new Project(desc, new Date(date));
         resizeSubmissionDates(project, number_of_groups);
-        if (id > projects_to_store->size())
-        {
+        if (id>projects_to_store->size()){
             projects_to_store->resize(id);
         }
         // projects_to_store->push_back(project);
-        (*projects_to_store)[id - 1] = project;
+        (*projects_to_store)[id-1] = project;
     }
 }
 
