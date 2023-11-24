@@ -1,14 +1,7 @@
 #ifndef OTHERFUNC_H
 #define OTHERFUNC_H
 
-#include <string>
-#include <iostream>
-#include <limits>
-#include "../Validate/ValidateFunc.h"
-#include "../Validate/ValidateRegex.h"
-#include "../Validate/ValidateFile.h"
-#include "../Base/Project.h"
-#include "../Base/Group.h"
+#include "../Menus/SharedResource.h"
 
 int askUserNumberOfGroups();
 int askUserNumberOfProjects();
@@ -16,7 +9,7 @@ int askGroupIDToSubmit();
 int askProjectIDToSubmit();
 std::string askUserFileGroupsDirectory();
 std::string askUserFileProjectsDirectory();
-void quitProgram();
+void cleanUpResources();
 
 int askUserNumberOfGroups()
 {
@@ -104,6 +97,7 @@ std::string askUserFileGroupsDirectory()
 
     return fileGroups;
 }
+
 std::string askUserFileProjectsDirectory()
 {
     string fileProjects = "";
@@ -115,7 +109,7 @@ std::string askUserFileProjectsDirectory()
     std::cin >> fileProjects;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    while (!isRightFile(fileProjects, GROUP_INFO_FILE))
+    while (!isRightFile(fileProjects, PROJECT_INFO_FILE))
     {
         std::cout << "Wrong file! Enter projects file Path Again: ";
         std::getline(std::cin, fileProjects);
@@ -126,8 +120,54 @@ std::string askUserFileProjectsDirectory()
 
     return fileProjects;
 }
-void quitProgram()
+
+bool confirmExit()
 {
-    exit(0);
+    std::string userInput;
+    std::cout << "Are you sure you want to exit? (y/n): ";
+    std::getline(std::cin, userInput);
+    while (true)
+    {
+        if (userInput == "Y" || userInput == "y")
+        {
+            cleanUpResources();
+            return true;
+        }
+        else if (userInput == "N" || userInput == "n")
+        {
+            return false;
+        }
+        else
+        {
+            std::cout << "Invalid input. Please enter 'y' or 'n'\n";
+        }
+    }
 }
+
+void BackOrNot(bool &continueProgram)
+{
+    std::string BackOrNotChoice;
+    std::cout << "Do You Want To Back To Menu (y/n): ";
+    std::cin >> BackOrNotChoice;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    if (BackOrNotChoice == "y" || BackOrNotChoice == "Y")
+    {
+    }
+
+    else if (BackOrNotChoice == "n" || BackOrNotChoice == "N")
+    {
+        if (confirmExit())
+        {
+            continueProgram = false;
+        }
+    }
+
+    else
+    {
+        std::cout << "Invalid Choice, Only Y Or N. Please Try Again!";
+        BackOrNot(continueProgram);
+    }
+}
+
 #endif
