@@ -69,34 +69,14 @@ void cleanUpResources()
 {
     std::cout << "Cleaning Resources In Progress...\n";
 
-    // Delete and show progress for groups
-    size_t totalGroups = groups.size();
-    for (size_t i = 0; i < totalGroups; ++i)
+    for (int i = 0; i < groups.size(); i++)
     {
-        delete groups[i];    // Delete each dynamically allocated object in groups
-        groups[i] = nullptr; // Safely nullify the pointer after deletion
-
-        // Calculate and display progress
-        int progress = static_cast<int>((i + 1) * 100 / totalGroups);
-        std::cout << "Deleting groups: " << progress << "%\r"; // \r to return to line start
-        std::cout.flush();                                     // Ensure the output is displayed immediately
+        delete[] groups[i];
     }
-    groups.clear(); // Clear the vector
-
-    // Delete and show progress for projects
-    size_t totalProjects = projects.size();
-    for (size_t i = 0; i < totalProjects; ++i)
+    for (int i = 0; i < projects.size(); i++)
     {
-        delete projects[i];    // Delete each dynamically allocated object in projects
-        projects[i] = nullptr; // Safely nullify the pointer after deletion
-
-        // Calculate and display progress
-        int progress = static_cast<int>((i + 1) * 100 / totalProjects);
-        std::cout << "Deleting projects: " << progress << "%\r"; // \r to return to line start
-        std::cout.flush();                                       // Ensure the output is displayed immediately
+        delete[] projects[i];
     }
-    projects.clear(); // Clear the vector
-
     std::cout << "\nCleaned Everything Before Quitting\n";
     std::cout << "Thank You!\n";
 }
@@ -172,15 +152,14 @@ void askUserInputMethodForProject()
     {
         int number_of_groups;
         std::string filePath = askUserFileProjectsDirectory();
-        extractProjectInfoFile(&projects, groups.size(), filePath);
+        extractProjectInfoFile(&projects, groups.size(), filePath);   
+        
     }
     
     else if (inputMethodChoiceForProject == 2)
     {
         int numOfProjects = askUserNumberOfProjects();
-
-        // Allocate Amount Of Space
-        projects = std::vector<Project *>(numOfProjects);
+        projects.resize(numOfProjects);  // Resize the Projects size according to Num Of Projects
 
         for (int project_index = 0; project_index < numOfProjects; project_index++)
         {

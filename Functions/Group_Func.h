@@ -58,6 +58,7 @@ Group *inputGroupInfo(int group_index)
 
     return newGroup;
 }
+
 void displayGroupsInfo(std::vector<Group *> *groups)
 {
     if (groups->empty())
@@ -89,6 +90,7 @@ void displayGroupsInfo(std::vector<Group *> *groups)
         }
     }
 }
+
 void saveGroupsInfo(std::vector<Group *> *groups, std::string filePath)
 {
     std::ofstream file;

@@ -50,20 +50,23 @@ int mapUserChoiceToActionMenu2(int userChoiceM2)
     {
     case Menu2::AddGroups:
         askUserInputMethodForGroup();
-        return INPUT_SUCCESS;
+        BackOrNot(continueProgram);
+        break;
 
     case Menu2::AddProjects:
         askUserInputMethodForProject();
         loadMenu3();
-        return INPUT_SUCCESS;
-
+        BackOrNot(continueProgram);
+        break;
+        
     case Menu2::DisplayGroupInfo:
         displayGroupsInfo(&groups);
         if (groups.empty())
         {
             bool continueProgram = true;
         }
-        return INPUT_SUCCESS;
+        BackOrNot(continueProgram);
+        break;
 
     case Menu2::DisplayProjectInfo:
         displayProjectsInfo(&projects);
@@ -72,21 +75,18 @@ int mapUserChoiceToActionMenu2(int userChoiceM2)
             std::cout << "Please Return To Menu To Perform This Task!\n";
             BackOrNot(continueProgram);
         }
-        return INPUT_SUCCESS;
+        BackOrNot(continueProgram);
+        break;
 
     case Menu2::QuitProgram:
-        if (!confirmExit == true)
-        {
-            cleanUpResources();
-            return QUIT_PROGRAM;
-        }
-        break;
+        quitProgram();
 
     default:
         std::cout << "Invalid Option. Please Try Again!\n";
         BackOrNot(continueProgram);
+        break;
     }
-    return INPUT_FAIL;
+    return userChoiceM2;
 }
 
 // Function to load and manage menu 2

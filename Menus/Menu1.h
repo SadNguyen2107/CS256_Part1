@@ -72,12 +72,7 @@ int mapUserChoiceToActionMenu1(int userChoiceM1)
         return INPUT_SUCCESS;
 
     case Menu1::QuitProgram:
-        if (confirmExit() == true)
-        {
-            cleanUpResources();
-            return QUIT_PROGRAM;
-        }
-        break;
+        quitProgram();
 
     default:
         std::cout << "Invalid Option. Please Try Again!\n"; 

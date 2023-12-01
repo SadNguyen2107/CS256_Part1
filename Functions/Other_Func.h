@@ -10,6 +10,7 @@ int askProjectIDToSubmit();
 std::string askUserFileGroupsDirectory();
 std::string askUserFileProjectsDirectory();
 void cleanUpResources();
+void quitProgram();
 
 int askUserNumberOfGroups()
 {
@@ -49,7 +50,7 @@ int askGroupIDToSubmit()
     std::string groupID_string = "";
 
     // ENTER NUMBER PROJECTS
-    std::cout << "Enter the Group ID to submit: ";
+    std::cout << "Enter the VALID Group ID to submit: ";
     std::cin >> groupID_string;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     groupID_string = getValueAfterValidate(groupID_string, validateID);
@@ -65,7 +66,7 @@ int askProjectIDToSubmit()
     std::string projectID_string = "";
 
     // ENTER NUMBER PROJECTS
-    std::cout << "Enter the Project ID to submit: ";
+    std::cout << "Enter the VALID Project ID to submit: ";
     std::cin >> projectID_string;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     projectID_string = getValueAfterValidate(projectID_string, validateID);
@@ -165,9 +166,21 @@ void BackOrNot(bool &continueProgram)
 
     else
     {
-        std::cout << "Invalid Choice, Only Y Or N. Please Try Again!";
+        std::cout << "Invalid Choice, Only Y Or N. Please Try Again!\n";
         BackOrNot(continueProgram);
     }
+}
+void quitProgram()
+{
+    for (int i = 0; i < groups.size(); i++)
+    {
+        delete[] groups[i];
+    }
+    for (int i = 0; i < projects.size(); i++)
+    {
+        delete[] projects[i];
+    }
+    exit(0);
 }
 
 #endif

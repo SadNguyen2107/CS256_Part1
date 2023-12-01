@@ -47,6 +47,7 @@ Project *inputProjectInfo(int project_index)
 
     return project;
 }
+
 void displayProjectsInfo(std::vector<Project *> *projects)
 {
     if (projects->empty())
@@ -111,9 +112,9 @@ void submitProject(Project *project, int groupID)
     submissionDateStr = getValueAfterValidate(submissionDateStr, validateDate);
 
     Date *submissionDate = new Date(submissionDateStr);
-
     project->addSubmissionDate(groupID, submissionDate);
-
+   
     cout << "Project submitted successfully on " << submissionDateStr << "." << endl;
 }
+
 #endif

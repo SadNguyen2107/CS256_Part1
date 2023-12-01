@@ -71,6 +71,7 @@ void displayByProject(std::vector<Group *> *groups, std::vector<Project *> *proj
     std::cout << std::endl;
   }
 }
+
 void displayByGroup(std::vector<Group *> *groups, std::vector<Project *> *projects)
 {
   // Get the group number from the instructor
@@ -121,6 +122,7 @@ void displayByGroup(std::vector<Group *> *groups, std::vector<Project *> *projec
   std::cout << "+======================================================================================+\n";
   std::cout << std::endl;
 }
+
 void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *projects)
 {
   std::cout << "\n"
@@ -206,6 +208,7 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
     //------------------------------------------------------------------------------------------------------------
   }
 }
+
 void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Project *> *projects)
 {
   string specificDate_string = "";
@@ -419,4 +422,5 @@ void printGroups(std::queue<std::tuple<int, Group *>> groupsInfo, int flag)
     }
   }
 }
+
 #endif
