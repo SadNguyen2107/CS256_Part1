@@ -41,8 +41,8 @@ void displayMenu3()
               << "|  2.  Input A New Project                    |\n"
               << "|  3.  Submit Project                         |\n"
               << "|  4.  Display All Info                       |\n"
-              << "|  5.  Display Info About Group ID            |\n"
-              << "|  6.  Display Info About Project ID          |\n"
+              << "|  5.  Display Infomation All Group           |\n"
+              << "|  6.  Display Infomation All Project         |\n"
               << "|  7.  Display Submission To A Specific Date  |\n"
               << "|  8.  Display Groups Submit On Time          |\n"
               << "|  9.  Display Groups Turn In Late            |\n"
@@ -63,11 +63,13 @@ int mapUserChoiceToActionMenu3(int userChoiceM3)
     {
     case Menu3::AddGroups:
         askUserInputMethodForGroup();
+        saveGroupsInfo(&groups, "OutputFiles/GroupInfo.txt");
         BackOrNot(continueProgram);
         break;
 
     case Menu3::AddProjects:
         askUserInputMethodForProject();
+        saveProjectsInfo(&projects, "OutputFiles/ProjectInfo.txt");
         BackOrNot(continueProgram);
         break;
 
@@ -91,7 +93,7 @@ int mapUserChoiceToActionMenu3(int userChoiceM3)
         displayGroupsInfo(&groups);
         if (groups.empty())
         {
-            bool continueProgram = true;
+            std::cout << "There is nothing to display\n";
         }
         BackOrNot(continueProgram);
         break;
@@ -143,7 +145,7 @@ int loadMenu3()
         displayMenu3();
         int choice = getUserChoice();
         int status = mapUserChoiceToActionMenu3(choice);
-        if (status == QUIT_PROGRAM || status == INPUT_FAIL)
+        if (status == QUIT_PROGRAM)
         {
             continueProgram = false;
         }

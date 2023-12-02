@@ -3,13 +3,18 @@
 
 #include "../Menus/SharedResource.h"
 
+// To Store Vector All the Groups
+std::vector<Group *> groups;
+
+// To Store Vector All the Projects
+std::vector<Project *> projects;
+
 int askUserNumberOfGroups();
 int askUserNumberOfProjects();
 int askGroupIDToSubmit();
 int askProjectIDToSubmit();
 std::string askUserFileGroupsDirectory();
 std::string askUserFileProjectsDirectory();
-void cleanUpResources();
 void quitProgram();
 
 int askUserNumberOfGroups()
@@ -131,7 +136,7 @@ bool confirmExit()
     {
         if (userInput == "Y" || userInput == "y")
         {
-            cleanUpResources();
+            quitProgram();
             return true;
         }
         else if (userInput == "N" || userInput == "n")
@@ -147,39 +152,65 @@ bool confirmExit()
 
 void BackOrNot(bool &continueProgram)
 {
-    std::string BackOrNotChoice;
-    std::cout << "Do You Want To Back To Menu (y/n): ";
-    std::cin >> BackOrNotChoice;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::string backOrNotChoice;
 
-    if (BackOrNotChoice == "y" || BackOrNotChoice == "Y")
+    while (true)
     {
-    }
+        std::cout << "Do you want to go back to the menu? (y/n): ";
+        std::cin >> backOrNotChoice;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    else if (BackOrNotChoice == "n" || BackOrNotChoice == "N")
-    {
-        if (confirmExit())
+        if (backOrNotChoice == "y" || backOrNotChoice == "Y")
         {
-            continueProgram = false;
+            break;
         }
-    }
-
-    else
-    {
-        std::cout << "Invalid Choice, Only Y Or N. Please Try Again!\n";
-        BackOrNot(continueProgram);
+        else if (backOrNotChoice == "n" || backOrNotChoice == "N")
+        {
+            if (confirmExit())
+            {
+                continueProgram = false;
+                break; // Exit the loop and end the program
+            }
+        }
+        else
+        {
+            std::cout << "Invalid choice. Please enter 'Y' or 'N'.\n";
+        }
     }
 }
 void quitProgram()
 {
-    for (int i = 0; i < groups.size(); i++)
+    std::cout << "Cleaning Resources In Progress...\n";
+
+    for (std::vector<Group *>::size_type i = 0; i < groups.size(); i++)
     {
-        delete[] groups[i];
+        if (groups[i] != nullptr)
+        {
+            delete groups[i];
+        }
     }
-    for (int i = 0; i < projects.size(); i++)
+    for (std::vector<Project *>::size_type i = 0; i < projects.size(); i++)
     {
-        delete[] projects[i];
+        if (projects[i] != nullptr)
+        {
+            delete projects[i];
+        }
     }
+    // for (Group *group : groups)
+    // {
+    //     delete group;
+    // }
+
+    // for (Project *project : projects)
+    // {
+    //     delete project;
+    // }
+
+    groups.clear();
+    projects.clear();
+    std::cout << "Cleaned Everything Before Quitting\n";
+    std::cout << "Thank You!\n";
+
     exit(0);
 }
 

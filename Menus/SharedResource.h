@@ -28,12 +28,6 @@
 // Define Menu Constants
 #define MENU_CONSTANTS_H
 
-// To Store Vector All the Groups
-std::vector<Group *> groups;
-
-// To Store Vector All the Projects
-std::vector<Project *> projects;
-
 // Create namespace menu 1 to reuse the same constants after that without causing conflicts due to redefinitions
 namespace Menu1
 {
@@ -65,115 +59,86 @@ namespace Menu3
     extern const int QuitProgram;
 }
 
-void cleanUpResources()
-{
-    std::cout << "Cleaning Resources In Progress...\n";
-
-    for (int i = 0; i < groups.size(); i++)
-    {
-        delete[] groups[i];
-    }
-    for (int i = 0; i < projects.size(); i++)
-    {
-        delete[] projects[i];
-    }
-    std::cout << "\nCleaned Everything Before Quitting\n";
-    std::cout << "Thank You!\n";
-}
-
-// void cleanUpResources()
-// {
-//     std::cout << "Cleaning Resources In Progress...\n";
-
-//     // Assuming groups and projects are vectors of pointers to dynamically allocated objects
-//     for (auto group : groups) {
-//         delete group;  // Delete each dynamically allocated object in groups
-//     }
-//     groups.clear();  // Clear the vector
-
-//     for (auto project : projects) {
-//         delete project;  // Delete each dynamically allocated object in projects
-//     }
-//     projects.clear();  // Clear the vector
-
-//     std::cout << "Cleaned Everything Before Quitting\n";
-//     std::cout << "Thank You!\n";
-// }
-
 void askUserInputMethodForGroup()
 {
     // Display The Menu And Get The User's Choice
     int inputMethodChoiceForGroup;
-    std::cout << "What Method Would You Like To Use?\n";
-    std::cout << "1. Input From File\n";
-    std::cout << "2. Input From Terminal\n";
-    std::cout << "Your Choice: ";
-    std::cin >> inputMethodChoiceForGroup;
-
-    if (inputMethodChoiceForGroup == 1)
+    do
     {
-        std::string filePath = askUserFileGroupsDirectory();
-        extractGroupInfoFile(&groups, filePath);
-    }
+        std::cout << "What Method Would You Like To Use?\n";
+        std::cout << "1. Input From File\n";
+        std::cout << "2. Input From Terminal\n";
+        std::cout << "Your Choice: ";
+        std::cin >> inputMethodChoiceForGroup;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    else if (inputMethodChoiceForGroup == 2)
-    {
-        int numOfGroups = askUserNumberOfGroups();
-
-        // ALocate AMount of Space
-        groups = std::vector<Group *>(numOfGroups);
-
-        for (int group_index = 0; group_index < numOfGroups; group_index++)
+        if (inputMethodChoiceForGroup == 1)
         {
-            groups[group_index] = inputGroupInfo(group_index);
+            std::string filePath = askUserFileGroupsDirectory();
+            extractGroupInfoFile(&groups, filePath);
         }
 
-        std::string filePath = "OutputFiles/GroupInfo.txt";
-        saveGroupsInfo(&groups, filePath);
-    }
+        else if (inputMethodChoiceForGroup == 2)
+        {
+            int numOfGroups = askUserNumberOfGroups();
 
-    else
-    {
-        std::cout << "Invalid Option, Only Option 1 and 2. Please Try Again!\n";
-    }
+            // ALocate AMount of Space
+            groups = std::vector<Group *>(numOfGroups);
+
+            for (int group_index = 0; group_index < numOfGroups; group_index++)
+            {
+                groups[group_index] = inputGroupInfo(group_index);
+            }
+
+            std::string filePath = "OutputFiles/GroupInfo.txt";
+            saveGroupsInfo(&groups, filePath);
+        }
+
+        else
+        {
+            std::cout << "Invalid Option, Only Option 1 and 2. Please Try Again!\n";
+        }
+    } while (inputMethodChoiceForGroup != 1 && inputMethodChoiceForGroup != 2);
 }
 
 void askUserInputMethodForProject()
 {
     // Display The Menu And Get The User's Choice
     int inputMethodChoiceForProject;
-    std::cout << "What Method Would You Like To Use?\n";
-    std::cout << "1. Input From File\n";
-    std::cout << "2. Input From Terminal\n";
-    std::cout << "Your Choice: ";
-    std::cin >> inputMethodChoiceForProject;
-
-    if (inputMethodChoiceForProject == 1)
+    do
     {
-        int number_of_groups;
-        std::string filePath = askUserFileProjectsDirectory();
-        extractProjectInfoFile(&projects, groups.size(), filePath);   
-        
-    }
-    
-    else if (inputMethodChoiceForProject == 2)
-    {
-        int numOfProjects = askUserNumberOfProjects();
-        projects.resize(numOfProjects);  // Resize the Projects size according to Num Of Projects
+        std::cout << "What Method Would You Like To Use?\n";
+        std::cout << "1. Input From File\n";
+        std::cout << "2. Input From Terminal\n";
+        std::cout << "Your Choice: ";
+        std::cin >> inputMethodChoiceForProject;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-        for (int project_index = 0; project_index < numOfProjects; project_index++)
+        if (inputMethodChoiceForProject == 1)
         {
-            projects[project_index] = inputProjectInfo(project_index);
+            std::string filePath = askUserFileProjectsDirectory();
+            extractProjectInfoFile(&projects, groups.size(), filePath);
         }
 
-        std::string filePath = "OutputFiles/ProjectInfo.txt";
-        saveProjectsInfo(&projects, filePath);
-    }
+        else if (inputMethodChoiceForProject == 2)
+        {
+            int numOfProjects = askUserNumberOfProjects();
+            projects.resize(numOfProjects); // Resize the Projects size according to Num Of Projects
 
-    else
-    {
-        std::cout << "Invalid Option, Only Option 1 And 2. Please Try Again!\n";
-    }
+            for (int project_index = 0; project_index < numOfProjects; project_index++)
+            {
+                projects[project_index] = inputProjectInfo(project_index);
+            }
+
+            std::string filePath = "OutputFiles/ProjectInfo.txt";
+            saveProjectsInfo(&projects, filePath);
+        }
+
+        else
+        {
+            std::cout << "Invalid Option, Only Option 1 And 2. Please Try Again!\n";
+        }
+    } while (inputMethodChoiceForProject != 1 && inputMethodChoiceForProject != 2);
 }
 
 #endif

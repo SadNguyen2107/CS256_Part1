@@ -1,6 +1,7 @@
 #include "Menus/Menu1.h"
 #include "Menus/Menu2.h"
 #include "Menus/Menu3.h"
+#include "Menus/SharedResource.h"
 
 int main()
 {
@@ -10,6 +11,8 @@ int main()
     {
         return 0;
     }
+
+    std::system("cls");
 
     //Print Menu 2
     if (status == INPUT_SUCCESS)
@@ -21,6 +24,8 @@ int main()
     {
         return 0;
     }
+
+    std::system("cls");
 
     // Load Menu3
     if(status == INPUT_SUCCESS)

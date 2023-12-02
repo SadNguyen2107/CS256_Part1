@@ -26,7 +26,7 @@ void displayMenu1()
     std::cout << "|                 Print menu                  |\n"
               << "|---------------------------------------------|\n"
               << "|  1. Input A New Group                       |\n"
-              << "|  2. Display Info About Group ID             |\n"
+              << "|  2. Display Infomation All Group            |\n"
               << "|  3. Quit The Program                        |\n";
 
     for (int i = 0; i < menuWidth; i++)
@@ -59,17 +59,16 @@ int mapUserChoiceToActionMenu1(int userChoiceM1)
     {
     case Menu1::AddGroups:
         askUserInputMethodForGroup();
+        saveGroupsInfo(&groups, "OutputFiles/GroupInfo.txt");
         loadMenu2();
-        return INPUT_SUCCESS;
 
     case Menu1::DisplayGroupInfo:
         displayGroupsInfo(&groups);
         if(groups.empty())
         {
-            std::cout << "Please Return To Menu To Perform This Task!\n";
-            BackOrNot(continueProgram);
+            std::cout << "There is nothing to display\n";
         }
-        return INPUT_SUCCESS;
+        BackOrNot(continueProgram);
 
     case Menu1::QuitProgram:
         quitProgram();
@@ -78,7 +77,7 @@ int mapUserChoiceToActionMenu1(int userChoiceM1)
         std::cout << "Invalid Option. Please Try Again!\n"; 
         BackOrNot(continueProgram);
     }
-    return INPUT_FAIL;
+    return userChoiceM1;
 }
 
 // Function to load and mangage menu 1
@@ -91,7 +90,7 @@ int loadMenu1()
         int choice = getUserChoice();
         int status = mapUserChoiceToActionMenu1(choice);
 
-        if (status == QUIT_PROGRAM || status == INPUT_FAIL)
+        if (status == QUIT_PROGRAM)
         {
             continueProgram = false;
         }

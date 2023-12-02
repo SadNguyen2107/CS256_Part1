@@ -8,6 +8,10 @@ struct Node
     Node* next;
 
     Node(Value data): data(data), next(nullptr) {}
+    ~Node()
+    {
+        delete data;
+    }
 };
 
 

@@ -31,8 +31,8 @@ void displayMenu2()
               << "|---------------------------------------------|\n"
               << "|  1. Input A New Group                       |\n"
               << "|  2. Input A New Project                     |\n"
-              << "|  3. Display Info About Group ID             |\n"
-              << "|  4. Display Info About Project ID           |\n"
+              << "|  3. Display Infomation All Group            |\n"
+              << "|  4. Display Infomation All Project          |\n"
               << "|  5. Quit The Program                        |\n";
 
     for (int i = 0; i < menuWidth; i++)
@@ -50,11 +50,13 @@ int mapUserChoiceToActionMenu2(int userChoiceM2)
     {
     case Menu2::AddGroups:
         askUserInputMethodForGroup();
+        saveGroupsInfo(&groups, "OutputFiles/GroupInfo.txt");
         BackOrNot(continueProgram);
         break;
 
     case Menu2::AddProjects:
         askUserInputMethodForProject();
+        saveProjectsInfo(&projects, "OutputFiles/ProjectInfo.txt");
         loadMenu3();
         BackOrNot(continueProgram);
         break;
@@ -63,7 +65,7 @@ int mapUserChoiceToActionMenu2(int userChoiceM2)
         displayGroupsInfo(&groups);
         if (groups.empty())
         {
-            bool continueProgram = true;
+            std::cout << "There is nothing to display\n";
         }
         BackOrNot(continueProgram);
         break;
@@ -98,7 +100,7 @@ int loadMenu2()
         displayMenu2();
         int choice = getUserChoice();
         int status = mapUserChoiceToActionMenu2(choice);
-        if (status == QUIT_PROGRAM || status == INPUT_FAIL)
+        if (status == QUIT_PROGRAM)
         {
             continueProgram = false;
         }

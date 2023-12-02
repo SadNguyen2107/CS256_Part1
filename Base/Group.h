@@ -10,6 +10,13 @@ struct Student
     std::string student_name;
     unsigned int student_id;
 
+    // Destructor For Student
+    ~Student()
+    {
+        this->student_name = "";
+        this->student_id = 0;
+    }
+
     //* FOR DEBUG PURPOSE
     friend std::ostream &operator<<(std::ostream &os, const Student &student)
     {
@@ -35,6 +42,7 @@ Student *newStudent(std::string name, unsigned int id)
     s->student_id = id;
     return s;
 }
+
 class Group
 {
 private:
@@ -119,17 +127,12 @@ public:
 Group::Group(std::string group_name)
 {
     this->group_name = group_name;
+    LinkedList<Student *> group_students = LinkedList<Student*>();
 };
 
 Group::~Group()
 {
-    Node<Student*> * head = this->group_students.getHead();
-    while (head != nullptr)
-    {
-        Node<Student*> * temp = head;
-        head = head->next;
-        delete temp;
-    }
+    
 };
 
 #endif
