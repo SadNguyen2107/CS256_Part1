@@ -46,6 +46,7 @@ void loadMenu1()
                     resizeSubmissionDates(projects[index], new_size);
                 }
             }
+            std::system("cls");
             loadMenu2();
 
         case Menu1::DisplayGroupInfo:
@@ -54,6 +55,7 @@ void loadMenu1()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu1::QuitProgram:
@@ -65,6 +67,7 @@ void loadMenu1()
             {
                 quitProgram();
             }
+            std::system("cls");
         }
     }
 }

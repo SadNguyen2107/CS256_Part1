@@ -69,6 +69,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::AddProjects:
@@ -93,6 +94,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::SubmitProjects:
@@ -101,6 +103,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::DisplayAll:
@@ -109,6 +112,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::DisplayGroupInfo:
@@ -117,6 +121,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::DisplayByGroup:
@@ -125,6 +130,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::DisplayProjectInfo:
@@ -133,6 +139,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::DisplayByProject:
@@ -141,6 +148,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::DisplaySubmissionSpecificDate:
@@ -149,6 +157,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::DisplayGroupsSubmitOnTime:
@@ -157,6 +166,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::DisplayGroupsTurnInLate:
@@ -165,6 +175,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu3::QuitProgram:
@@ -176,6 +187,7 @@ void loadMenu3()
             {
                 quitProgram();
             }
+            std::system("cls");
         }
     }
 }

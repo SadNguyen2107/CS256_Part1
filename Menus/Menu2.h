@@ -54,6 +54,7 @@ void loadMenu2()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu2::AddProjects:
@@ -78,6 +79,7 @@ void loadMenu2()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu2::DisplayGroupInfo:
@@ -86,6 +88,7 @@ void loadMenu2()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu2::DisplayProjectInfo:
@@ -94,6 +97,7 @@ void loadMenu2()
             {
                 quitProgram();
             }
+            std::system("cls");
             break;
 
         case Menu2::QuitProgram:
@@ -105,6 +109,7 @@ void loadMenu2()
             {
                 quitProgram();
             }
+            std::system("cls");
         }
     }
 }
