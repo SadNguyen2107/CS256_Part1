@@ -46,7 +46,6 @@ void askUserInputMethodForGroup()
             std::string filePath = askUserFileGroupsDirectory();
             extractGroupInfoFile(&groups, filePath);
         }
-
         else if (inputMethodChoiceForGroup == 2)
         {
             int numOfGroups = askUserNumberOfGroups();
@@ -59,11 +58,7 @@ void askUserInputMethodForGroup()
             {
                 groups[group_index] = inputGroupInfo(group_index);
             }
-
-            std::string filePath = "OutputFiles/GroupInfo.txt";
-            saveGroupsInfo(&groups, filePath);
         }
-
         else
         {
             std::cout << "Invalid Option, Only Option 1 and 2. Please Try Again!\n";
@@ -92,7 +87,6 @@ void askUserInputMethodForProject()
             std::string filePath = askUserFileProjectsDirectory();
             extractProjectInfoFile(&projects, groups.size(), filePath);
         }
-
         else if (inputMethodChoiceForProject == 2)
         {
             int numOfProjects = askUserNumberOfProjects();
@@ -104,11 +98,7 @@ void askUserInputMethodForProject()
             {
                 projects[project_index] = inputProjectInfo(project_index);
             }
-
-            std::string filePath = "OutputFiles/ProjectInfo.txt";
-            saveProjectsInfo(&projects, filePath);
         }
-
         else
         {
             std::cout << "Invalid Option, Only Option 1 And 2. Please Try Again!\n";
@@ -156,6 +146,8 @@ bool back()
 }
 void quitProgram()
 {
+    saveGroupsInfo(&groups, "OutputFiles/GroupInfo.txt");
+    saveProjectsInfo(&projects, "OutputFiles/ProjectInfo.txt");
     std::cout << "EXITTING THE PROGRAM...\n";
 
     for (std::vector<Group *>::size_type i = 0; i < groups.size(); i++)

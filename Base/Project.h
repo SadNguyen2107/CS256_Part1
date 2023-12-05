@@ -80,7 +80,7 @@ public:
     }
 
     // FUNCTION TO RESIZE THE submission_dates VECTOR
-    friend void resizeSubmissionDates(Project *project, int newSize);
+    friend void resizeSubmissionDates(Project *project, size_t newSize);
 };
 
 Project::Project(std::string group_description, Date *due_date)
@@ -98,9 +98,13 @@ Project::~Project()
     }
 }
 
-void resizeSubmissionDates(Project *project, int newSize)
+void resizeSubmissionDates(Project *project, size_t newSize)
 {
     project->submission_dates.resize(newSize);
+    
+    // Add 1 More Submission Date Holder For the new Group
+    project->submission_dates[newSize - 1] = nullptr;
+    
 }
 
 #endif

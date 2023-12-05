@@ -48,8 +48,23 @@ void loadMenu3()
         switch (choiceMenu3)
         {
         case Menu3::AddGroups:
-            askUserInputMethodForGroup();
-            saveGroupsInfo(&groups, "OutputFiles/GroupInfo.txt");
+            // If None OF the group is input
+            if (groups.size() <= 0)
+            {
+                askUserInputMethodForGroup();
+            }
+            // Else That Vector has already have at least 1 group then append
+            else
+            {
+                groups.push_back(inputGroupInfo(groups.size()));
+
+                int new_size = groups.size();
+                for (size_t index = 0; index < projects.size(); index++)
+                {
+                    resizeSubmissionDates(projects[index], new_size);
+                }
+            }
+
             if (!back())
             {
                 quitProgram();
@@ -57,8 +72,23 @@ void loadMenu3()
             break;
 
         case Menu3::AddProjects:
-            askUserInputMethodForProject();
-            saveProjectsInfo(&projects, "OutputFiles/ProjectInfo.txt");
+            if (projects.size() <= 0)
+            {
+                askUserInputMethodForProject();
+            }
+            else
+            {
+                Project* newProject = inputProjectInfo(projects.size());
+                projects.push_back(newProject);
+
+                // Add PlaceHolder For The Submission Dates 
+                size_t groups_size = groups.size();
+                for (size_t group = 1; group <= groups_size; group++)
+                {
+                    resizeSubmissionDates(newProject, group);
+                }
+            }
+
             if (!back())
             {
                 quitProgram();

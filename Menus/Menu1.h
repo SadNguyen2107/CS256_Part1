@@ -30,8 +30,22 @@ void loadMenu1()
         switch (choiceMenu1)
         {
         case Menu1::AddGroups:
-            askUserInputMethodForGroup();
-            saveGroupsInfo(&groups, "OutputFiles/GroupInfo.txt");
+            // If None OF the group is input
+            if (groups.size() <= 0)
+            {
+                askUserInputMethodForGroup();
+            }
+            // Else That Vector has already have at least 1 group then append
+            else
+            {
+                groups.push_back(inputGroupInfo(groups.size()));
+
+                int new_size = groups.size();
+                for (size_t index = 0; index < projects.size(); index++)
+                {
+                    resizeSubmissionDates(projects[index], new_size);
+                }
+            }
             loadMenu2();
 
         case Menu1::DisplayGroupInfo:
@@ -41,7 +55,7 @@ void loadMenu1()
                 quitProgram();
             }
             break;
-            
+
         case Menu1::QuitProgram:
             quitProgram();
 
