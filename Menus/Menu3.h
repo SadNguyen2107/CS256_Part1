@@ -38,8 +38,8 @@ void loadMenu3()
                   << "|  7.  Display Infomation All Project         |\n"
                   << "|  8.  Display Infomation by ProjectID        |\n"
                   << "|  9.  Display Submission To A Specific Date  |\n"
-                  << "|  10.  Display Groups Submit On Time         |\n"
-                  << "|  11.  Display Groups Turn In Late           |\n"
+                  << "|  10. Display Groups Submit On Time          |\n"
+                  << "|  11. Display Groups Turn In Late            |\n"
                   << "|  12. Quit The Program                       |\n";
         std::cout << "-----------------------------------------------\n";
 
