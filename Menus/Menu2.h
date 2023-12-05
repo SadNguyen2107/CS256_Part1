@@ -74,12 +74,12 @@ void loadMenu2()
                     resizeSubmissionDates(newProject, group);
                 }
             }
+            std::system("cls");
             loadMenu3();
             if (!back())
             {
                 quitProgram();
             }
-            std::system("cls");
             break;
 
         case Menu2::DisplayGroupInfo:
