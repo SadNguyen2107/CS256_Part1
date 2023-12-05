@@ -12,21 +12,17 @@ namespace Menu3
     const int SubmitProjects = 3;
     const int DisplayAll = 4;
     const int DisplayGroupInfo = 5;
-    const int DisplayProjectInfo = 6;
-    const int DisplaySubmissionSpecificDate = 7;
-    const int DisplayGroupsSubmitOnTime = 8;
-    const int DisplayGroupsTurnInLate = 9;
-    const int QuitProgram = 10;
+    const int DisplayByGroup = 6;
+    const int DisplayProjectInfo = 7;
+    const int DisplayByProject = 8;
+    const int DisplaySubmissionSpecificDate = 9;
+    const int DisplayGroupsSubmitOnTime = 10;
+    const int DisplayGroupsTurnInLate = 11;
+    const int QuitProgram = 12;
 }
 
 void loadMenu3()
 {
-    // Declare variable used in this function
-    std::queue<std::tuple<int, Group *>> groupsCompleteOnTime = findGroupsCompleteOnTime(&groups, &projects);
-    std::queue<std::tuple<int, Group *>> groupsNotCompleteOnTime = findGroupsNotCompleteOnTime(&groups, &projects);
-    std::vector<Project *>::size_type projectID = 0;
-    std::vector<Group *>::size_type groupID = 0;
-
     while (true)
     {
         // Print Menu 3
@@ -38,11 +34,13 @@ void loadMenu3()
                   << "|  3.  Submit Project                         |\n"
                   << "|  4.  Display All Info                       |\n"
                   << "|  5.  Display Infomation All Group           |\n"
-                  << "|  6.  Display Infomation All Project         |\n"
-                  << "|  7.  Display Submission To A Specific Date  |\n"
-                  << "|  8.  Display Groups Submit On Time          |\n"
-                  << "|  9.  Display Groups Turn In Late            |\n"
-                  << "|  10. Quit The Program                       |\n";
+                  << "|  6.  Display Infomation by GroupID          |\n"
+                  << "|  7.  Display Infomation All Project         |\n"
+                  << "|  8.  Display Infomation by ProjectID        |\n"
+                  << "|  9.  Display Submission To A Specific Date  |\n"
+                  << "|  10.  Display Groups Submit On Time         |\n"
+                  << "|  11.  Display Groups Turn In Late           |\n"
+                  << "|  12. Quit The Program                       |\n";
         std::cout << "-----------------------------------------------\n";
 
         // Option in Menu 3
@@ -68,13 +66,7 @@ void loadMenu3()
             break;
 
         case Menu3::SubmitProjects:
-
-            // Ask for project and group IDs and update them by reference
-            projectID = askProjectIDToSubmit();
-            groupID = askGroupIDToSubmit();
-
-            submitProject(projects[projectID - 1], groupID);
-
+            submitProject(projects[askProjectIDToSubmit() - 1], askGroupIDToSubmit());
             if (!back())
             {
                 quitProgram();
@@ -97,8 +89,24 @@ void loadMenu3()
             }
             break;
 
+        case Menu3::DisplayByGroup:
+            displayByGroup(&groups, &projects);
+            if (!back())
+            {
+                quitProgram();
+            }
+            break;
+
         case Menu3::DisplayProjectInfo:
             displayProjectsInfo(&projects);
+            if (!back())
+            {
+                quitProgram();
+            }
+            break;
+
+        case Menu3::DisplayByProject:
+            displayByProject(&groups, &projects);
             if (!back())
             {
                 quitProgram();
@@ -114,7 +122,7 @@ void loadMenu3()
             break;
 
         case Menu3::DisplayGroupsSubmitOnTime:
-            printGroups(groupsCompleteOnTime, GROUP_ON_TIME);
+            printGroups(findGroupsCompleteOnTime(&groups, &projects), GROUP_ON_TIME);
             if (!back())
             {
                 quitProgram();
@@ -122,7 +130,7 @@ void loadMenu3()
             break;
 
         case Menu3::DisplayGroupsTurnInLate:
-            printGroups(groupsNotCompleteOnTime, GROUP_LATE);
+            printGroups(findGroupsNotCompleteOnTime(&groups, &projects), GROUP_LATE);
             if (!back())
             {
                 quitProgram();

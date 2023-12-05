@@ -50,23 +50,22 @@ void displayByProject(std::vector<Group *> *groups, std::vector<Project *> *proj
             << "|" << std::left << std::setw(12) << "GroupName"
             << "|" << std::left << std::setw(25) << "StudentName"
             << "|" << std::left << std::setw(9) << "StudentID"
-            << "|" << std::left << std::setw(8) << "Project " << projectNumber;
+            << "|" << std::left << std::setw(8) << "Project " << projectNumber << std::endl;
 
-  std::cout << "\n+=============================================================+\n";
+  std::cout << std::endl;
 
   for (std::vector<Group *>::size_type groupIndex = 0; groupIndex < groups->size(); groupIndex++)
   {
     for (std::vector<Student>::size_type studentIndex = 0; studentIndex < groups->at(groupIndex)->getGroupStudentCopy().size(); studentIndex++)
     {
-      std::cout << "|" << std::left << std::setw(3) << groupIndex + 1
+      std::cout << "|" << std::left << std::setw(4) << groupIndex + 1
                 << "|" << std::left << std::setw(12) << groups->at(groupIndex)->getGroupName()
                 << "|" << std::left << std::setw(25) << groups->at(groupIndex)->getGroupStudentCopy().at(studentIndex).student_name
                 << "|" << std::left << std::setw(9) << groups->at(groupIndex)->getGroupStudentCopy().at(studentIndex).student_id;
 
       // Check the submission status for the selected project
       std::string submissionStatus = checkState(selectedProject->getDueDate(), submissionDates[groupIndex]);
-      std::cout << "|" << std::left << std::setw(9) << submissionStatus;
-      std::cout << "\n+=============================================================+\n";
+      std::cout << "|" << std::left << std::setw(9) << submissionStatus << std::endl;
     }
     std::cout << std::endl;
   }
@@ -104,7 +103,6 @@ void displayByGroup(std::vector<Group *> *groups, std::vector<Project *> *projec
     std::cout << "|" << std::left << std::setw(8) << "Project" << project_index + 1;
   }
   std::cout << std::endl;
-  std::cout << "+======================================================================================+";
   for (std::vector<Student>::size_type studentIndex = 0; studentIndex < groups->at(groupNumber - 1)->getGroupStudentCopy().size(); studentIndex++)
   {
     std::cout << "\n|" << std::left << std::setw(3) << groupNumber
@@ -119,7 +117,6 @@ void displayByGroup(std::vector<Group *> *groups, std::vector<Project *> *projec
     }
   }
   std::cout << std::endl;
-  std::cout << "+======================================================================================+\n";
   std::cout << std::endl;
 }
 
@@ -136,7 +133,7 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
     std::cout << "|" << std::left << std::setw(8) << "Project" << project_index + 1;
   }
   std::cout << std::endl;
-  std::cout << "+======================================================================================+\n";
+  std::cout << std::endl;
 
   size_t projects_length = projects->size();
   size_t groups_length = groups->size();
@@ -164,7 +161,7 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
           std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[rows]);
         }
         std::cout << std::endl;
-        std::cout << "+======================================================================================+\n";
+
       }
       std::cout << std::endl;
       if (project_index + 1 < projects_length)
@@ -196,7 +193,7 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
           std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[group_index]);
         }
         std::cout << std::endl;
-        std::cout << "+======================================================================================+\n";
+
       }
       std::cout << std::endl;
       group_index++;
@@ -244,7 +241,7 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
     std::cout << "|" << std::left << std::setw(8) << "Project" << project_index + 1;
   }
   std::cout << std::endl;
-  std::cout << "+======================================================================================+\n";
+  std::cout << std::endl;
 
   size_t projects_length = projects->size();
   size_t groups_length = groups->size();
@@ -272,7 +269,7 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
           std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[rows]);
         }
         std::cout << std::endl;
-        std::cout << "+======================================================================================+\n";
+
       }
       std::cout << std::endl;
       if (project_index + 1 < projects_length)
@@ -304,7 +301,7 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
           std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[group_index]);
         }
         std::cout << std::endl;
-        std::cout << "+======================================================================================+\n";
+
       }
       std::cout << std::endl;
       group_index++;
@@ -409,8 +406,16 @@ void printGroups(std::queue<std::tuple<int, Group *>> groupsInfo, int flag)
         std::tuple<int, Group *> project_info = groupsInfo.front();
         int project_index = std::get<int>(project_info);
         Group *group = std::get<Group *>(project_info);
-        std::cout << "Group " << group->getGroupName() << " submitted Project " << project_index << " on time!" << std::endl;
-        groupsInfo.pop();
+        if (flag == GROUP_ON_TIME)
+        {
+          std::cout << "Group " << group->getGroupName() << " submitted Project " << project_index << " on time!" << std::endl;
+          groupsInfo.pop();
+        }
+        else if (flag == GROUP_LATE)
+        {
+          std::cout << "Group " << group->getGroupName() << " submitted Project " << project_index << " late!" << std::endl;
+          groupsInfo.pop();
+        }
 
         // Print the separate line
         if (prev_index != project_index)

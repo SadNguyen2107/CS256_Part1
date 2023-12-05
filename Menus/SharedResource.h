@@ -50,6 +50,7 @@ void askUserInputMethodForGroup()
         else if (inputMethodChoiceForGroup == 2)
         {
             int numOfGroups = askUserNumberOfGroups();
+            groups.resize(numOfGroups);
 
             // ALocate AMount of Space
             groups = std::vector<Group *>(numOfGroups);
@@ -96,6 +97,8 @@ void askUserInputMethodForProject()
         {
             int numOfProjects = askUserNumberOfProjects();
             projects.resize(numOfProjects); // Resize the Projects size according to Num Of Projects
+
+            projects = std::vector<Project *>(numOfProjects);
 
             for (int project_index = 0; project_index < numOfProjects; project_index++)
             {
