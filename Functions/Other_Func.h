@@ -15,7 +15,6 @@ int askGroupIDToSubmit();
 int askProjectIDToSubmit();
 std::string askUserFileGroupsDirectory();
 std::string askUserFileProjectsDirectory();
-void quitProgram();
 
 int askUserNumberOfGroups()
 {
@@ -125,93 +124,6 @@ std::string askUserFileProjectsDirectory()
     std::cout << fileProjects << " has been loaded successfully!\n";
 
     return fileProjects;
-}
-
-bool confirmExit()
-{
-    std::string userInput;
-    std::cout << "Are you sure you want to exit? (y/n): ";
-    std::getline(std::cin, userInput);
-    while (true)
-    {
-        if (userInput == "Y" || userInput == "y")
-        {
-            quitProgram();
-            return true;
-        }
-        else if (userInput == "N" || userInput == "n")
-        {
-            return false;
-        }
-        else
-        {
-            std::cout << "Invalid input. Please enter 'y' or 'n'\n";
-        }
-    }
-}
-
-void BackOrNot(bool &continueProgram)
-{
-    std::string backOrNotChoice;
-
-    while (true)
-    {
-        std::cout << "Do you want to go back to the menu? (y/n): ";
-        std::cin >> backOrNotChoice;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-        if (backOrNotChoice == "y" || backOrNotChoice == "Y")
-        {
-            break;
-        }
-        else if (backOrNotChoice == "n" || backOrNotChoice == "N")
-        {
-            if (confirmExit())
-            {
-                continueProgram = false;
-                break; // Exit the loop and end the program
-            }
-        }
-        else
-        {
-            std::cout << "Invalid choice. Please enter 'Y' or 'N'.\n";
-        }
-    }
-}
-void quitProgram()
-{
-    std::cout << "Cleaning Resources In Progress...\n";
-
-    for (std::vector<Group *>::size_type i = 0; i < groups.size(); i++)
-    {
-        if (groups[i] != nullptr)
-        {
-            delete groups[i];
-        }
-    }
-    for (std::vector<Project *>::size_type i = 0; i < projects.size(); i++)
-    {
-        if (projects[i] != nullptr)
-        {
-            delete projects[i];
-        }
-    }
-    // for (Group *group : groups)
-    // {
-    //     delete group;
-    // }
-
-    // for (Project *project : projects)
-    // {
-    //     delete project;
-    // }
-
-    groups.clear();
-    projects.clear();
-    std::cout << "Cleaned Everything Before Quitting\n";
-    std::cout << "Thank You!\n";
-
-    exit(0);
 }
 
 #endif

@@ -12,90 +12,47 @@ namespace Menu1
     const int QuitProgram = 3;
 }
 
-int loadMenu2();
-
-// Function To Display Menu 1 Options
-void displayMenu1()
+void loadMenu1()
 {
-    int menuWidth = 47;
-    for (int i = 0; i < menuWidth; i++)
+    while (true)
     {
-        std::cout << "-";
-    }
-    std::cout << "\n";
-    std::cout << "|                 Print menu                  |\n"
-              << "|---------------------------------------------|\n"
-              << "|  1. Input A New Group                       |\n"
-              << "|  2. Display Infomation All Group            |\n"
-              << "|  3. Quit The Program                        |\n";
+        // Print Menu 1
+        std::cout << "-----------------------------------------------\n";
+        std::cout << "|                 Print menu                  |\n"
+                  << "|---------------------------------------------|\n"
+                  << "|  1. Input A New Group                       |\n"
+                  << "|  2. Display Infomation All Group            |\n"
+                  << "|  3. Quit The Program                        |\n";
+        std::cout << "-----------------------------------------------\n";
 
-    for (int i = 0; i < menuWidth; i++)
-    {
-        std::cout << "-";
-    }
-    std::cout << "\n";
-}
-
-// Receive Input And Validate From User
-int getUserChoice()
-{
-    std::string choice_string;
-
-    std::cout << "Please enter your choice: ";
-
-    int choice;
-    std::cin >> choice_string;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    choice_string = getValueAfterValidate(choice_string, validateID);
-    choice = std::stoi(choice_string);
-    return choice;
-}
-
-// Maps User's Choice To Actions For Menu 1 And Handles Input Validation, User Interactions And Program Flows 
-int mapUserChoiceToActionMenu1(int userChoiceM1)
-{
-    bool continueProgram = true;
-    switch (userChoiceM1)
-    {
-    case Menu1::AddGroups:
-        askUserInputMethodForGroup();
-        saveGroupsInfo(&groups, "OutputFiles/GroupInfo.txt");
-        loadMenu2();
-
-    case Menu1::DisplayGroupInfo:
-        displayGroupsInfo(&groups);
-        if(groups.empty())
+        // Option in Menu 1
+        int choiceMenu1 = getUserChoice();
+        switch (choiceMenu1)
         {
-            std::cout << "There is nothing to display\n";
-        }
-        BackOrNot(continueProgram);
+        case Menu1::AddGroups:
+            askUserInputMethodForGroup();
+            saveGroupsInfo(&groups, "OutputFiles/GroupInfo.txt");
+            loadMenu2();
 
-    case Menu1::QuitProgram:
-        quitProgram();
+        case Menu1::DisplayGroupInfo:
+            displayGroupsInfo(&groups);
+            if (!back())
+            {
+                quitProgram();
+            }
+            break;
+            
+        case Menu1::QuitProgram:
+            quitProgram();
 
-    default:
-        std::cout << "Invalid Option. Please Try Again!\n"; 
-        BackOrNot(continueProgram);
-    }
-    return userChoiceM1;
-}
-
-// Function to load and mangage menu 1
-int loadMenu1()
-{
-    bool continueProgram = true;
-    while (continueProgram)
-    {
-        displayMenu1();
-        int choice = getUserChoice();
-        int status = mapUserChoiceToActionMenu1(choice);
-
-        if (status == QUIT_PROGRAM)
-        {
-            continueProgram = false;
+        default:
+            std::cout << "Invalid Option. Please Try Again!\n";
+            if (!back())
+            {
+                quitProgram();
+            }
         }
     }
-    return 0;
 }
 
 #endif

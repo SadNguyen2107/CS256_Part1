@@ -5,37 +5,15 @@
 
 int main()
 {
-    //Print Menu 1
-    int status = loadMenu1();
-    if (status == QUIT_PROGRAM)
-    {
-        return 0;
-    }
+    loadMenu1();
 
     std::system("cls");
 
-    //Print Menu 2
-    if (status == INPUT_SUCCESS)
-    {
-        status = loadMenu2();
-    }
-
-    if (status == QUIT_PROGRAM)
-    {
-        return 0;
-    }
+    loadMenu2();
 
     std::system("cls");
 
-    // Load Menu3
-    if(status == INPUT_SUCCESS)
-    {
-        status = loadMenu3();
-    }
-    if (status == QUIT_PROGRAM)
-    {
-        return 0;
-    }
+    loadMenu3();
 
     return 0;
-}                 
+}
