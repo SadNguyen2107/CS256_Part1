@@ -21,8 +21,8 @@ endif
 
 # Directories
 SRC_DIR 		= src
-OBJ_DIR 		= program/obj
-BIN_DIR 		= program/bin
+OBJ_DIR 		= build/obj
+BIN_DIR 		= build/bin
 
 # Source Files
 SOURCES 		= $(wildcard $(SRC_DIR)/*.cpp) $(wildcard *.cpp)
