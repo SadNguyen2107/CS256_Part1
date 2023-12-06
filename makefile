@@ -1,27 +1,58 @@
-# Determine the operating system
+# Output File
+OUTPUT 			= main
+
+# Compiler and Flags
+GCC 			= g++
+GGC_FLAGS 		= -Wall
+
+# Check the OS-SYSTEM to give the Right LIBS
+#--------------------------------------------------------------------
 ifeq ($(OS),Windows_NT)
-    # Windows-specific compiler and flags
-    CC = x86_64-w64-mingw32-g++
-    CFLAGS = -static-libgcc -static-libstdc++
-    LDFLAGS = -lsqlite3 -lole32 -lshell32 -lcomdlg32 -luuid
+    # Windows-specific settings or actions
+	LIBS += -lole32 -lshell32 -lcomdlg32 -luuid
 else
-    # Linux-specific compiler and flags
-    CC = g++
-    CFLAGS =
-    LDFLAGS = -lsqlite3 # Add Linux-specific linker flags here
+	UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+	GCC = g++
+	LIBS += -lboost_log -lboost_system
+    endif
 endif
+#------------------------------------------------------------------
 
-# Common compiler flags and source files
-CFLAGS += -Wall
-SOURCES = main.cpp
+# Directories
+SRC_DIR 		= src
+OBJ_DIR 		= program/obj
+BIN_DIR 		= program/bin
 
-# Output executable name
-OUTPUT = main
+# Source Files
+SOURCES 		= $(wildcard $(SRC_DIR)/*.cpp) $(wildcard *.cpp)
+OBJECTS 		= $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SOURCES))
+EXECUTABLE 		= $(BIN_DIR)/$(OUTPUT)
 
-all: $(OUTPUT)
+# Build Target
+all: directories $(EXECUTABLE)
 
-$(OUTPUT): $(SOURCES)
-	$(CC) $(CFLAGS) -o $(OUTPUT) $(SOURCES) $(LDFLAGS)
+directories:
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(BIN_DIR)
 
+$(EXECUTABLE): $(OBJECTS)
+	$(GCC) $(GGC_FLAGS) -o $@ $(OBJECTS) $(LIBS)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(GCC) $(GGC_FLAGS) -c -o $@ $<
+
+# For Cleaning Up the Folder
 clean:
-	rm -f $(OUTPUT)
+	@echo clean...
+	@rm -rf $(OBJ_DIR) $(BIN_DIR)
+
+# For Running Application
+run: all
+	@./$(EXECUTABLE)
+
+# Check Memory Leak
+check:
+	@drmemory -logdir logs $(EXECUTABLE)
+	
+.PHONY: all clean directories run check

@@ -1,6 +1,7 @@
 #ifndef SHARED_RESOURCE_H
 #define SHARED_RESOURCE_H
 
+#include "../GUI/Windows/GetFileWindow.h"
 #include "../GUI/ValidateOS.h"
 #include "../Validate/ValidateFile.h"
 #include "../Functions/Display_Func.h"
