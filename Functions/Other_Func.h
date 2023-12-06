@@ -82,46 +82,50 @@ int askProjectIDToSubmit()
 }
 std::string askUserFileGroupsDirectory()
 {
-    string fileGroups = "";
+    std::string fileGroups = "";
 
     std::vector<Group *> groups;
 
-    // ASK PEOPLE FILE PATH GROUPS
-    cout << "Enter groups file Path: ";
-    std::cin >> fileGroups;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-    while (!isRightFile(fileGroups, GROUP_INFO_FILE))
+    int getfile;
+    do
     {
-        std::cout << "Wrong file! Enter groups file Path Again: ";
-        std::getline(std::cin, fileGroups);
-    }
-    //! VAILIDATE FILE PATH GROUPS
-    fileGroups = getValueAfterValidate(fileGroups, validateFileTxt);
-    std::cout << fileGroups << " has been loaded successfully!\n";
+        getfile = getFileTxtPathWindow(fileGroups);
+
+        if (getfile == SUCCESS && isRightFile(fileGroups, GROUP_INFO_FILE))
+        {
+            std::cout << "Selected file path: " << fileGroups << std::endl;
+        }
+        else
+        {
+            std::cout << "Wrong file!!! Please choose the correct file." << std::endl;
+        }
+
+    } while (getfile != SUCCESS || !isRightFile(fileGroups, GROUP_INFO_FILE));
 
     return fileGroups;
 }
 
 std::string askUserFileProjectsDirectory()
 {
-    string fileProjects = "";
+    std::string fileProjects = "";
 
     std::vector<Project *> projects;
 
-    // ASK PEOPLE FILE PATH PROJECTS
-    cout << "Enter projects file Path: ";
-    std::cin >> fileProjects;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-    while (!isRightFile(fileProjects, PROJECT_INFO_FILE))
+    int getfile;
+    do
     {
-        std::cout << "Wrong file! Enter projects file Path Again: ";
-        std::getline(std::cin, fileProjects);
-    }
-    //! VAILIDATE FILE PATH PROJECTS
-    fileProjects = getValueAfterValidate(fileProjects, validateFileTxt);
-    std::cout << fileProjects << " has been loaded successfully!\n";
+        getfile = getFileTxtPathWindow(fileProjects);
+
+        if (getfile == SUCCESS && isRightFile(fileProjects, PROJECT_INFO_FILE))
+        {
+            std::cout << "Selected file path: " << fileProjects << std::endl;
+        }
+        else
+        {
+            std::cout << "Wrong file!!! Please choose the correct file." << std::endl;
+        }
+
+    } while (getfile != SUCCESS || !isRightFile(fileProjects, PROJECT_INFO_FILE));
 
     return fileProjects;
 }
