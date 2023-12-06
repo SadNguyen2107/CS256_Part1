@@ -12,7 +12,7 @@ namespace Menu1
     const int QuitProgram = 3;
 }
 
-void loadMenu1()
+void loadMenu()
 {
     while (true)
     {
@@ -20,7 +20,7 @@ void loadMenu1()
         std::cout << "-----------------------------------------------\n";
         std::cout << "|                 Print menu                  |\n"
                   << "|---------------------------------------------|\n"
-                  << "|  1. Input A New Group                       |\n"
+                  << "|  1. Input New Group (require to upload)     |\n"
                   << "|  2. Display Infomation All Group            |\n"
                   << "|  3. Quit The Program                        |\n";
         std::cout << "-----------------------------------------------\n";

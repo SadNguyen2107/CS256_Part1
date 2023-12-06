@@ -22,8 +22,8 @@ void loadMenu2()
         std::cout << "-----------------------------------------------\n";
         std::cout << "|                 Print menu                  |\n"
                   << "|---------------------------------------------|\n"
-                  << "|  1. Input A New Group                       |\n"
-                  << "|  2. Input A New Project                     |\n"
+                  << "|  1. Input New Group                         |\n"
+                  << "|  2. Input New Project (require to upload)   |\n"
                   << "|  3. Display Infomation All Group            |\n"
                   << "|  4. Display Infomation All Project          |\n"
                   << "|  5. Quit The Program                        |\n";

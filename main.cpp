@@ -5,15 +5,9 @@
 
 int main()
 {
-    loadMenu1();
-
     std::system("cls");
-
-    loadMenu2();
-
-    std::system("cls");
-
-    loadMenu3();
+    
+    loadMenu();
 
     return 0;
 }
