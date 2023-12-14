@@ -14,7 +14,7 @@ using namespace std;
 // PROTOTYPE
 Project *inputProjectInfo(int project_index);
 void displayProjectsInfo(std::vector<Project *> *projects);
-void submitProject(Project *project, int groupID);
+void submitProject(std::vector<Group *> *groups, std::vector<Project *> *projects);
 void saveProjectsInfo(std::vector<Project *> *projects, std::string filePath);
 
 Project *inputProjectInfo(int project_index)
@@ -103,18 +103,43 @@ void saveProjectsInfo(std::vector<Project *> *projects, std::string filePath)
         std::cout << "Error opening file: " << filePath << std::endl;
     }
 }
-void submitProject(Project *project, int groupID)
+void submitProject(std::vector<Group *> *groups, std::vector<Project *> *projects)
 {
-    string submissionDateStr = "";
+    std::string projectNumber_string = "";
+    std::vector<Project *>::size_type projectNumber = 0;
+    do
+    {
+        std::cout << "Enter the VALID project number you want to submit: ";
+        std::cin >> projectNumber_string;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        projectNumber_string = getValueAfterValidate(projectNumber_string, validateID);
+        projectNumber = std::stoi(projectNumber_string);
+    } while (projectNumber < 1 || projectNumber > projects->size());
+
+    std::string submissionDateStr = "";
     // ENTER SUBMISSION DATE OF THAT GROUP
-    cout << "Enter the submission date (DD/MM/YYYY): ";
-    getline(cin, submissionDateStr);
+    std::cout << "Enter the submission date (DD/MM/YYYY): ";
+    std::getline(std::cin, submissionDateStr);
     submissionDateStr = getValueAfterValidate(submissionDateStr, validateDate);
 
     Date *submissionDate = new Date(submissionDateStr);
-    project->addSubmissionDate(groupID, submissionDate);
-   
-    cout << "Project submitted successfully on " << submissionDateStr << "." << endl;
+
+    for (std::vector<Group *>::size_type group_index = 0; group_index < groups->size(); group_index++)
+    {
+        std::string option = "";
+        do
+        {
+            std::cout << "Group " << group_index + 1 << " submit project " << projectNumber << "? (ONLY[y/n]): ";
+            std::getline(std::cin, option);
+        } while (option != "y" && option != "Y" && option != "n" && option != "N");
+
+        if (option == "y" || option == "Y")
+        {
+            (*projects)[projectNumber - 1]->addSubmissionDate(group_index + 1, submissionDate);
+            std::cout << "Group " << group_index + 1 << " submitted Project " << projectNumber << " successfully on " << submissionDateStr << "." << std::endl;
+        }
+    }
+    std::cout << "================================================\n";
 }
 
 #endif

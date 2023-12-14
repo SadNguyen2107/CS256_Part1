@@ -278,7 +278,7 @@ std::string checkState(const Date *d1, const Date *d2)
     {
         if (!today.later(d1))
         {
-            return "NULL";
+            return "NotSubmit";
         }
         else
         {

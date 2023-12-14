@@ -150,19 +150,23 @@ void quitProgram()
     saveGroupsInfo(&groups, "OutputFiles/GroupInfo.txt");
     saveProjectsInfo(&projects, "OutputFiles/ProjectInfo.txt");
     std::cout << "EXITTING THE PROGRAM...\n";
-
+    
+    // Delete groups and projects
     for (std::vector<Group *>::size_type i = 0; i < groups.size(); i++)
     {
         if (groups[i] != nullptr)
         {
             delete groups[i];
+            groups[i] = nullptr;  // Set to nullptr after deletion
         }
     }
+
     for (std::vector<Project *>::size_type i = 0; i < projects.size(); i++)
     {
         if (projects[i] != nullptr)
         {
             delete projects[i];
+            projects[i] = nullptr;  // Set to nullptr after deletion
         }
     }
     groups.clear();

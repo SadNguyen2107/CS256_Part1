@@ -336,7 +336,7 @@ std::queue<std::tuple<int, Group *>> findGroupsCompleteOnTime(std::vector<Group 
       {
         groupCompleteOnTime = true;
       }
-      else if (checkState(dueDate, submissionDate) == "NULL" || checkState(dueDate, submissionDate) == "Late")
+      else if (checkState(dueDate, submissionDate) == "NotSubmit" || checkState(dueDate, submissionDate) == "Late")
       {
         groupCompleteOnTime = false;
       }
@@ -369,7 +369,7 @@ std::queue<std::tuple<int, Group *>> findGroupsNotCompleteOnTime(std::vector<Gro
       {
         groupNotCompleteOnTime = true;
       }
-      else if (checkState(dueDate, submissionDate) == "On time" || checkState(dueDate, submissionDate) == "NULL")
+      else if (checkState(dueDate, submissionDate) == "On time" || checkState(dueDate, submissionDate) == "NotSubmit")
       {
         groupNotCompleteOnTime = false;
       }
@@ -387,7 +387,7 @@ void printGroups(std::queue<std::tuple<int, Group *>> groupsInfo, int flag)
 
   if (groupsInfo.empty())
   {
-    std::cout << "No Group submitted on time!" << std::endl;
+    std::cout << "There are no groups that you need to find!" << std::endl;
   }
   else if (!groupsInfo.empty())
   {

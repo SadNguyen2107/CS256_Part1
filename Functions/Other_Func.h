@@ -11,8 +11,6 @@ std::vector<Project *> projects;
 
 int askUserNumberOfGroups();
 int askUserNumberOfProjects();
-int askGroupIDToSubmit();
-int askProjectIDToSubmit();
 std::string askUserFileGroupsDirectory();
 std::string askUserFileProjectsDirectory();
 
@@ -47,38 +45,6 @@ int askUserNumberOfProjects()
     std::cout << "================================================\n";
 
     return numProjects;
-}
-int askGroupIDToSubmit()
-{
-    int groupID = 0;
-    std::string groupID_string = "";
-
-    // ENTER NUMBER PROJECTS
-    std::cout << "Enter the VALID Group ID to submit: ";
-    std::cin >> groupID_string;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    groupID_string = getValueAfterValidate(groupID_string, validateID);
-    groupID = std::stoi(groupID_string);
-
-    std::cout << "================================================\n";
-
-    return groupID;
-}
-int askProjectIDToSubmit()
-{
-    int projectID = 0;
-    std::string projectID_string = "";
-
-    // ENTER NUMBER PROJECTS
-    std::cout << "Enter the VALID Project ID to submit: ";
-    std::cin >> projectID_string;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    projectID_string = getValueAfterValidate(projectID_string, validateID);
-    projectID = std::stoi(projectID_string);
-
-    std::cout << "================================================\n";
-
-    return projectID;
 }
 std::string askUserFileGroupsDirectory()
 {
