@@ -11,6 +11,7 @@ struct Student
     unsigned int student_id;
 
     // Destructor For Student
+    Student() {}
     ~Student()
     {
         this->student_name = "";
@@ -85,9 +86,9 @@ public:
         Student *tempStudent = new Student();
         tempStudent->student_id = id;
 
-        this->group_students.remove([](Student *student_a, Student *student_b) -> bool { 
-            return student_a->student_id == student_b->student_id; 
-            }, tempStudent);
+        this->group_students.remove([](Student *student_a, Student *student_b) -> bool
+                                    { return student_a->student_id == student_b->student_id; },
+                                    tempStudent);
     }
 
     void changeStudentInfo(unsigned int id, std::string new_name, unsigned int new_id)
@@ -127,12 +128,23 @@ public:
 Group::Group(std::string group_name)
 {
     this->group_name = group_name;
-    LinkedList<Student *> group_students = LinkedList<Student*>();
+    LinkedList<Student *> group_students = LinkedList<Student *>();
 };
 
 Group::~Group()
 {
-    
+    Node<Student *> *head = this->group_students.getHead();
+    while (head != nullptr)
+    {
+        Node<Student *> *temp = head;
+        head = head->next;
+
+        delete temp->data;
+        temp->data = nullptr;
+
+        // delete temp; // Deallocate the Node object
+        // temp = nullptr;
+    }
 };
 
 #endif

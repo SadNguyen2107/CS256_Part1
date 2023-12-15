@@ -50,7 +50,6 @@ void askUserInputMethodForGroup()
         else if (inputMethodChoiceForGroup == 2)
         {
             int numOfGroups = askUserNumberOfGroups();
-            groups.resize(numOfGroups);
 
             // ALocate AMount of Space
             groups = std::vector<Group *>(numOfGroups);
@@ -91,7 +90,6 @@ void askUserInputMethodForProject()
         else if (inputMethodChoiceForProject == 2)
         {
             int numOfProjects = askUserNumberOfProjects();
-            projects.resize(numOfProjects); // Resize the Projects size according to Num Of Projects
 
             projects = std::vector<Project *>(numOfProjects);
 
@@ -169,6 +167,7 @@ void quitProgram()
             projects[i] = nullptr;  // Set to nullptr after deletion
         }
     }
+    
     groups.clear();
     projects.clear();
     std::cout << "Cleaned Everything Before Quitting\n";

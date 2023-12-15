@@ -49,6 +49,11 @@ public:
             this->submission_dates.resize(groupID);
         }
 
+        if (this->submission_dates[groupID -1] != nullptr )
+        {
+            delete this->submission_dates[groupID -1];
+        }
+        
         this->submission_dates[groupID - 1] = group_subbmit_date;
     };
 
@@ -80,7 +85,7 @@ public:
     }
 
     // FUNCTION TO RESIZE THE submission_dates VECTOR
-    friend void resizeSubmissionDates(Project *project, size_t newSize);
+    friend void resizeSubmissionDates(Project *project, int newSize);
 };
 
 Project::Project(std::string group_description, Date *due_date)
@@ -92,19 +97,29 @@ Project::Project(std::string group_description, Date *due_date)
 Project::~Project()
 {
     delete due_date;
-    for (auto iter = submission_dates.begin(); iter != submission_dates.end(); ++iter)
+    this->due_date = nullptr;
+
+    size_t submission_date_size = submission_dates.size();
+    for (size_t index = 0; index < submission_date_size; index++)
     {
-        delete *iter;
+        
+            delete submission_dates[index];
+            submission_dates[index] = nullptr;
     }
+    
 }
 
-void resizeSubmissionDates(Project *project, size_t newSize)
+void resizeSubmissionDates(Project *project, int newSize)
 {
     project->submission_dates.resize(newSize);
-    
-    // Add 1 More Submission Date Holder For the new Group
-    project->submission_dates[newSize - 1] = nullptr;
-    
+    // for (size_t index = 0; index < newSize; index++)
+    // {
+    //     if (project->submission_dates[index] != nullptr)
+    //     {
+    //         continue;
+    //     }
+    //     project->submission_dates[index] = nullptr;
+    // }
 }
 
 #endif

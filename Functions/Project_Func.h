@@ -122,8 +122,6 @@ void submitProject(std::vector<Group *> *groups, std::vector<Project *> *project
     std::getline(std::cin, submissionDateStr);
     submissionDateStr = getValueAfterValidate(submissionDateStr, validateDate);
 
-    Date *submissionDate = new Date(submissionDateStr);
-
     for (std::vector<Group *>::size_type group_index = 0; group_index < groups->size(); group_index++)
     {
         std::string option = "";
@@ -135,7 +133,7 @@ void submitProject(std::vector<Group *> *groups, std::vector<Project *> *project
 
         if (option == "y" || option == "Y")
         {
-            (*projects)[projectNumber - 1]->addSubmissionDate(group_index + 1, submissionDate);
+            (*projects)[projectNumber - 1]->addSubmissionDate(group_index + 1, new Date(submissionDateStr));
             std::cout << "Group " << group_index + 1 << " submitted Project " << projectNumber << " successfully on " << submissionDateStr << "." << std::endl;
         }
     }
