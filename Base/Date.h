@@ -54,6 +54,12 @@ public:
         this->month = month;
         this->year = year;
     }
+    ~Date() 
+    {
+        this->day = 0;
+        this->month = 0;
+        this->year = 0;
+    }
     friend std::ostream &operator<<(std::ostream &os, const Date &date)
     {
         os << date.day << "/" << date.month << "/" << date.year;
@@ -278,7 +284,7 @@ std::string checkState(const Date *d1, const Date *d2)
     {
         if (!today.later(d1))
         {
-            return "NULL";
+            return "NotSubmit";
         }
         else
         {
@@ -298,5 +304,6 @@ std::string checkState(const Date *d1, const Date *d2)
         }
     }
 }
+
 
 #endif

@@ -79,10 +79,10 @@ void loadMenu3()
             }
             else
             {
-                Project* newProject = inputProjectInfo(projects.size());
+                Project *newProject = inputProjectInfo(projects.size());
                 projects.push_back(newProject);
 
-                // Add PlaceHolder For The Submission Dates 
+                // Add PlaceHolder For The Submission Dates
                 size_t groups_size = groups.size();
                 for (size_t group = 1; group <= groups_size; group++)
                 {
@@ -98,7 +98,7 @@ void loadMenu3()
             break;
 
         case Menu3::SubmitProjects:
-            submitProject(projects[askProjectIDToSubmit() - 1], askGroupIDToSubmit());
+            submitProject(&groups, &projects);
             if (!back())
             {
                 quitProgram();
