@@ -147,7 +147,9 @@ void quitProgram()
 {
     saveGroupsInfo(&groups, "OutputFiles/GroupInfo.txt");
     saveProjectsInfo(&projects, "OutputFiles/ProjectInfo.txt");
-    std::cout << "EXITTING THE PROGRAM...\n";
+    saveSubmissionsInfo(&projects, &groups, "OutputFiles/SubmitStatus.txt");
+
+    std::cout << "EXITING THE PROGRAM...\n";
     
     // Delete groups and projects
     for (std::vector<Group *>::size_type i = 0; i < groups.size(); i++)
