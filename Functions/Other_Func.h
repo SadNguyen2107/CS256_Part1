@@ -13,6 +13,7 @@ int askUserNumberOfGroups();
 int askUserNumberOfProjects();
 std::string askUserFileGroupsDirectory();
 std::string askUserFileProjectsDirectory();
+void saveSubmissionsInfo(std::vector<Project *> *projects, std::vector<Group *> *groups, std::string filePath);
 
 int askUserNumberOfGroups()
 {
@@ -94,6 +95,114 @@ std::string askUserFileProjectsDirectory()
     } while (getfile != SUCCESS || !isRightFile(fileProjects, PROJECT_INFO_FILE));
 
     return fileProjects;
+}
+
+void saveSubmissionsInfo(std::vector<Project *> *projects, std::vector<Group *> *groups, std::string filePath)
+{
+    std::ofstream file(filePath);
+
+    if (!file.is_open())
+    {
+        std::cerr << "Error opening file: " << filePath << std::endl;
+        return;
+    }
+
+    // Write To File
+    file << "Group_ID\tDates\n";
+
+    size_t projects_length = projects->size();
+    size_t groups_length = groups->size();
+
+    //? CHECK WHICH LENGTH IS LARGER
+    if (groups_length >= projects_length) // THEN CHOOSE THE GROUP_INDEX AS THE PIVOT
+    {
+        size_t project_index = 0;
+
+        //? INFOMATION
+        for (std::vector<Group *>::size_type rows = 0; rows < groups->size(); rows++)
+        {
+            int times = 0; // To Know How Many Times It Print
+            if (times == 1)
+            {
+                break;
+            }
+
+            file << rows + 1 << "\t";
+            for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
+            {
+                Project *project = projects->at(project_index);
+                std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
+
+                Date *date = submission_dates[rows];
+                if (date != nullptr)
+                {
+                    file << date->getDay() << "/" << date->getMonth() << "/" << date->getYear() << "\t";
+                }
+                else
+                {
+                    file << "Unknown"
+                         << "\t";
+                }
+
+                times++;
+            }
+            file << "\n";
+
+            if (project_index + 1 < projects_length)
+            {
+                project_index++;
+            }
+
+            times++;
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------
+
+    else // THEN CHOOSE THE PROJECT_INDEX AS THE PIVOT
+    {
+        size_t group_index = 0;
+
+        //? INFOMATION
+        for (std::vector<Project *>::size_type rows = 0; rows < projects->size(); rows++)
+        {
+            int times = 0; // To Know How Many Times It Print
+            if (times == 1)
+            {
+                break;
+            }
+
+            file << group_index + 1 << "\t";
+
+            for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
+            {
+                Project *project = projects->at(project_index);
+                std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
+
+                Date *date = submission_dates[rows];
+                if (date != nullptr)
+                {
+                    file << date->getDay() << "/" << date->getMonth() << "/" << date->getYear() << "\t";
+                }
+                else
+                {
+                    file << "Unknown"
+                         << "\t";
+                }
+            }
+            file << "\n";
+            group_index++;
+            if (group_index >= groups_length)
+            {
+                break;
+            }
+
+            times++;
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------
+
+    // Close The File
+    file.close();
 }
 
 #endif
