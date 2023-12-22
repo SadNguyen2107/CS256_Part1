@@ -8,18 +8,61 @@
 #include "../Validate/ValidateFunc.h"
 #include <fstream>
 
-Group *inputGroupInfo(int group_index);
+bool groupNameExists(std::string &groupName, std::vector<Group *> &groups);
+bool studentIDExists(unsigned int studentID, Group *group);
+Group *inputGroupInfo(int group_index, std::vector<Group *> &groups);
 void displayGroupsInfo(std::vector<Group *> *groups);
 void saveGroupsInfo(std::vector<Group *> *groups, std::string filePath);
 
-Group *inputGroupInfo(int group_index)
+// Function to check if a group name already exists
+bool groupNameExists(std::string &groupName, std::vector<Group *> &groups)
+{
+    for (Group *group : groups)
+    {
+        if (group->getGroupName() == groupName)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Function to check if a student ID already exists within a group
+bool studentIDExists(unsigned int studentID, Group *group)
+{
+    for (Group *group : groups)
+    {
+        std::vector<Student> groupStudents = group->getGroupStudentCopy();
+
+        for (Student &student : groupStudents)
+        {
+            if (student.student_id == studentID)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+Group *inputGroupInfo(int group_index, std::vector<Group *> &groups)
 {
     cout << "Group " << group_index + 1 << " Information:" << endl;
     std::cout << "================================================\n";
+
     // ENTER GROUPS NAME
     std::string groupName;
-    std::cout << "Enter the name of group " << group_index + 1 << ": ";
-    std::getline(std::cin, groupName);
+    do
+    {
+        std::cout << "Enter the name of group " << group_index + 1 << ": ";
+        std::getline(std::cin, groupName);
+
+        if (groupNameExists(groupName, groups))
+        {
+            std::cout << "Error: Group name already exists. Please choose a different name.\n";
+        }
+    } while (groupNameExists(groupName, groups));
 
     Group *newGroup = new Group(groupName);
 
@@ -34,6 +77,7 @@ Group *inputGroupInfo(int group_index)
 
     std::cout << "________________________________________________\n";
 
+    // Add student validation for duplicate IDs
     for (std::vector<Student>::size_type j = 0; j < numStudents; j++)
     {
         // ENTER STUDENTS NAME
@@ -45,14 +89,23 @@ Group *inputGroupInfo(int group_index)
         // ENTER STUDENTS ID
         std::vector<Student>::size_type student_id = 0;
         string string_ID = "";
-        std::cout << "Enter the student ID: ";
-        std::cin >> string_ID;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        string_ID = getValueAfterValidate(string_ID, validateID);
-        student_id = std::stoi(string_ID);
+        do
+        {
+            std::cout << "Enter the student ID: ";
+            std::cin >> string_ID;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            string_ID = getValueAfterValidate(string_ID, validateID);
+            student_id = std::stoi(string_ID);
+
+            if (studentIDExists(student_id, newGroup))
+            {
+                std::cout << "Error: Student ID already exists in this group. Please enter a different ID.\n";
+            }
+        } while (studentIDExists(student_id, newGroup));
 
         newGroup->addStudent(newStudent(student_name, student_id));
     }
+
     std::cout << "================================================\n";
     cout << "Group " << group_index + 1 << " added successfully." << endl;
 
