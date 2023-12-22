@@ -56,7 +56,7 @@ void askUserInputMethodForGroup()
 
             for (int group_index = 0; group_index < numOfGroups; group_index++)
             {
-                groups[group_index] = inputGroupInfo(group_index);
+                groups[group_index] = inputGroupInfo(group_index, groups);
             }
         }
         else

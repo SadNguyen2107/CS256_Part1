@@ -56,7 +56,7 @@ void loadMenu3()
             // Else That Vector has already have at least 1 group then append
             else
             {
-                groups.push_back(inputGroupInfo(groups.size()));
+                groups.push_back(inputGroupInfo(groups.size(), groups));
 
                 int new_size = groups.size();
                 for (size_t index = 0; index < projects.size(); index++)
