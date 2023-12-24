@@ -52,11 +52,12 @@ Group *inputGroupInfo(int group_index, std::vector<Group *> &groups)
     std::cout << "================================================\n";
 
     // ENTER GROUPS NAME
-    std::string groupName;
+    std::string groupName = "";
     do
     {
         std::cout << "Enter the name of group " << group_index + 1 << ": ";
         std::getline(std::cin, groupName);
+        groupName = getValueAfterValidate(groupName, validateName);
 
         if (groupNameExists(groupName, groups))
         {
