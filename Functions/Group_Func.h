@@ -70,11 +70,19 @@ Group *inputGroupInfo(int group_index, std::vector<Group *> &groups)
     // ENTER NUMBER STUDENTS
     std::vector<Student>::size_type numStudents = 0;
     std::string numStudents_string = "";
-    std::cout << "Enter the number of students in this group: ";
-    std::cin >> numStudents_string;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    numStudents_string = getValueAfterValidate(numStudents_string, validateID);
-    numStudents = std::stoi(numStudents_string);
+    do
+    {
+        std::cout << "Enter the number of students in this group: ";
+        std::cin >> numStudents_string;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        numStudents_string = getValueAfterValidate(numStudents_string, validateID);
+        numStudents = std::stoi(numStudents_string);
+
+        if (numStudents < 1)
+        {
+            std::cout << "Error: Number of students must be equal or greater than 1. Please enter a valid number.\n";
+        }
+    } while (numStudents < 1);
 
     std::cout << "________________________________________________\n";
 

@@ -21,11 +21,17 @@ int askUserNumberOfGroups()
     std::string numGroups_string = "";
 
     // ENTER NUMBER GROUPS
-    std::cout << "Enter the number of groups: ";
-    std::cin >> numGroups_string;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    numGroups_string = getValueAfterValidate(numGroups_string, validateID);
-    numGroups = std::stoi(numGroups_string);
+    do {
+        std::cout << "Enter the number of groups (must be at least 1): ";
+        std::cin >> numGroups_string;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        numGroups_string = getValueAfterValidate(numGroups_string, validateID);
+        numGroups = std::stoi(numGroups_string);
+
+        if (numGroups < 1) {
+            std::cout << "Error: Number of groups must be at least 1. Please enter a valid number.\n";
+        }
+    } while (numGroups < 1);
 
     std::cout << "================================================\n";
 
@@ -37,11 +43,17 @@ int askUserNumberOfProjects()
     std::string numProjects_string = "";
 
     // ENTER NUMBER PROJECTS
-    std::cout << "Enter the number of projects: ";
-    std::cin >> numProjects_string;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    numProjects_string = getValueAfterValidate(numProjects_string, validateID);
-    numProjects = std::stoi(numProjects_string);
+    do {
+        std::cout << "Enter the number of projects (must be at least 1): ";
+        std::cin >> numProjects_string;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        numProjects_string = getValueAfterValidate(numProjects_string, validateID);
+        numProjects = std::stoi(numProjects_string);
+
+        if (numProjects < 1) {
+            std::cout << "Error: Number of projects must be at least 1. Please enter a valid number.\n";
+        }
+    } while (numProjects < 1);
 
     std::cout << "================================================\n";
 
