@@ -52,20 +52,33 @@ void displayByProject(std::vector<Group *> *groups, std::vector<Project *> *proj
             << "|" << std::left << std::setw(9) << "StudentID"
             << "|" << std::left << std::setw(8) << "Project " << projectNumber << std::endl;
 
-  std::cout << std::endl;
-
   for (std::vector<Group *>::size_type groupIndex = 0; groupIndex < groups->size(); groupIndex++)
   {
     for (std::vector<Student>::size_type studentIndex = 0; studentIndex < groups->at(groupIndex)->getGroupStudentCopy().size(); studentIndex++)
     {
-      std::cout << "|" << std::left << std::setw(4) << groupIndex + 1
-                << "|" << std::left << std::setw(12) << groups->at(groupIndex)->getGroupName()
-                << "|" << std::left << std::setw(25) << groups->at(groupIndex)->getGroupStudentCopy().at(studentIndex).student_name
+      if (studentIndex == 0)
+      {
+        std::cout << "|" << std::left << std::setw(4) << groupIndex + 1
+                  << "|" << std::left << std::setw(12) << groups->at(groupIndex)->getGroupName();
+      }
+      else if (studentIndex != 0)
+      {
+        std::cout << "|" << std::left << std::setw(4) << " "
+                  << "|" << std::left << std::setw(12) << " ";
+      }
+      std::cout << "|" << std::left << std::setw(25) << groups->at(groupIndex)->getGroupStudentCopy().at(studentIndex).student_name
                 << "|" << std::left << std::setw(9) << groups->at(groupIndex)->getGroupStudentCopy().at(studentIndex).student_id;
 
       // Check the submission status for the selected project
       std::string submissionStatus = checkState(selectedProject->getDueDate(), submissionDates[groupIndex]);
-      std::cout << "|" << std::left << std::setw(9) << submissionStatus << std::endl;
+      if (studentIndex == 0)
+      {
+        std::cout << "|" << std::left << std::setw(9) << submissionStatus << std::endl;
+      }
+      else if (studentIndex != 0)
+      {
+        std::cout << "|" << std::left << std::setw(9) << " " << std::endl;
+      }
     }
     std::cout << std::endl;
   }
@@ -105,18 +118,33 @@ void displayByGroup(std::vector<Group *> *groups, std::vector<Project *> *projec
   std::cout << std::endl;
   for (std::vector<Student>::size_type studentIndex = 0; studentIndex < groups->at(groupNumber - 1)->getGroupStudentCopy().size(); studentIndex++)
   {
-    std::cout << "\n|" << std::left << std::setw(3) << groupNumber
-              << "|" << std::left << std::setw(12) << groups->at(groupNumber - 1)->getGroupName()
-              << "|" << std::left << std::setw(25) << groups->at(groupNumber - 1)->getGroupStudentCopy().at(studentIndex).student_name
+    if (studentIndex == 0)
+    {
+      std::cout << "|" << std::left << std::setw(3) << groupNumber
+                << "|" << std::left << std::setw(12) << groups->at(groupNumber - 1)->getGroupName();
+    }
+    else if (studentIndex != 0)
+    {
+      std::cout << "|" << std::left << std::setw(3) << " "
+                << "|" << std::left << std::setw(12) << " ";
+    }
+    std::cout << "|" << std::left << std::setw(25) << groups->at(groupNumber - 1)->getGroupStudentCopy().at(studentIndex).student_name
               << "|" << std::left << std::setw(9) << groups->at(groupNumber - 1)->getGroupStudentCopy().at(studentIndex).student_id;
     for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
     {
       Project *project = projects->at(project_index);
       std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
-      std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[groupNumber - 1]);
+      if (studentIndex == 0)
+      {
+        std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[groupNumber - 1]);
+      }
+      else if (studentIndex != 0)
+      {
+        std::cout << "|" << std::left << std::setw(9) << " ";
+      }
     }
+    std::cout << std::endl;
   }
-  std::cout << std::endl;
   std::cout << std::endl;
 }
 
@@ -133,7 +161,6 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
     std::cout << "|" << std::left << std::setw(8) << "Project" << project_index + 1;
   }
   std::cout << std::endl;
-  std::cout << std::endl;
 
   size_t projects_length = projects->size();
   size_t groups_length = groups->size();
@@ -148,21 +175,34 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
     {
       for (std::vector<Student>::size_type columns = 0; columns < groups->at(rows)->getGroupStudentCopy().size(); columns++)
       {
-
-        std::cout << "|" << std::left << std::setw(3) << rows + 1
-                  << "|" << std::left << std::setw(12) << groups->at(rows)->getGroupName()
-                  << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
+        if (columns == 0)
+        {
+          std::cout << "|" << std::left << std::setw(3) << rows + 1
+                    << "|" << std::left << std::setw(12) << groups->at(rows)->getGroupName();
+        }
+        else if (columns != 0)
+        {
+          std::cout << "|" << std::left << std::setw(3) << " "
+                    << "|" << std::left << std::setw(12) << " ";
+        }
+        std::cout << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
                   << "|" << std::left << std::setw(10) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id;
 
         for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
         {
           Project *project = projects->at(project_index);
           std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
-          std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[rows]);
+          if (columns == 0)
+          {
+            std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[rows]);
+          }
+          else if (columns != 0)
+          {
+            std::cout << "|" << std::left << std::setw(9) << " ";
+          }
         }
         std::cout << std::endl;
       }
-      std::cout << std::endl;
       if (project_index + 1 < projects_length)
       {
         project_index++;
@@ -179,21 +219,34 @@ void displayAllTable(std::vector<Group *> *groups, std::vector<Project *> *proje
     {
       for (std::vector<Student>::size_type columns = 0; columns < groups->at(group_index)->getGroupStudentCopy().size(); columns++)
       {
-
-        std::cout << "|" << std::left << std::setw(3) << group_index + 1
-                  << "|" << std::left << std::setw(12) << groups->at(group_index)->getGroupName()
-                  << "|" << std::left << std::setw(25) << groups->at(group_index)->getGroupStudentCopy().at(columns).student_name
+        if (columns == 0)
+        {
+          std::cout << "|" << std::left << std::setw(3) << group_index + 1
+                    << "|" << std::left << std::setw(12) << groups->at(group_index)->getGroupName();
+        }
+        else if (columns != 0)
+        {
+          std::cout << "|" << std::left << std::setw(3) << " "
+                    << "|" << std::left << std::setw(12) << " ";
+        }
+        std::cout << "|" << std::left << std::setw(25) << groups->at(group_index)->getGroupStudentCopy().at(columns).student_name
                   << "|" << std::left << std::setw(10) << groups->at(group_index)->getGroupStudentCopy().at(columns).student_id;
 
         for (std::vector<Project *>::size_type project_index = 0; project_index < projects->size(); project_index++)
         {
           Project *project = projects->at(project_index);
           std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
-          std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[group_index]);
+          if (columns == 0)
+          {
+            std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[group_index]);
+          }
+          else if (columns != 0)
+          {
+            std::cout << "|" << std::left << std::setw(9) << " ";
+          }
         }
         std::cout << std::endl;
       }
-      std::cout << std::endl;
       group_index++;
       if (group_index >= groups_length)
       {
@@ -245,7 +298,6 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
       std::cout << "|" << std::left << std::setw(8) << "Project" << project_index + 1;
     }
     std::cout << std::endl;
-    std::cout << std::endl;
 
     size_t projects_length = projects->size();
     size_t groups_length = groups->size();
@@ -261,20 +313,34 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
         for (std::vector<Student>::size_type columns = 0; columns < groups->at(rows)->getGroupStudentCopy().size(); columns++)
         {
 
-          std::cout << "|" << std::left << std::setw(3) << rows + 1
-                    << "|" << std::left << std::setw(12) << groups->at(rows)->getGroupName()
-                    << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
+          if (columns == 0)
+          {
+            std::cout << "|" << std::left << std::setw(3) << rows + 1
+                      << "|" << std::left << std::setw(12) << groups->at(rows)->getGroupName();
+          }
+          else if (columns != 0)
+          {
+            std::cout << "|" << std::left << std::setw(3) << " "
+                      << "|" << std::left << std::setw(12) << " ";
+          }
+          std::cout << "|" << std::left << std::setw(25) << groups->at(rows)->getGroupStudentCopy().at(columns).student_name
                     << "|" << std::left << std::setw(10) << groups->at(rows)->getGroupStudentCopy().at(columns).student_id;
 
           for (std::vector<Project *>::size_type project_index = 0; project_index < projects_before_specific_date.size(); project_index++)
           {
             Project *project = projects->at(project_index);
             std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
-            std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[rows]);
+            if (columns == 0)
+            {
+              std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[rows]);
+            }
+            else if (columns != 0)
+            {
+              std::cout << "|" << std::left << std::setw(9) << " ";
+            }
           }
           std::cout << std::endl;
         }
-        std::cout << std::endl;
         if (project_index + 1 < projects_length)
         {
           project_index++;
@@ -292,20 +358,34 @@ void showSubmissionToASpecificDate(std::vector<Group *> *groups, std::vector<Pro
         for (std::vector<Student>::size_type columns = 0; columns < groups->at(group_index)->getGroupStudentCopy().size(); columns++)
         {
 
-          std::cout << "|" << std::left << std::setw(3) << group_index + 1
-                    << "|" << std::left << std::setw(12) << groups->at(group_index)->getGroupName()
-                    << "|" << std::left << std::setw(25) << groups->at(group_index)->getGroupStudentCopy().at(columns).student_name
+          if (columns == 0)
+          {
+            std::cout << "|" << std::left << std::setw(3) << group_index + 1
+                      << "|" << std::left << std::setw(12) << groups->at(group_index)->getGroupName();
+          }
+          else if (columns != 0)
+          {
+            std::cout << "|" << std::left << std::setw(3) << " "
+                      << "|" << std::left << std::setw(12) << " ";
+          }
+          std::cout << "|" << std::left << std::setw(25) << groups->at(group_index)->getGroupStudentCopy().at(columns).student_name
                     << "|" << std::left << std::setw(10) << groups->at(group_index)->getGroupStudentCopy().at(columns).student_id;
 
           for (std::vector<Project *>::size_type project_index = 0; project_index < projects_before_specific_date.size(); project_index++)
           {
             Project *project = projects->at(project_index);
             std::vector<Date *> submission_dates = project->getSubmissionDateCopy();
-            std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[group_index]);
+            if (columns == 0)
+            {
+              std::cout << "|" << std::left << std::setw(9) << checkState(project->getDueDate(), submission_dates[group_index]);
+            }
+            else if (columns != 0)
+            {
+              std::cout << "|" << std::left << std::setw(9) << " ";
+            }
           }
           std::cout << std::endl;
         }
-        std::cout << std::endl;
         group_index++;
         if (group_index >= groups_length)
         {
