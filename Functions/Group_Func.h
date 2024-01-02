@@ -17,13 +17,20 @@ void saveGroupsInfo(std::vector<Group *> *groups, std::string filePath);
 // Function to check if a group name already exists
 bool groupNameExists(std::string &groupName, std::vector<Group *> &groups)
 {
-    for (Group *group : groups)
+    for (size_t index = 0; index < groups.size(); index++)
     {
+        Group* group = groups[index];
+        if (group == nullptr)
+        {
+            return false;
+        }
+        
         if (group->getGroupName() == groupName)
         {
             return true;
         }
     }
+    
     return false;
 }
 
@@ -32,6 +39,11 @@ bool studentIDExists(unsigned int studentID, Group *group)
 {
     for (Group *group : groups)
     {
+        if (group == nullptr)
+        {
+            return false;
+        }
+        
         std::vector<Student> groupStudents = group->getGroupStudentCopy();
 
         for (Student &student : groupStudents)
