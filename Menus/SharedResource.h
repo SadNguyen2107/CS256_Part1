@@ -46,18 +46,30 @@ void askUserInputMethodForGroup()
         {
             std::string filePath = askUserFileGroupsDirectory();
             extractGroupInfoFile(&groups, filePath);
+            break;
         }
         else if (inputMethodChoiceForGroup == 2)
         {
             int numOfGroups = askUserNumberOfGroups();
 
             // ALocate AMount of Space
-            groups = std::vector<Group *>(numOfGroups);
+            groups.resize(numOfGroups);
 
             for (int group_index = 0; group_index < numOfGroups; group_index++)
             {
                 groups[group_index] = inputGroupInfo(group_index, groups);
             }
+            saveGroupsInfo(&groups, "InputFiles/GroupInfo.txt");
+            for (std::vector<Group *>::size_type i = 0; i < groups.size(); i++)
+            {
+                if (groups[i] != nullptr)
+                {
+                    delete groups[i];
+                    groups[i] = nullptr; // Set to nullptr after deletion
+                }
+            }
+            groups.clear();
+            break;
         }
         else
         {
@@ -86,17 +98,28 @@ void askUserInputMethodForProject()
         {
             std::string filePath = askUserFileProjectsDirectory();
             extractProjectInfoFile(&projects, groups.size(), filePath);
+            break;
         }
         else if (inputMethodChoiceForProject == 2)
         {
             int numOfProjects = askUserNumberOfProjects();
 
-            projects = std::vector<Project *>(numOfProjects);
+            projects.resize(numOfProjects);
 
             for (int project_index = 0; project_index < numOfProjects; project_index++)
             {
                 projects[project_index] = inputProjectInfo(project_index);
             }
+            for (std::vector<Project *>::size_type i = 0; i < projects.size(); i++)
+            {
+                if (projects[i] != nullptr)
+                {
+                    delete projects[i];
+                    projects[i] = nullptr; // Set to nullptr after deletion
+                }
+            }
+            projects.clear();
+            break;
         }
         else
         {
@@ -150,14 +173,14 @@ void quitProgram()
     saveSubmissionsInfo(&projects, &groups, "OutputFiles/SubmitStatus.txt");
 
     std::cout << "EXITING THE PROGRAM...\n";
-    
+
     // Delete groups and projects
     for (std::vector<Group *>::size_type i = 0; i < groups.size(); i++)
     {
         if (groups[i] != nullptr)
         {
             delete groups[i];
-            groups[i] = nullptr;  // Set to nullptr after deletion
+            groups[i] = nullptr; // Set to nullptr after deletion
         }
     }
 
@@ -166,10 +189,10 @@ void quitProgram()
         if (projects[i] != nullptr)
         {
             delete projects[i];
-            projects[i] = nullptr;  // Set to nullptr after deletion
+            projects[i] = nullptr; // Set to nullptr after deletion
         }
     }
-    
+
     groups.clear();
     projects.clear();
     std::cout << "Cleaned Everything Before Quitting\n";

@@ -34,6 +34,7 @@ void loadMenu()
             if (groups.size() <= 0)
             {
                 askUserInputMethodForGroup();
+                extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
             }
             // Else That Vector has already have at least 1 group then append
             else

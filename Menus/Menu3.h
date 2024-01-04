@@ -98,7 +98,7 @@ void loadMenu3()
             break;
 
         case Menu3::SubmitProjects:
-            submitProject(&groups, &projects);
+            submitProject(projects[askProjectIDToSubmit() - 1], askGroupIDToSubmit());
             if (!back())
             {
                 quitProgram();
