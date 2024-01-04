@@ -61,6 +61,7 @@ void loadMenu2()
             if (projects.size() <= 0)
             {
                 askUserInputMethodForProject();
+                extractProjectInfoFile(&projects, groups.size(), "InputFiles/ProjectInfo.txt");
             }
             else
             {
