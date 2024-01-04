@@ -14,7 +14,7 @@ using namespace std;
 // PROTOTYPE
 Project *inputProjectInfo(int project_index);
 void displayProjectsInfo(std::vector<Project *> *projects);
-void submitProject(std::vector<Group *> *groups, std::vector<Project *> *projects);
+void submitProject(Project* project, int groupID);
 void saveProjectsInfo(std::vector<Project *> *projects, std::string filePath);
 
 Project *inputProjectInfo(int project_index)
