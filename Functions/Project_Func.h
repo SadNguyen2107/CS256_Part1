@@ -27,14 +27,11 @@ Project *inputProjectInfo(int project_index)
     getline(cin, description);
 
     string dueDateString = "";
-    do
-    {
-        cout << "Due date (DD/MM/YYYY): ";
-        getline(cin, dueDateString);
+    cout << "Due date (DD/MM/YYYY): ";
+    getline(cin, dueDateString);
 
-        //! VALIDATE dueDate FORMAT
-        dueDateString = getValueAfterValidate(dueDateString, validateDate);
-    } while (isSmallerOrEqualThanToday(dueDateString));
+    //! VALIDATE dueDate FORMAT
+    dueDateString = getValueAfterValidate(dueDateString, validateDate);
 
     // CREATE Date Object
     Date *dueDate = new Date(dueDateString);
