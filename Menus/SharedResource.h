@@ -58,6 +58,8 @@ void askUserInputMethodForGroup()
             {
                 groups[group_index] = inputGroupInfo(group_index, groups);
             }
+            saveGroupsInfo(&groups, "InputFiles/GroupInfo.txt");
+            extractGroupInfoFile(&groups, "InputFiles/GroupInfo.txt");
         }
         else
         {
@@ -97,6 +99,9 @@ void askUserInputMethodForProject()
             {
                 projects[project_index] = inputProjectInfo(project_index);
             }
+            saveProjectsInfo(&projects, "InputFiles/ProjectInfo.txt");
+            extractProjectInfoFile(&projects, groups.size(), "InputFiles/ProjectInfo.txt");
+            
         }
         else
         {

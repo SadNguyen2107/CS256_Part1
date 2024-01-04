@@ -67,7 +67,7 @@ Group *inputGroupInfo(int group_index, std::vector<Group *> &groups)
     std::string groupName = "";
     do
     {
-        std::cout << "Enter the name of group " << group_index + 1 << ": ";
+        std::cout << "Enter the name of group " << group_index + 1 << " (Group_Name): ";
         std::getline(std::cin, groupName);
         groupName = getValueAfterValidate(groupName, validateName);
 
@@ -103,7 +103,7 @@ Group *inputGroupInfo(int group_index, std::vector<Group *> &groups)
     {
         // ENTER STUDENTS NAME
         std::string student_name;
-        std::cout << "Enter the name of student " << j + 1 << ": ";
+        std::cout << "Enter the name of student " << j + 1 << " (Full_Name): ";
         std::getline(std::cin, student_name);
         student_name = getValueAfterValidate(student_name, validateName);
 

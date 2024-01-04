@@ -15,6 +15,38 @@ std::string askUserFileGroupsDirectory();
 std::string askUserFileProjectsDirectory();
 void saveSubmissionsInfo(std::vector<Project *> *projects, std::vector<Group *> *groups, std::string filePath);
 
+int askGroupIDToSubmit()
+{
+    int groupID = 0;
+    std::string groupID_string = "";
+
+    // ENTER NUMBER PROJECTS
+    std::cout << "Enter the Group ID to submit: ";
+    std::cin >> groupID_string;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    groupID_string = getValueAfterValidate(groupID_string, validateID);
+    groupID = std::stoi(groupID_string);
+
+    std::cout << "================================================\n";
+
+    return groupID;
+}
+int askProjectIDToSubmit()
+{
+    int projectID = 0;
+    std::string projectID_string = "";
+
+    // ENTER NUMBER PROJECTS
+    std::cout << "Enter the Project ID to submit: ";
+    std::cin >> projectID_string;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    projectID_string = getValueAfterValidate(projectID_string, validateID);
+    projectID = std::stoi(projectID_string);
+
+    std::cout << "================================================\n";
+
+    return projectID;
+}
 int askUserNumberOfGroups()
 {
     int numGroups = 0;
