@@ -110,6 +110,7 @@ void askUserInputMethodForProject()
             {
                 projects[project_index] = inputProjectInfo(project_index);
             }
+            saveProjectsInfo(&projects, "InputFiles/ProjectInfo.txt");
             for (std::vector<Project *>::size_type i = 0; i < projects.size(); i++)
             {
                 if (projects[i] != nullptr)
